@@ -11,7 +11,8 @@ Este é o meu repositório de exercícios como estagiária de backend na 9ª edi
 ### Módulo 1
 - [x] Lista 1 - Variáveis e Condicionais - Deadline: 20/06 - 11hs
 - [x] Aula 1 - Exercícios apresentados no slide de aula - Deadline: 20/06 - 11hs
-- [x] Lista 2 - Matrizes, Vetores e REpetições - Deadline: 21/06 - 11hs
+- [x] Lista 2 - Matrizes, Vetores e Repetições - Deadline: 21/06 - 11hs
+- [x] Homework - Conta Corrente - Deadline: 22/06 - 11hs
 
 <br>
 
