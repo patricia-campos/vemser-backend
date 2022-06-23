@@ -12,14 +12,18 @@ public class Cliente {
     public void imprimirContatos() {
 
         for (int i = 0; i < contatos.length; i++) {
-            contatos[i].imprimeContato();
+            if (contatos[i] != null) {
+               contatos[i].imprimeContato();
+            }
         }
     }
 
         public void imprimirEnderecos() {
 
             for (int i = 0; i < enderecos.length; i++) {
-                enderecos[i].imprimirEndereco();
+                if (contatos[i] != null) {
+                   enderecos[i].imprimirEndereco();
+                }    
             }
 
         }
