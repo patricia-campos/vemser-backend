@@ -1,4 +1,4 @@
-public abstract class Conta {
+public abstract class Conta { //Classe pai/mãe das classes Conta Poupança e Conta Corrente
 
     Cliente cliente;
     String numeroConta;
@@ -49,9 +49,7 @@ public abstract class Conta {
     }
 
     public boolean sacar(double valor) {
-        //fazer na variável saldo
-        //a variável cheque especial é apenas para controle
-        //agregar o valor no saldo
+
         if (this.saldo>= valor && valor > 0) {
             this.saldo -= valor;
             System.out.println("Saque efetuado! \nSaldo atual: " + this.saldo);
@@ -65,6 +63,7 @@ public abstract class Conta {
     }
 
     public boolean depositar(double valor) {
+        
         if  (valor > 0) {
             this.saldo += valor;
             System.out.println("Depósito efetuado! \nSaldo atual: " + this.saldo);
@@ -78,6 +77,7 @@ public abstract class Conta {
     }
 
     public boolean transferir(Conta conta, double valor) {
+        
         if (this.saldo >= valor && valor > 0) {
             this.saldo -= valor;
             conta.saldo += valor;
