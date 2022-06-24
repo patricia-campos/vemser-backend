@@ -14,6 +14,7 @@ Este é o meu repositório de exercícios como estagiária de backend na 9ª edi
 - [x] Lista 2 - Matrizes, Vetores e Repetições - Deadline: 21/06 - 11hs
 - [x] Homework - Conta Corrente - Deadline: 22/06 - 11hs
 - [x] Homework - Conta Corrente Herança - Deadline: 23/06 - 11hs
+- [x] Homework - Conta Corrente Herança Array List - Deadline: 24/06 - 11hs
 
 <br>
 
