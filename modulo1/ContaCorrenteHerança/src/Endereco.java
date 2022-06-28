@@ -1,13 +1,13 @@
 public class Endereco {
 
-    int tipoEndereco; //1- residencial , 2- comercial
-    String logradouro;
-    int numero;
-    String complemento;
-    String cep;
-    String cidade;
-    String estado;
-    String pais;
+    private int tipoEndereco; //1- residencial , 2- comercial
+    private String logradouro;
+    private int numero;
+    private String complemento;
+    private String cep;
+    private String cidade;
+    private String estado;
+    private String pais;
 
     //Get e Set Tipo de endereço
     public int getTipoEndereco() {

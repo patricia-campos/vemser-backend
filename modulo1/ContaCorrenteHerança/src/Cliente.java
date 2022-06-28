@@ -23,6 +23,7 @@ public class Cliente {
     }
 
     //SETTERS POIS SÃO PRIVADOS
+
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -31,31 +32,13 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    //Método para popular o vetor de contatos lá na Main
+    //popula o vetor de contatos lá na Main
     public void setContatos(Contato[] contatos) {
-            for (int i = 0; i < contatos.length; i++) {
-                if (contatos[i] != null) {
-                    contatos[i].setDescricao(contatos[i].getDescricao());
-                    contatos[i].setTelefone(contatos[i].getTelefone());
-                    contatos[i].setTipo(contatos[i].getTipo());
-                }
-            }
+        this.contatos = contatos;
     }
 
-    //Método para popular o vetor de endereços lá na Main
     public void setEnderecos(Endereco[] enderecos) {
-        for (int i = 0; i < enderecos.length; i++) {
-            if (enderecos[i] != null) {
-                enderecos[i].setTipoEndereco(enderecos[i].getTipoEndereco());
-                enderecos[i].setLogradouro(enderecos[i].getLogradouro());
-                enderecos[i].setNumero(enderecos[i].getNumero());
-                enderecos[i].setComplemento(enderecos[i].getComplemento());
-                enderecos[i].setCep(enderecos[i].getCep());
-                enderecos[i].setCidade(enderecos[i].getCidade());
-                enderecos[i].setEstado(enderecos[i].getEstado());
-                enderecos[i].setPais(enderecos[i].getPais());
-            }
-        }
+        this.enderecos = enderecos;
     }
 
 

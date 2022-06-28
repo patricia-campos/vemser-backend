@@ -1,9 +1,9 @@
 public abstract class Conta { //Classe pai/mãe das classes Conta Poupança e Conta Corrente
 
-    Cliente cliente;
-    String numeroConta;
-    String agencia;
-    double saldo;
+    private Cliente cliente;
+    private String numeroConta;
+    private String agencia;
+    private double saldo;
 
     //INÍCIO GETTERS E SETTERS
     public Cliente getCliente() {
@@ -76,16 +76,17 @@ public abstract class Conta { //Classe pai/mãe das classes Conta Poupança e Co
         }
     }
 
+    //-------------------Método para transferir-------------------
     public boolean transferir(Conta conta, double valor) {
-        
+
         if (this.saldo >= valor && valor > 0) {
-            this.saldo -= valor;
-            conta.saldo += valor;
-            System.out.println("Transferência realizada.\n Saldo atual: " + this.saldo);
+            this.sacar(valor); //acessa o método saque da conta que chamou
+            conta.depositar(valor); //acessa o método depósito da conta destino
+            System.out.println("Transferência realizada.\nSaldo atual: " + this.saldo);
             System.out.println("---------------------------------------");
             return true;
         } else {
-            System.out.println("Não é possível realizar a operação.\n Saldo insuficiente.");
+            System.out.println("Não é possível realizar a operação.\nSaldo insuficiente.");
             System.out.println("---------------------------------------");
             return false;
         }

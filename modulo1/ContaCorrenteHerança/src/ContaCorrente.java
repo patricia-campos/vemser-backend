@@ -1,55 +1,51 @@
-public class ContaCorrente extends Conta implements Movimentacao{
+public class ContaCorrente extends Conta implements Movimentacao, Impressao{
 
     private double chequeEspecial;
 
-    //Getter e Setter Cheque especial
-    public double getChequeEspecial() {
-        return chequeEspecial;
-    }
+    //Setter do cheque especial
+    //Não tem getter pois não precisarei acessar para modificá-lo, será apenas para referência.
+    public void setChequeEspecial(double chequeEspecial) {this.chequeEspecial = chequeEspecial;}
 
-    public void setChequeEspecial(double chequeEspecial) {
-        this.chequeEspecial = chequeEspecial;
-    }
 
+    //------------------- INÍCIO MÉTODOS DA CLASSE-------------------
+
+    //-------------------Método que retorna o saldo com cheque especial
     public double retornarSaldoComChequeEspecial() {
-        double saldoTotal = this.saldo + this.chequeEspecial;
+        double saldoTotal = this.getSaldo() + this.chequeEspecial;
         return saldoTotal;
     }
+    //-------------------Método para imprimir
+    public void imprimir() {
+        if(this.getNumeroConta() != null) {
+            System.out.println("CONTA CORRENTE: " +
+                    "\nCliente: " + this.getCliente().getNome() +
+                    "\nNúmero da conta: " + this.getNumeroConta() +
+                    "\nAgência: " + this.getAgencia() +
+                    "\nSaldo: " + this.getSaldo() +
+                    "\nCheque especial com saldo: " + this.retornarSaldoComChequeEspecial());
+        }
+    }
 
-    @Override //Sobrescreve o método sacar do molde sacar na classe abstrata conta pois tem a particularidade cheque especial
+    //-------------------Método para sacar
+    //Sobrescreve o método sacar do molde sacar na classe abstrata (mãe) Conta pois tem a particularidade cheque especial
+    @Override
     public boolean sacar(double valor) {
-        if (this.saldo + this.chequeEspecial >= valor && valor > 0) {
-            this.saldo -= valor;
-            System.out.println("Saque efetuado! \nSaldo atual: " + this.saldo);
+        if (this.getSaldo() + this.chequeEspecial >= valor && valor > 0) {
+
+            double saldoTotal = this.getSaldo() - valor;
+            this.setSaldo(saldoTotal);
+
+            System.out.println("Saque efetuado! \nSaldo atual: " + saldoTotal);
             System.out.println("---------------------------------------");
+
             return true;
+
         } else {
             System.out.println("Não foi possível realizar o saque.\nSaldo insuficiente.");
             System.out.println("---------------------------------------");
+
             return false;
         }
     }
-    @Override
-    public boolean transferir(Conta conta, double valor) {
-        if (this.saldo + this.chequeEspecial >= valor && valor > 0) {
-            this.saldo -= valor;
-            conta.saldo += valor;
-            System.out.println("Transferência realizada.\nSaldo atual: " + this.saldo);
-            System.out.println("---------------------------------------");
-            return true;
-        } else {
-            System.out.println("Não é possível realizar a operação.\nSaldo insuficiente.");
-            System.out.println("---------------------------------------");
-            return false;
-        }
-    }
-    @Override
-    public void imprimir() {
-        System.out.println("Cliente: " + this.cliente.getNome());
-        System.out.println("Conta: " + this.getNumeroConta());
-        System.out.println("Agência: " + this.getAgencia());
-        System.out.println("Saldo: " + this.getSaldo());
-        System.out.println("Cheque Especial: " + this.getChequeEspecial());
-        System.out.println("---------------------------------------");
-    }
+
 }
