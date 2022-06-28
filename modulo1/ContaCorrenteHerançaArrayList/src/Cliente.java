@@ -53,16 +53,19 @@ public class Cliente {
 
     public void imprimirContatos() {
 
-        for (int i = 0; i < contatos.size(); i++) {
-            if(contatos != null)
-            contatos.get(i).imprimeContato();
+            if(contatos != null) {
+                for (int i = 0; i < contatos.size(); i++) {
+                contatos.get(i).imprimeContato();
+            }
         }
     }
         public void imprimirEnderecos() {
 
-            for (int i = 0; i < enderecos.size(); i++) {
-                if(enderecos != null)
-                enderecos.get(i).imprimirEndereco();
+
+                if(enderecos != null) {
+                    for (int i = 0; i < enderecos.size(); i++) {
+                    enderecos.get(i).imprimirEndereco();
+                }
             }
         }
     }
