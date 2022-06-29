@@ -5,10 +5,10 @@ CREATE TABLE VEMSER_PATRICIA.ESTUDANTE (
   nome VARCHAR(200) NOT NULL, 
   data_nascimento DATE NOT NULL, 
   nr_matricula NUMBER(10) UNIQUE NOT NULL,
-  ativo CHAR(1) NOT NULL,
+  ativo CHAR(1),
   PRIMARY KEY(id));
  
- --Criando a sequÃªncia automÃ¡tica do id
+ --Criando a sequência automática do id
  CREATE SEQUENCE SEQ_ESTUDANTE
  START WITH     1
  INCREMENT BY   1
@@ -29,7 +29,7 @@ INSERT INTO VEMSER_PATRICIA.ESTUDANTE (id, nome, data_nascimento, nr_matricula, 
 VALUES(SEQ_ESTUDANTE.nextval, 'Nicole Lemez', TO_DATE('10-01-2007', 'dd-mm-yyyy'), 4567890123, 'S');
 
 INSERT INTO VEMSER_PATRICIA.ESTUDANTE (id, nome, data_nascimento, nr_matricula, ativo)
-VALUES(SEQ_ESTUDANTE.nextval, 'VitÃ³ria Cardoso', TO_DATE('14-02-2007', 'dd-mm-yyyy'), 5678901234, 'S');
+VALUES(SEQ_ESTUDANTE.nextval, 'Vitória Cardoso', TO_DATE('14-02-2007', 'dd-mm-yyyy'), 5678901234, 'S');
 
 INSERT INTO VEMSER_PATRICIA.ESTUDANTE (id, nome, data_nascimento, nr_matricula, ativo)
 VALUES(SEQ_ESTUDANTE.nextval, 'Leonardo Silva', TO_DATE('21-12-2007', 'dd-mm-yyyy'), 6789012345, 'S');
@@ -38,16 +38,19 @@ INSERT INTO VEMSER_PATRICIA.ESTUDANTE (id, nome, data_nascimento, nr_matricula, 
 VALUES(SEQ_ESTUDANTE.nextval, 'Ana Paula Ribeiro', TO_DATE('25-03-2007', 'dd-mm-yyyy'), 7890123456, 'S');
 
 INSERT INTO VEMSER_PATRICIA.ESTUDANTE (id, nome, data_nascimento, nr_matricula, ativo)
-VALUES(SEQ_ESTUDANTE.nextval, 'JÃºlia Costa', TO_DATE('19-05-2007', 'dd-mm-yyyy'), 8901234567, 'S');
+VALUES(SEQ_ESTUDANTE.nextval, 'Júlia Costa', TO_DATE('19-05-2007', 'dd-mm-yyyy'), 8901234567, 'S');
 
 INSERT INTO VEMSER_PATRICIA.ESTUDANTE (id, nome, data_nascimento, nr_matricula, ativo)
 VALUES(SEQ_ESTUDANTE.nextval, 'Juliana Campos', TO_DATE('08-09-2007', 'dd-mm-yyyy'), 9012345678, 'S');
 
 INSERT INTO VEMSER_PATRICIA.ESTUDANTE (id, nome, data_nascimento, nr_matricula, ativo)
-VALUES(SEQ_ESTUDANTE.nextval, 'AndrÃ© Souza', TO_DATE('07-08-2007', 'dd-mm-yyyy'), 2255778899, 'S');
+VALUES(SEQ_ESTUDANTE.nextval, 'André Souza', TO_DATE('07-08-2007', 'dd-mm-yyyy'), 2255778899, 'S');
 
 --Selecionando todos os estudantes da tabela
 SELECT * FROM ESTUDANTE;
 
---Selecionado estudantes especÃ­ficos, no caso os ativos
+--Selecionado estudantes específicos, no caso os ativos
 SELECT * FROM ESTUDANTE WHERE ativo = 'S';
+
+
+
