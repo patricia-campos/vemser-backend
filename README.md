@@ -16,6 +16,12 @@ Este é o meu repositório de exercícios como estagiária de backend na 9ª edi
 - [x] Homework - Conta Corrente Herança - Deadline: 23/06 - 11hs
 - [x] Homework - Conta Corrente Herança Array List - Deadline: 24/06 - 11hs
 
+### Módulo 2
+- [x] Homework 1 - Oracle - Deadline: 29/06 - 11hs
+- [x] Homework 2 - Oracle - Deadline: 30/06 - 11hs
+- [x] Exercícios Endereços - Oracle - Deadline: 30/06 - 11hs
+- [x] Homework 3 - Oracle - Deadline: 01/07 - 11hs
+
 <br>
 
 ## 👨‍🏫 Instrutores
