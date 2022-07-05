@@ -22,6 +22,10 @@ Este é o meu repositório de exercícios como estagiária de backend na 9ª edi
 - [x] Exercícios Endereços - Oracle - Deadline: 30/06 - 11hs
 - [x] Homework 3 - Oracle - Deadline: 01/07 - 11hs
 
+### Módulo 3
+- [x] Homework 1 - Spring Web - Deadline: 05/07 - 11hs
+- [ ] Homework 2 - Spring Web - Deadline: 05/07 - 11hs
+
 <br>
 
 ## 👨‍🏫 Instrutores
