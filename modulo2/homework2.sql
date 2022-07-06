@@ -8,7 +8,7 @@
   --Logradouro e cep dos endereços. Porém somente os logradouros que comecem com a letra a maiúsculo ou minúsculo
   SELECT LOGRADOURO, CEP 
       FROM VEMSER_PATRICIA.ENDERECO 
-      WHERE LOGRADOURO LIKE UPPER ('a%')
+      WHERE UPPER(LOGRADOURO) LIKE ('A%')
   
   --Enderecos que tenham cep com final 0
   SELECT * 
@@ -23,7 +23,7 @@
   --Enderecos que comecem por "rua" e ordenar cep de forma decrescente
   SELECT * 
       FROM VEMSER_PATRICIA.ENDERECO 
-      WHERE LOGRADOURO LIKE UPPER ('Rua%') 
+      WHERE UPPER(LOGRADOURO) LIKE ('RUA%') 
       ORDER BY CEP DESC
   
   --Selecionar a quantidade de endereços cadastrados na tabela
