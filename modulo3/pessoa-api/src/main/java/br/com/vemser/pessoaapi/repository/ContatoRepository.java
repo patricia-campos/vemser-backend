@@ -14,9 +14,9 @@ public class ContatoRepository {
 
     public ContatoRepository() {
         listaContatos.add(new Contato(COUNTER.incrementAndGet() /*1*/, 1, 2, "000333222", "Whatsapp"));
-        listaContatos.add(new Contato(COUNTER.incrementAndGet() /*2*/, 2, 1, "000333255", "Código morse"));
+        listaContatos.add(new Contato(COUNTER.incrementAndGet() /*2*/, 2, 1, "000333255", "Recados"));
         listaContatos.add(new Contato(COUNTER.incrementAndGet() /*3*/, 2, 2, "000333244", "Celular"));
-        listaContatos.add(new Contato(COUNTER.incrementAndGet() /*4*/, 3, 1, "000333233", "Sinal de fumaça"));
+        listaContatos.add(new Contato(COUNTER.incrementAndGet() /*4*/, 3, 1, "000333233", "Whatsapp"));
         listaContatos.add(new Contato(COUNTER.incrementAndGet() /*4*/, 3, 2, "000333277", "Telegram"));
     }
 
