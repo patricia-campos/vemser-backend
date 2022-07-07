@@ -15,8 +15,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://back-vemserdbc.herokuapp.com/pessoa",
-							"protocol": "https",
+							"raw": "back-vemserdbc.herokuapp.com/pessoa",
 							"host": [
 								"back-vemserdbc",
 								"herokuapp",
@@ -24,32 +23,6 @@
 							],
 							"path": [
 								"pessoa"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "LISTAR pessoa idPessoa=14",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://back-vemserdbc.herokuapp.com/pessoa?idPessoa=14",
-							"protocol": "https",
-							"host": [
-								"back-vemserdbc",
-								"herokuapp",
-								"com"
-							],
-							"path": [
-								"pessoa"
-							],
-							"query": [
-								{
-									"key": "idPessoa",
-									"value": "14"
-								}
 							]
 						}
 					},
