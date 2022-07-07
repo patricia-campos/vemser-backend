@@ -33,7 +33,7 @@ public class EnderecoController {
     }
 
     //4 - Cadastro de endereço por idPessoa
-    @PostMapping("/{idpessoa}")
+    @PostMapping("/{idPessoa}")
     public Endereco create(@PathVariable("idPessoa") Integer id, @RequestBody Endereco endereco) throws Exception {
         return enderecoService.create(id, endereco);
     }

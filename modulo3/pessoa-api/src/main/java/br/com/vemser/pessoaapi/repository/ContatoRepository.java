@@ -60,6 +60,7 @@ public class ContatoRepository {
                 .orElseThrow(() -> new Exception("Contato não localizado"));
         listaContatos.remove(contatoRecuperado);
     }
+
     
     public List<Contato> listByIdPessoa(Integer idPessoa) {
         return listaContatos.stream()

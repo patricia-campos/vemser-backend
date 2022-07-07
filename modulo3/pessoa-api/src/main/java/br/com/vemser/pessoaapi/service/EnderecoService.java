@@ -25,11 +25,11 @@ public class EnderecoService {
 
     //checando se a pessoa existe e criando um novo endereço na lista
     public Endereco create(Integer idPessoa, Endereco endereco) throws Exception{
-        Pessoa pessoa = pessoaRepository.list().stream()
-                .filter(x -> x.getIdPessoa().equals(idPessoa))
+        Pessoa pessoaRecuperada = pessoaRepository.list().stream()
+                .filter( pessoa -> pessoa.getIdPessoa().equals(idPessoa))
                 .findFirst().orElseThrow(() -> new Exception("Pessoa não cadastrada"));
 
-        endereco.setIdPessoa(pessoa.getIdPessoa());
+        endereco.setIdPessoa(pessoaRecuperada.getIdPessoa());
 
         return enderecoRepository.create(endereco);
     }
