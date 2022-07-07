@@ -1,0 +1,249 @@
+{
+	"info": {
+		"_postman_id": "009253e6-4953-48e6-9eb7-c7b2db5bed17",
+		"name": "LOCAL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21195113"
+	},
+	"item": [
+		{
+			"name": "Contato",
+			"item": [
+				{
+					"name": "1- Listar todos os contatos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/contato",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contato"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2- Listar por contato",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/contato/byidpessoa?idPessoa=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contato",
+								"byidpessoa"
+							],
+							"query": [
+								{
+									"key": "idPessoa",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3- Com um id da pessoa para adicionar o contato e no corpo, receber o contato para inserir",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"idContato\": 5,\r\n        \"idPessoa\": 3,\r\n        \"tipo\": 2,\r\n        \"numero\": \"000333222\",\r\n        \"descricao\": \"Telegram\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/contato",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contato"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4- Com o id do contato, deve atualizar um contato existente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"idContato\": 3,\r\n        \"idPessoa\": 2,\r\n        \"tipo\": 2,\r\n        \"numero\": \"000333888\",\r\n        \"descricao\": \"Celular\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/contato/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contato",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5- Deve receber um id do contato e remover da lista",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/contato/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contato",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Endereco",
+			"item": [
+				{
+					"name": "1 - Listar todos os endereços",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/endereco",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"endereco"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2 - Listar por idEndereco",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/endereco/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"endereco",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3 - Listar por idPessoa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/endereco/2/pessoa",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"endereco",
+								"2",
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5 - Altera os dados do endereço",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"idEndereco\": 4,\r\n        \"idPessoa\": 1,\r\n        \"tipo\": \"RESIDENCIAL\",\r\n        \"logradouro\": \"Rua 2\",\r\n        \"numero\": 820,\r\n        \"complemento\": \"201\",\r\n        \"cep\": \"94935851\",\r\n        \"cidade\": \"teste\",\r\n        \"estado\": \"RJ\",\r\n        \"pais\": \"Brasil\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8090/endereco/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"endereco",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6 - Remove endereço pelo Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8090/endereco/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"endereco",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4 - Cadastro endereço pelo idPessoa",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
