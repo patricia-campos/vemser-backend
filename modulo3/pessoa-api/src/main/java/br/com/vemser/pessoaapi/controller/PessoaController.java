@@ -2,6 +2,7 @@ package br.com.vemser.pessoaapi.controller;
 
 import br.com.vemser.pessoaapi.entity.Pessoa;
 import br.com.vemser.pessoaapi.service.PessoaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -10,11 +11,12 @@ import java.util.List;
 
 public class PessoaController {
 
+    @Autowired
     private PessoaService pessoaService;
 
-    public PessoaController() {
-        pessoaService = new PessoaService();
-    }
+    //public PessoaController() {
+    //    pessoaService = new PessoaService();
+    //}
 
     // localhost:8080/pessoa/hello
     @GetMapping("/hello")

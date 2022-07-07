@@ -36,7 +36,7 @@ public class EnderecoRepository {
         return listaEnderecos;
     }
 
-
+/*
     //Deletando da lista através do id passado pelo parâmetro
     public void delete(Integer id) throws Exception {
 
@@ -46,6 +46,8 @@ public class EnderecoRepository {
                 .orElseThrow(() -> new Exception("Endereco não localizado"));
         listaEnderecos.remove(enderecoRecuperado);
     }
+
+ */
 
     //Lista endereço por Id Endereco
     public List<Endereco> listByIdEndereco(Integer idEndereco) {

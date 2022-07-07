@@ -60,9 +60,22 @@ public class EnderecoService {
         return enderecoRecuperado;
     }
 
+    /*
     public void delete(Integer id) throws Exception {
 
         enderecoRepository.delete(id);
+    }
+
+     */
+
+    //Deletando da lista através do id passado pelo parâmetro
+    public void delete(Integer id) throws Exception {
+
+        Endereco enderecoRecuperado = enderecoRepository.list().stream()
+                .filter(endereco -> endereco.getIdEndereco().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new Exception("Endereco não localizado"));
+        enderecoRepository.list().remove(enderecoRecuperado);
     }
 
     //Lista pelo id pessoa
