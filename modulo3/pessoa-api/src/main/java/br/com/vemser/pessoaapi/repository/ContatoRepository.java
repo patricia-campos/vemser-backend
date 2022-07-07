@@ -32,6 +32,10 @@ public class ContatoRepository {
         return listaContatos;
     }
 
+    /*
+
+    TRANSFERIDO PARA SERVICE POIS É REGRA DE NEGÓCIO
+
     public Contato update(Integer id,
                          Contato contatoAtualizar) throws Exception {
 
@@ -46,6 +50,7 @@ public class ContatoRepository {
 
         return contatoRecuperado;
     }
+    */
 
     public void delete(Integer id) throws Exception {
 
