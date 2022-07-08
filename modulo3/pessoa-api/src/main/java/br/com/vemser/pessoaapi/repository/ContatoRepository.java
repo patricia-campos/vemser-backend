@@ -32,36 +32,6 @@ public class ContatoRepository {
         return listaContatos;
     }
 
-    /*
-
-    TRANSFERIDO PARA SERVICE POIS É REGRA DE NEGÓCIO
-
-    public Contato update(Integer id,
-                         Contato contatoAtualizar) throws Exception {
-
-        Contato contatoRecuperado = listaContatos.stream()
-                .filter(contato -> contato.getIdContato().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Contato não localizado"));
-        contatoRecuperado.setIdPessoa(contatoAtualizar.getIdPessoa());
-        contatoRecuperado.setTipo(contatoAtualizar.getTipo());
-        contatoRecuperado.setNumero(contatoAtualizar.getNumero());
-        contatoRecuperado.setDescricao(contatoAtualizar.getDescricao());
-
-        return contatoRecuperado;
-    }
-    */
-
-    public void delete(Integer id) throws Exception {
-
-        Contato contatoRecuperado = listaContatos.stream()
-                .filter(contato -> contato.getIdContato().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Contato não localizado"));
-        listaContatos.remove(contatoRecuperado);
-    }
-
-    
     public List<Contato> listByIdPessoa(Integer idPessoa) {
         return listaContatos.stream()
                 .filter(x -> x.getIdPessoa().equals(idPessoa))

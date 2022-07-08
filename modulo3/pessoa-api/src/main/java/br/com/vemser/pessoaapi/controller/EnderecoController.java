@@ -1,15 +1,17 @@
 package br.com.vemser.pessoaapi.controller;
 
-import br.com.vemser.pessoaapi.entity.Contato;
 import br.com.vemser.pessoaapi.entity.Endereco;
 import br.com.vemser.pessoaapi.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/endereco")
+@Validated
 
 public class EnderecoController {
 
@@ -34,14 +36,14 @@ public class EnderecoController {
 
     //4 - Cadastro de endereço por idPessoa
     @PostMapping("/{idPessoa}")
-    public Endereco create(@PathVariable("idPessoa") Integer id, @RequestBody Endereco endereco) throws Exception {
+    public Endereco create(@PathVariable("idPessoa") Integer id, @Valid @RequestBody Endereco endereco) throws Exception {
         return enderecoService.create(id, endereco);
     }
 
     //5 - Altera os dados do endereço
     @PutMapping("/{idEndereco}")
     public Endereco update(@PathVariable("idEndereco") Integer id,
-                          @RequestBody Endereco enderecoAtualizar) throws Exception {
+                           @Valid @RequestBody Endereco enderecoAtualizar) throws Exception {
         return enderecoService.update(id, enderecoAtualizar);
     }
 
@@ -50,9 +52,5 @@ public class EnderecoController {
     public void delete(@PathVariable("idEndereco") Integer id) throws Exception {
         enderecoService.delete(id);
     }
-
-
-
-
 
 }

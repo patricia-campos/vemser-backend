@@ -3,11 +3,15 @@ package br.com.vemser.pessoaapi.controller;
 import br.com.vemser.pessoaapi.entity.Contato;
 import br.com.vemser.pessoaapi.service.ContatoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/contato")
+@Validated
 
 public class ContatoController {
 
@@ -27,8 +31,8 @@ public class ContatoController {
     }
 
     // POST com um id da pessoa para adicionar o contato e no corpo, receber o contato para inserir
-    @PostMapping("/{idpessoa}")
-    public Contato create(@PathVariable("idPessoa") Integer id, @RequestBody Contato contato) throws Exception {
+    @PostMapping("/{idPessoa}")
+    public Contato create(@PathVariable("idPessoa") Integer id, @Valid @RequestBody Contato contato) throws Exception {
         return contatoService.create(id, contato);
     }
 
@@ -36,7 +40,7 @@ public class ContatoController {
     // os novos dados do contato (deve receber todos os dados)
     @PutMapping("/{idContato}")
     public Contato update(@PathVariable("idContato") Integer id,
-                          @RequestBody Contato contatoAtualizar) throws Exception {
+                          @Valid @RequestBody Contato contatoAtualizar) throws Exception {
         return contatoService.update(id, contatoAtualizar);
     }
 

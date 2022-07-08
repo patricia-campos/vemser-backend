@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 public class EnderecoRepository {
 
     private static List<Endereco> listaEnderecos = new ArrayList<>();
-
     private AtomicInteger COUNTER = new AtomicInteger();
 
     public EnderecoRepository() {
@@ -24,7 +23,7 @@ public class EnderecoRepository {
         listaEnderecos.add(new Endereco(COUNTER.incrementAndGet() /*5*/, 5,TipoEndereco.COMERCIAL,"Rua Dr. Flores", 1050,"901","94935859", "Porto ALegre", "RS", "Brasil"));
     }
 
-    //Inserir Endereço
+    //INSERIR ENDEREÇO
     public Endereco create(Endereco endereco) {
         endereco.setIdEndereco(COUNTER.incrementAndGet());
         listaEnderecos.add(endereco);
@@ -35,19 +34,6 @@ public class EnderecoRepository {
     public List<Endereco> list() {
         return listaEnderecos;
     }
-
-/*
-    //Deletando da lista através do id passado pelo parâmetro
-    public void delete(Integer id) throws Exception {
-
-        Endereco enderecoRecuperado = listaEnderecos.stream()
-                .filter(endereco -> endereco.getIdEndereco().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Endereco não localizado"));
-        listaEnderecos.remove(enderecoRecuperado);
-    }
-
- */
 
     //Lista endereço por Id Endereco
     public List<Endereco> listByIdEndereco(Integer idEndereco) {

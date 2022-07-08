@@ -18,6 +18,13 @@
 	</properties>
 	<dependencies>
 
+		<!-- inserido em aula - 07/07/2022 - VALIDAÇÕES-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
+		<!-- inserido em aula - 06/07/2022-->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
