@@ -3,20 +3,25 @@ package br.com.vemser.pessoaapi.service;
 import br.com.vemser.pessoaapi.entity.Pessoa;
 import br.com.vemser.pessoaapi.exception.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.repository.PessoaRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Slf4j
 @Service
 public class PessoaService {
 
     @Autowired
     private PessoaRepository pessoaRepository;
 
-   // public PessoaService(){pessoaRepository = new PessoaRepository();}
-
-    public Pessoa create(Pessoa pessoa){return pessoaRepository.create(pessoa);}
+    //ALTERADO AULA 08/07
+    public Pessoa create(Pessoa pessoa) {
+        log.info("Criando a pessoa...");
+        Pessoa p = pessoaRepository.create(pessoa);
+        log.warn("Pessoa " + p.getNome() + " criada!");
+        return pessoaRepository.create(p);
+    }
 
 
     public List<Pessoa> list(){

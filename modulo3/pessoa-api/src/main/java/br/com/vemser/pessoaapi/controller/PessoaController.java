@@ -2,9 +2,10 @@ package br.com.vemser.pessoaapi.controller;
 
 import br.com.vemser.pessoaapi.entity.Pessoa;
 import br.com.vemser.pessoaapi.service.PessoaService;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/pessoa") // localhost:8080/pessoa
 @Validated
+@Slf4j //para usar log
 
 public class PessoaController {
 
@@ -47,10 +49,18 @@ public class PessoaController {
     }
 
     // localhost:8080/pessoa
-    //aula 07/07
+    //aula 07/07 e 08/07
     @PostMapping
     public ResponseEntity<Pessoa> create(@RequestBody @Valid  Pessoa pessoa) {
+
+        //ALTERADO AULA 08/07
         return ResponseEntity.ok(pessoaService.create(pessoa));
+
+        //log.info("Criando pessoa...");
+        // Pessoa p = pessoaService.create(pessoa);
+        //log.info("Pessoa " + p.getNome() + " criada!");
+        //return ResponseEntity.ok(p);
+        //return ResponseEntity.ok(pessoaService.create(pessoa));
     }
 
     // localhost:8080/pessoa/1000

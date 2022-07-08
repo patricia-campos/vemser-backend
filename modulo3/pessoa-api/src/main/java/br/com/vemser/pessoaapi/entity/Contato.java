@@ -1,9 +1,18 @@
 package br.com.vemser.pessoaapi.entity;
 
+import lombok.*;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+@Getter
+@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 
 public class Contato {
 
@@ -20,10 +29,17 @@ public class Contato {
     @NotNull(message = "Descrição não pode ser nula")
     private String descricao;
 
+    /*
+    //TODO SUBSTITUIDO POR @NoArgsConstructor
+
     public Contato() {
-
     }
+    */
 
+    /*
+    //TODO SUBSTITUIDO POR  @AllArgsConstructor
+
+    SUBSTITUIDO POR ALL ARGS
     public Contato(Integer idContato, Integer idPessoa, Integer tipo, String numero, String descricao) {
         this.idContato = idContato;
         this.idPessoa = idPessoa;
@@ -32,6 +48,10 @@ public class Contato {
         this.descricao = descricao;
     }
 
+     */
+
+    /*
+    //TODO SUBSTITUÍDO POR @Getter @Setter
     public Integer getIdContato() {
         return idContato;
     }
@@ -71,8 +91,10 @@ public class Contato {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+    */
 
-
+    /*
+    //TODO SUBSTITUÍDO POR @ToString
     @Override
     public String toString() {
         return "Contato{" +
@@ -83,6 +105,8 @@ public class Contato {
                 ", descricao='" + descricao +'\'' +
                 '}';
     }
+
+     */
 
     //TODO
     // - Aplicar enum em Tipo

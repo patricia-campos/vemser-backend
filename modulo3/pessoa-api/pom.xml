@@ -18,6 +18,14 @@
 	</properties>
 	<dependencies>
 
+		<!-- Inserido em aula - 08/07/2022 -  Spring WEB - Aula 4 - Lombok, DTO-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.22</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- inserido em aula - 07/07/2022 - VALIDAÇÕES-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

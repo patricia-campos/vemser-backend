@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Repository
 public class PessoaRepository {
 
-    private static List<Pessoa> listaPessoas = new ArrayList<>();
+    private List<Pessoa> listaPessoas = new ArrayList<>();
     private AtomicInteger COUNTER = new AtomicInteger();
 
     public PessoaRepository() {

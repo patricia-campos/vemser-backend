@@ -2,6 +2,8 @@ package br.com.vemser.pessoaapi.controller;
 
 import br.com.vemser.pessoaapi.entity.Endereco;
 import br.com.vemser.pessoaapi.service.EnderecoService;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/endereco")
 @Validated
+@Slf4j //para usar log
 
 public class EnderecoController {
 

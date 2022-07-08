@@ -6,11 +6,12 @@ import br.com.vemser.pessoaapi.exception.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.repository.PessoaRepository;
 
 import br.com.vemser.pessoaapi.repository.EnderecoRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Slf4j
 @Service
 public class EnderecoService {
 
@@ -18,9 +19,6 @@ public class EnderecoService {
     private EnderecoRepository enderecoRepository;
     @Autowired
     private PessoaService pessoaService;
-
-
-   // public EnderecoService(){enderecoRepository = new EnderecoRepository();}
 
 
     //checando se a pessoa existe e criando um novo endereço na lista - REGRA DE NEGÓCIO

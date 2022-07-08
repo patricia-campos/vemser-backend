@@ -5,12 +5,13 @@ import br.com.vemser.pessoaapi.entity.Pessoa;
 import br.com.vemser.pessoaapi.exception.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.repository.PessoaRepository;
 import br.com.vemser.pessoaapi.repository.ContatoRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-
+@Slf4j
 @Service
 public class ContatoService {
 
@@ -21,8 +22,6 @@ public class ContatoService {
     @Autowired
     private PessoaService pessoaService;
 
-
-   // public ContatoService(){contatoRepository= new ContatoRepository();}
 
     public Contato create(Integer idPessoa, Contato contato) throws Exception{
 

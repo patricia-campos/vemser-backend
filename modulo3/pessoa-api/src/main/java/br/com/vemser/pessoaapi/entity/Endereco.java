@@ -1,9 +1,16 @@
 package br.com.vemser.pessoaapi.entity;
 
+import lombok.*;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@ToString
 
 public class Endereco {
 
@@ -36,6 +43,9 @@ public class Endereco {
     @NotBlank(message = "Paíss não pode ser em branco")
     private String pais;
 
+    /*
+    //TODO SUBSTITUIDO POR  @AllArgsConstructor
+
     public Endereco(Integer idEndereco, Integer idPessoa, TipoEndereco tipo, String logradouro, Integer numero, String complemento, String cep, String cidade, String estado, String pais) {
         this.idEndereco = idEndereco;
         this.idPessoa = idPessoa;
@@ -48,6 +58,10 @@ public class Endereco {
         this.estado = estado;
         this.pais = pais;
     }
+    */
+
+    /*
+    //TODO SUBSTITUÍDO POR @Getter @Setter
 
     public Integer getIdEndereco() {
         return idEndereco;
@@ -128,6 +142,8 @@ public class Endereco {
     public void setPais(String pais) {
         this.pais = pais;
     }
+    */
+
 }
 
 //TODO
