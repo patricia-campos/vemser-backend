@@ -19,27 +19,10 @@ public class PessoaService {
 
     @Autowired
     private PessoaRepository pessoaRepository;
-
-    //TODO - DTO EM CONSTRUÇÃO ------------------------------------------------------
-    @Autowired  //TODO PESQUISAR PARA ENTENDER
+    @Autowired
     private ObjectMapper objectMapper;
-    //TODO - DTO EM CONSTRUÇÃO ------------------------------------------------------
 
 
-    /*
-    //----CREATE
-    public Pessoa create(Pessoa pessoa) {
-
-        log.info("Criando a pessoa...");
-        Pessoa p = pessoaRepository.create(pessoa);
-
-        log.warn("Pessoa " + p.getNome() + " criada!");
-        return pessoaRepository.create(p);
-    }
-    */
-
-
-    //TODO - DTO CREATE EM CONSTRUÇÃO - INÍCIO -----------------------------------------------------
     //----CREATE
     public PessoaDTO create(PessoaCreateDTO pessoa) {
 
@@ -54,7 +37,6 @@ public class PessoaService {
         log.warn("Pessoa " + pessoaDTO.getNome() + " criada!");
         return pessoaDTO;
     }
-    //TODO - DTO CREATE EM CONSTRUÇÃO - FIM -----------------------------------------------------
 
 
     //----READ
@@ -67,25 +49,6 @@ public class PessoaService {
     }
 
 
-    /*
-    //----UPDATE
-    public Pessoa update(Integer id,
-                         Pessoa pessoaAtualizar) throws Exception {
-
-        Pessoa pessoaRecuperada = findPessoaById(id);
-
-        log.info("Atualizando pessoa " + pessoaRecuperada.getNome());
-        pessoaRecuperada.setCpf(pessoaAtualizar.getCpf());
-        pessoaRecuperada.setNome(pessoaAtualizar.getNome());
-        pessoaRecuperada.setDataNascimento(pessoaAtualizar.getDataNascimento());
-
-        log.warn("Pessoa atualizada!");
-        return pessoaRecuperada;
-    }
-    */
-
-
-    //TODO - DTO UPDATE EM CONSTRUÇÃO - INÍCIO -----------------------------------------------------
     //----UPDATE
     public PessoaDTO update(Integer id,
                             PessoaCreateDTO pessoaAtualizar) throws Exception {
@@ -108,7 +71,6 @@ public class PessoaService {
 
         return pessoaDTO;
     }
-    //TODO - DTO UPDATE EM CONSTRUÇÃO - FIM -----------------------------------------------------
 
 
     //----DELETE

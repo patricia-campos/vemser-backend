@@ -1,5 +1,7 @@
 package br.com.vemser.pessoaapi.controller;
 
+import br.com.vemser.pessoaapi.dto.ContatoCreateDTO;
+import br.com.vemser.pessoaapi.dto.ContatoDTO;
 import br.com.vemser.pessoaapi.entity.Contato;
 import br.com.vemser.pessoaapi.service.ContatoService;
 
@@ -35,17 +37,23 @@ public class ContatoController {
         return contatoService.listByIdPessoa(idPessoa);
     }
 
-
+    /*
     @PostMapping("/{idPessoa}") // Criar novo contato em pessoa existente - localhost:8080/contato/idPessoa
     public ResponseEntity<Contato> create(@PathVariable("idPessoa") Integer id, @Valid @RequestBody Contato contato)
             throws Exception {
         return ResponseEntity.ok(contatoService.create(id, contato));
     }
+    */
 
+    @PostMapping("/{idPessoa}") // Criar novo contato em pessoa existente - localhost:8080/contato/idPessoa
+    public ResponseEntity<ContatoDTO> create(@PathVariable("idPessoa") Integer id, @Valid @RequestBody ContatoCreateDTO contato)
+            throws Exception {
+        return ResponseEntity.ok(contatoService.create(id, contato));
+    }
 
     @PutMapping("/{idContato}") // Editar contato existente (deve receber todos os dados) - localhost:8080/contato/idContato
-    public ResponseEntity<Contato> update(@PathVariable("idContato") Integer id,
-                          @Valid @RequestBody Contato contatoAtualizar) throws Exception {
+    public ResponseEntity<ContatoDTO> update(@PathVariable("idContato") Integer id,
+                          @Valid @RequestBody ContatoCreateDTO contatoAtualizar) throws Exception {
         return ResponseEntity.ok(contatoService.update(id, contatoAtualizar));
     }
 
