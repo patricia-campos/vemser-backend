@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/pessoa") // localhost:8080/pessoa
 @Validated
@@ -25,54 +26,60 @@ public class PessoaController {
 
     @Value("${user}")
     private String usuario;
-
     @Value("${spring.application.name}")
     private String app;
 
 
-    // localhost:8080/pessoa/hello
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello world!" + app;
-    }
 
-    // localhost:8080/pessoa
-    @GetMapping
+    @GetMapping // Listar pessoas - localhost:8080/pessoa
     public List<Pessoa> list() {
         return pessoaService.list();
     }
 
-    // localhost:8080/pessoa/byname?nome=Rafa
-    @GetMapping("/byname")
+
+    @GetMapping("/byname") // Listar por nome - localhost:8080/pessoa/byname?nome=Rafa
     public List<Pessoa> listByName(@RequestParam("nome") String nome) {
         return pessoaService.listByName(nome);
     }
 
-    // localhost:8080/pessoa
-    //aula 07/07 e 08/07
-    @PostMapping
+
+
+    @PostMapping // Criar nova pessoa - localhost:8080/pessoa
     public ResponseEntity<Pessoa> create(@RequestBody @Valid  Pessoa pessoa) {
-
-        //ALTERADO AULA 08/07
         return ResponseEntity.ok(pessoaService.create(pessoa));
-
-        //log.info("Criando pessoa...");
-        // Pessoa p = pessoaService.create(pessoa);
-        //log.info("Pessoa " + p.getNome() + " criada!");
-        //return ResponseEntity.ok(p);
-        //return ResponseEntity.ok(pessoaService.create(pessoa));
     }
 
-    // localhost:8080/pessoa/1000
-    @PutMapping("/{idPessoa}")
-    public Pessoa update(@PathVariable("idPessoa") Integer id,
+
+    @PutMapping("/{idPessoa}") // Editar pessoa existente - localhost:8080/pessoa/idPessoa
+    public ResponseEntity<Pessoa> update(@PathVariable("idPessoa") Integer id,
                          @Valid @RequestBody Pessoa pessoaAtualizar) throws Exception {
-        return pessoaService.update(id, pessoaAtualizar);
+
+        return ResponseEntity.ok(pessoaService.update(id, pessoaAtualizar));
     }
 
-    // localhost:8080/pessoa/10
-    @DeleteMapping("/{idPessoa}")
+
+    @DeleteMapping("/{idPessoa}") // Excluir pessoa - localhost:8080/pessoa/idPessoa
     public void delete(@PathVariable("idPessoa") Integer id) throws Exception {
         pessoaService.delete(id);
     }
+
+
+    /*
+    //TODO DÚVIDA: Precisa de Response Entity no delete? Pois com ResponseEntity ele exige um retorno.
+
+    // localhost:8080/pessoa/10
+    @DeleteMapping("/{idPessoa}")
+    public ResponseEntity<Pessoa> delete(@PathVariable("idPessoa") Integer id) throws Exception {
+
+        return ResponseEntity.ok(pessoaService.delete(id));
+    }
+
+     */
+
+    // localhost:8080/pessoa/hello
+    // @GetMapping("/hello")
+    //public String hello() {
+    //    return "Hello world!" + app;
+    //}
+
 }

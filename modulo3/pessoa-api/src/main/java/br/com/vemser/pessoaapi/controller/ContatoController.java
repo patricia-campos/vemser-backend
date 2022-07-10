@@ -5,11 +5,13 @@ import br.com.vemser.pessoaapi.service.ContatoService;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/contato")
@@ -20,35 +22,35 @@ public class ContatoController {
 
     @Autowired
     private ContatoService contatoService;
-    
-    // Listar todos os contatos - GET
-    @GetMapping
+
+
+    @GetMapping // Listar contatos - localhost:8080/contato
     public List<Contato> list() {
         return contatoService.list();
     }
 
-    // Listar por pessoa - GET
-    @GetMapping("/{idPessoa}")
+
+    @GetMapping("/{idPessoa}") // Listar por pessoa - localhost:8080/contato/idPessoa
     public List<Contato> listByIdCliente(@PathVariable("idPessoa") Integer idPessoa) {
         return contatoService.listByIdPessoa(idPessoa);
     }
 
-    // POST com um id da pessoa para adicionar o contato e no corpo, receber o contato para inserir
-    @PostMapping("/{idPessoa}")
-    public Contato create(@PathVariable("idPessoa") Integer id, @Valid @RequestBody Contato contato) throws Exception {
-        return contatoService.create(id, contato);
+
+    @PostMapping("/{idPessoa}") // Criar novo contato em pessoa existente - localhost:8080/contato/idPessoa
+    public ResponseEntity<Contato> create(@PathVariable("idPessoa") Integer id, @Valid @RequestBody Contato contato)
+            throws Exception {
+        return ResponseEntity.ok(contatoService.create(id, contato));
     }
 
-    // PUT com o id do contato, deve atualizar um contato existente e receber no corpo da requisição
-    // os novos dados do contato (deve receber todos os dados)
-    @PutMapping("/{idContato}")
-    public Contato update(@PathVariable("idContato") Integer id,
+
+    @PutMapping("/{idContato}") // Editar contato existente (deve receber todos os dados) - localhost:8080/contato/idContato
+    public ResponseEntity<Contato> update(@PathVariable("idContato") Integer id,
                           @Valid @RequestBody Contato contatoAtualizar) throws Exception {
-        return contatoService.update(id, contatoAtualizar);
+        return ResponseEntity.ok(contatoService.update(id, contatoAtualizar));
     }
 
-    // Deve receber um id do contato e remover da lista
-    @DeleteMapping("/{idContato}")
+
+    @DeleteMapping("/{idContato}") // Excluir contato - localhost:8080/contato/idContato
     public void delete(@PathVariable("idContato") Integer id) throws Exception {
         contatoService.delete(id);
     }
