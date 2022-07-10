@@ -6,6 +6,7 @@ import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Data
+
 public class PessoaCreateDTO {
 
         private Integer idPessoa;

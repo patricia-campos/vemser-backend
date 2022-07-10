@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
 public class Contato {
 
     private Integer idContato;
+
     private Integer idPessoa;
 
     @NotNull(message = "Tipo não pode ser nulo")
