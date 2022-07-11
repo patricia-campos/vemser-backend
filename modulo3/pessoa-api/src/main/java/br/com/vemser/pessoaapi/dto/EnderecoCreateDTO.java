@@ -31,7 +31,7 @@ public class EnderecoCreateDTO {
 
     @NotEmpty(message = "Cep não pode ser vazio")
     @NotBlank(message = "Cep não pode ser em branco")
-    @Size(max = 250, message = "Máximo de 8 caracteres")
+    @Size(max = 8, message = "Máximo de 8 caracteres")
     private String cep;
 
     @NotNull(message = "Cidade não pode ser nula")
@@ -47,7 +47,7 @@ public class EnderecoCreateDTO {
 
     @NotNull(message = "País não pode ser nulo")
     @NotEmpty(message = "País não pode ser vazio")
-    @NotBlank(message = "Paíss não pode ser em branco")
+    @NotBlank(message = "País não pode ser em branco")
     private String pais;
 }
 

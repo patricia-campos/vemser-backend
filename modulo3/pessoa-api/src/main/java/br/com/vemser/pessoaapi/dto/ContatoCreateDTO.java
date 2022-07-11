@@ -16,13 +16,13 @@ public class ContatoCreateDTO {
 
     private Integer idPessoa;
 
-    @NotNull(message = "Tipo não pode ser nulo")
+    @NotNull(message = "Tipo do contato não pode ser nulo")
     private TipoEndereco tipo;
 
     @NotNull(message = "Número não pode ser nulo")
     @NotEmpty(message = "Número não pode ser vazio")
     @NotBlank(message = "Número não pode ser em branco")
-    @Size(max = 13, message = "Número conter no máximo 13 caracteres")
+    @Size(max = 13, message = "Número deve conter no máximo 13 caracteres")
     private String numero;
 
     @NotEmpty(message = "Descrição não pode ser vazia")
