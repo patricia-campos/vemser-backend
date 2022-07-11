@@ -25,4 +25,12 @@ public class PessoaCreateDTO {
         @Size(min = 11,max = 11, message = "Deve conter 11 caracteres")
         private String cpf;
 
-    }
+}
+
+/*
+NOTAS DE ESTUDO:
+@Data - equivalent to the combination of @Getter, @Setter, @RequiredArgsConstructor, @ToString, @EqualsAndHashCode
+
+PessoaCreateDTO - É o espelho de Pessoa, que usamos para fazer a manipulação usando DTO, para fim de proteger
+as informações nas transações.
+*/

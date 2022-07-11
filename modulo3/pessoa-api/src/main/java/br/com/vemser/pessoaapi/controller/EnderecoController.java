@@ -1,6 +1,7 @@
 package br.com.vemser.pessoaapi.controller;
 
-import br.com.vemser.pessoaapi.entity.Contato;
+import br.com.vemser.pessoaapi.dto.EnderecoCreateDTO;
+import br.com.vemser.pessoaapi.dto.EnderecoDTO;
 import br.com.vemser.pessoaapi.entity.Endereco;
 import br.com.vemser.pessoaapi.service.EnderecoService;
 
@@ -44,15 +45,15 @@ public class EnderecoController {
 
 
     @PostMapping("/{idPessoa}") // Criar novo endereço por idPessoa - localhost:8080/idPessoa
-    public ResponseEntity<Endereco> create(@PathVariable("idPessoa") Integer id, @Valid @RequestBody Endereco endereco)
+    public ResponseEntity<EnderecoDTO> create(@PathVariable("idPessoa") Integer id, @Valid @RequestBody EnderecoCreateDTO endereco)
             throws Exception {
         return ResponseEntity.ok(enderecoService.create(id, endereco));
     }
 
 
     @PutMapping("/{idEndereco}") // Editar endereco existente (deve receber todos os dados) - localhost:8080/contato/idEndereco
-    public ResponseEntity<Endereco> update(@PathVariable("idEndereco") Integer id,
-                           @Valid @RequestBody Endereco enderecoAtualizar) throws Exception {
+    public ResponseEntity<EnderecoDTO> update(@PathVariable("idEndereco") Integer id,
+                           @Valid @RequestBody EnderecoCreateDTO enderecoAtualizar) throws Exception {
         return ResponseEntity.ok(enderecoService.update(id, enderecoAtualizar));
     }
 
@@ -62,3 +63,8 @@ public class EnderecoController {
         enderecoService.delete(id);
     }
 }
+
+/*
+NOTAS DE ESTUDO:
+Post e Put (entradas de dados) agora usam EnderecoDTO e EnderecoCreateDTO para fazer o tráfego de informações
+*/

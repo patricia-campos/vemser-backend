@@ -44,6 +44,3 @@ public class Endereco {
     private String pais;
 
 }
-
-//TODO
-// - Pesquisar como testar o enum tipo de endereço

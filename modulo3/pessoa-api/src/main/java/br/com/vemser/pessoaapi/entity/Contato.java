@@ -21,7 +21,7 @@ public class Contato {
     private Integer idPessoa;
 
     @NotNull(message = "Tipo não pode ser nulo")
-    private Integer tipo;
+    private TipoContato tipo;
 
     @NotNull(message = "Número não pode ser nulo")
     @NotEmpty(message = "Número não pode ser vazio")
@@ -32,9 +32,5 @@ public class Contato {
     @NotEmpty(message = "Descrição não pode ser vazia")
     @NotNull(message = "Descrição não pode ser nula")
     private String descricao;
-
-
-    //TODO
-    // - Aplicar enum em Tipo
 
 }

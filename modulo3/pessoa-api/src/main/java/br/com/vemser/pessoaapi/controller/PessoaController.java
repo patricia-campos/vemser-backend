@@ -45,25 +45,6 @@ public class PessoaController {
     }
 
 
-    /*
-    @PostMapping // Criar nova pessoa - localhost:8080/pessoa
-    public ResponseEntity<Pessoa> create(@RequestBody @Valid  Pessoa pessoa) {
-        return ResponseEntity.ok(pessoaService.create(pessoa));
-    }
-     */
-
-
-    /*
-    @PutMapping("/{idPessoa}") // Editar pessoa existente - localhost:8080/pessoa/idPessoa
-    public ResponseEntity<Pessoa> update(@PathVariable("idPessoa") Integer id,
-                                         @Valid @RequestBody Pessoa pessoaAtualizar) throws Exception {
-
-        return ResponseEntity.ok(pessoaService.update(id, pessoaAtualizar));
-    }
-    */
-
-
-    //TODO - DTO POST E PUT EM CONSTRUÇÃO - INÍCIO -----------------------------------------------------
     @PostMapping // Criar nova pessoa - localhost:8080/pessoa
     public ResponseEntity<PessoaDTO> create(@RequestBody @Valid PessoaCreateDTO pessoa) {
         return ResponseEntity.ok(pessoaService.create(pessoa));
@@ -77,8 +58,6 @@ public class PessoaController {
         return ResponseEntity.ok(pessoaService.update(id, pessoaAtualizar));
     }
 
-    //TODO - DTO POST E PUT EM CONSTRUÇÃO - FIM -----------------------------------------------------
-
 
     @DeleteMapping("/{idPessoa}") // Excluir pessoa - localhost:8080/pessoa/idPessoa
     public void delete(@PathVariable("idPessoa") Integer id) throws Exception {
@@ -87,8 +66,10 @@ public class PessoaController {
 }
 
 
-
-
+/*
+NOTAS DE ESTUDO:
+Post e Put (entradas de dados) agora usam PessoaDTO e PessoaCreateDTO para fazer o tráfego de informações
+*/
 
 // localhost:8080/pessoa/hello
 // @GetMapping("/hello")

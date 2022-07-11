@@ -1,5 +1,6 @@
 package br.com.vemser.pessoaapi.dto;
 
+import br.com.vemser.pessoaapi.entity.TipoEndereco;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -16,7 +17,7 @@ public class ContatoCreateDTO {
     private Integer idPessoa;
 
     @NotNull(message = "Tipo não pode ser nulo")
-    private Integer tipo;
+    private TipoEndereco tipo;
 
     @NotNull(message = "Número não pode ser nulo")
     @NotEmpty(message = "Número não pode ser vazio")
@@ -29,3 +30,11 @@ public class ContatoCreateDTO {
     private String descricao;
 
 }
+/*
+NOTAS DE ESTUDO:
+@Data - equivalent to the combination of @Getter, @Setter, @RequiredArgsConstructor, @ToString, @EqualsAndHashCode
+
+ContatoCreateDTO - É o espelho de Contato, que usamos para fazer a manipulação usando DTO, para fim de proteger
+as informações nas transações.
+*/
+

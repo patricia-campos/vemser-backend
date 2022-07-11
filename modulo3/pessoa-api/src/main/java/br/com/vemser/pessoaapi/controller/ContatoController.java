@@ -37,19 +37,13 @@ public class ContatoController {
         return contatoService.listByIdPessoa(idPessoa);
     }
 
-    /*
-    @PostMapping("/{idPessoa}") // Criar novo contato em pessoa existente - localhost:8080/contato/idPessoa
-    public ResponseEntity<Contato> create(@PathVariable("idPessoa") Integer id, @Valid @RequestBody Contato contato)
-            throws Exception {
-        return ResponseEntity.ok(contatoService.create(id, contato));
-    }
-    */
 
     @PostMapping("/{idPessoa}") // Criar novo contato em pessoa existente - localhost:8080/contato/idPessoa
     public ResponseEntity<ContatoDTO> create(@PathVariable("idPessoa") Integer id, @Valid @RequestBody ContatoCreateDTO contato)
             throws Exception {
         return ResponseEntity.ok(contatoService.create(id, contato));
     }
+
 
     @PutMapping("/{idContato}") // Editar contato existente (deve receber todos os dados) - localhost:8080/contato/idContato
     public ResponseEntity<ContatoDTO> update(@PathVariable("idContato") Integer id,
@@ -63,3 +57,9 @@ public class ContatoController {
         contatoService.delete(id);
     }
 }
+
+/*
+NOTAS DE ESTUDO:
+Post e Put (entradas de dados) agora usam ContatoDTO e ContatoCreateDTO para fazer o tráfego de informações
+*/
+

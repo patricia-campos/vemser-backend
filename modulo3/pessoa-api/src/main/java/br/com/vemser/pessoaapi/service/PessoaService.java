@@ -28,9 +28,13 @@ public class PessoaService {
 
         log.info("Criando a pessoa...");
 
+        // Aqui acontece a conversão do conteúdo do Json através do ObjectMapper
         Pessoa pessoaEntity = objectMapper.convertValue(pessoa, Pessoa.class);
+
+        // Chamando o create (insert passando objeto convertido na linha anterior)
         Pessoa pessoaCriada = pessoaRepository.create(pessoaEntity);
 
+        // Criando o objeto e convertendo para o DTO (que só tem o id) para retornar para o controller
         PessoaDTO pessoaDTO = new PessoaDTO();
         pessoaDTO = objectMapper.convertValue(pessoaCriada, PessoaDTO.class);
 
@@ -55,19 +59,21 @@ public class PessoaService {
 
         Pessoa pessoaRecuperada = findPessoaById(id);
 
-        log.info("Atualizando pessoa " + pessoaRecuperada.getNome());
+        log.info("Atualizando pessoa " + pessoaRecuperada.getNome() + "...");
 
+        // Aqui acontece a conversão do conteúdo do Json através do ObjectMapper
         Pessoa pessoaEntity = objectMapper.convertValue(pessoaAtualizar, Pessoa.class);
+
+        // Chamando o update (update passando objeto convertido na linha anterior)
         pessoaRecuperada.setCpf(pessoaEntity.getCpf());
         pessoaRecuperada.setNome(pessoaEntity.getNome());
         pessoaRecuperada.setDataNascimento(pessoaEntity.getDataNascimento());
 
-
+        // Criando o objeto e convertendo para o DTO (que só tem o id) para retornar para o controller
         PessoaDTO pessoaDTO = new PessoaDTO();
         pessoaDTO = objectMapper.convertValue(pessoaRecuperada, PessoaDTO.class);
 
-        log.warn("Pessoa atualizada!");
-
+        log.warn("Pessoa " + pessoaRecuperada.getNome() + " atualizada!");
 
         return pessoaDTO;
     }
@@ -78,10 +84,10 @@ public class PessoaService {
 
         Pessoa pessoaRecuperada = findPessoaById(id);
 
-        log.info("Excluindo pessoa " + pessoaRecuperada.getNome());
+        log.info("Excluindo pessoa " + pessoaRecuperada.getNome() + "...");
         pessoaRepository.list().remove(pessoaRecuperada);
 
-        log.warn("Pessoa excluída!");
+        log.warn("Pessoa" + pessoaRecuperada.getNome() + " excluída!");
     }
 
 

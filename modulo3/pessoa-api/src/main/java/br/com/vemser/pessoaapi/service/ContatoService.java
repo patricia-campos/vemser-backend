@@ -5,8 +5,8 @@ import br.com.vemser.pessoaapi.dto.ContatoDTO;
 import br.com.vemser.pessoaapi.entity.Contato;
 import br.com.vemser.pessoaapi.entity.Pessoa;
 import br.com.vemser.pessoaapi.exception.RegraDeNegocioException;
-import br.com.vemser.pessoaapi.repository.PessoaRepository;
 import br.com.vemser.pessoaapi.repository.ContatoRepository;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +23,6 @@ public class ContatoService {
     @Autowired
     private ContatoRepository contatoRepository;
     @Autowired
-    private PessoaRepository pessoaRepository;
-    @Autowired
     private PessoaService pessoaService;
     @Autowired
     private ObjectMapper objectMapper;
@@ -33,18 +31,22 @@ public class ContatoService {
     //----CREATE
     public ContatoDTO create(Integer idPessoa, ContatoCreateDTO contato) throws Exception{
 
-        log.info("Adicionando contato...");
         //Puxei o método de encontrar pessoa by Id do PessoaService
         Pessoa pessoaRecuperada = pessoaService.findPessoaById(idPessoa);
         contato.setIdPessoa(pessoaRecuperada.getIdPessoa());
 
+        log.info("Adicionando contato de " + pessoaRecuperada.getNome() + "...");
+
+        // Aqui acontece a conversão do conteúdo do Json através do ObjectMapper
         Contato contatoEntity = objectMapper.convertValue(contato, Contato.class);
+
+        // Chamando o create (insert passando objeto convertido na linha anterior)
         Contato contatoCriado = contatoRepository.create(contatoEntity);
 
         ContatoDTO contatoDTO = new ContatoDTO();
         contatoDTO = objectMapper.convertValue(contatoCriado, ContatoDTO.class);
 
-        log.info("Adicionado novo contato de " + pessoaRecuperada.getNome());
+        log.info("Contato de " + pessoaRecuperada.getNome() + " adicionado!");
         return contatoDTO;
     }
 
@@ -55,7 +57,6 @@ public class ContatoService {
     }
 
     public List<Contato> listByIdPessoa(Integer idPessoa) {
-
         return contatoRepository.listByIdPessoa(idPessoa);
     }
 
@@ -69,13 +70,17 @@ public class ContatoService {
         //checando se o endereço existe e alterando uma linha da lista de endereços pelo id do parâmetro
         Pessoa pessoaRecuperada = pessoaService.findPessoaById(contatoRecuperado.getIdPessoa());
 
-        log.info("Atualizando contato  " + contatoRecuperado.getTipo() + " de " + pessoaRecuperada.getNome());
+        log.info("Atualizando contato  " + contatoRecuperado.getTipo() + " de " + pessoaRecuperada.getNome() + "...");
 
-        Contato contatoEntity = objectMapper.convertValue(contato, Contato.class); //convertendo o contato para objeto chamado contatoEntity
+        // Aqui acontece a conversão do conteúdo do Json através do ObjectMapper
+        Contato contatoEntity = objectMapper.convertValue(contato, Contato.class);
+
+        // Chamando o update (update passando objeto convertido na linha anterior)
         contatoRecuperado.setTipo(contatoEntity.getTipo());
         contatoRecuperado.setNumero(contatoEntity.getNumero());
         contatoRecuperado.setDescricao(contatoEntity.getDescricao());
 
+        // Criando o objeto e convertendo para o DTO (que só tem o id) para retornar para o controller
         ContatoDTO contatoDTO = new ContatoDTO();
         contatoDTO = objectMapper.convertValue(contatoRecuperado, ContatoDTO.class);
 
@@ -85,14 +90,13 @@ public class ContatoService {
     }
 
 
-
     //----DELETE
     public void delete(Integer id) throws Exception {
 
         Contato contatoRecuperado = findContatoById(id);
         Pessoa pessoaRecuperada = pessoaService.findPessoaById(contatoRecuperado.getIdPessoa());
 
-        log.info("Excluindo contato  " + contatoRecuperado.getTipo() + " de " + pessoaRecuperada.getNome());
+        log.info("Excluindo contato  " + contatoRecuperado.getTipo() + " de " + pessoaRecuperada.getNome() + "...");
 
         contatoRepository.list().remove(contatoRecuperado);
 

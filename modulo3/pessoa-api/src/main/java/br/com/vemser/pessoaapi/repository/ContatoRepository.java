@@ -1,6 +1,7 @@
 package br.com.vemser.pessoaapi.repository;
 
 import br.com.vemser.pessoaapi.entity.Contato;
+import br.com.vemser.pessoaapi.entity.TipoContato;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -15,11 +16,11 @@ public class ContatoRepository {
     private AtomicInteger COUNTER = new AtomicInteger();
 
     public ContatoRepository() {
-        listaContatos.add(new Contato(COUNTER.incrementAndGet() /*1*/, 1, 2, "000333222", "Whatsapp"));
-        listaContatos.add(new Contato(COUNTER.incrementAndGet() /*2*/, 2, 1, "000333255", "Código morse"));
-        listaContatos.add(new Contato(COUNTER.incrementAndGet() /*3*/, 2, 2, "000333244", "Celular"));
-        listaContatos.add(new Contato(COUNTER.incrementAndGet() /*4*/, 3, 1, "000333233", "Sinal de fumaça"));
-        listaContatos.add(new Contato(COUNTER.incrementAndGet() /*4*/, 3, 2, "000333277", "Telegram"));
+        listaContatos.add(new Contato(COUNTER.incrementAndGet() /*1*/, 1, TipoContato.RESIDENCIAL, "000333222", "Whatsapp"));
+        listaContatos.add(new Contato(COUNTER.incrementAndGet() /*2*/, 2, TipoContato.COMERCIAL, "000333255", "Fixo"));
+        listaContatos.add(new Contato(COUNTER.incrementAndGet() /*3*/, 2, TipoContato.COMERCIAL, "000333244", "Celular"));
+        listaContatos.add(new Contato(COUNTER.incrementAndGet() /*4*/, 3, TipoContato.RESIDENCIAL, "000333233", "WhatsApp"));
+        listaContatos.add(new Contato(COUNTER.incrementAndGet() /*4*/, 3, TipoContato.RESIDENCIAL, "000333277", "Apenas recados"));
     }
 
     public Contato create(Contato contato) {
