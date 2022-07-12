@@ -29,7 +29,7 @@ public class ContatoService {
 
 
     //----CREATE
-    public ContatoDTO create(Integer idPessoa, ContatoCreateDTO contato) throws Exception{
+    public ContatoDTO create(Integer idPessoa, ContatoCreateDTO contato) throws RegraDeNegocioException{
 
         //Puxei o método de encontrar pessoa by Id do PessoaService
         Pessoa pessoaRecuperada = pessoaService.findPessoaById(idPessoa);
@@ -64,7 +64,7 @@ public class ContatoService {
 
     //----UPDATE
     public ContatoDTO update(Integer id,
-                          ContatoCreateDTO contato) throws Exception {
+                          ContatoCreateDTO contato) throws RegraDeNegocioException {
 
         Contato contatoRecuperado = findContatoById(id);
 
@@ -92,7 +92,7 @@ public class ContatoService {
 
 
     //----DELETE
-    public void delete(Integer id) throws Exception {
+    public void delete(Integer id) throws RegraDeNegocioException {
 
         Contato contatoRecuperado = findContatoById(id);
         Pessoa pessoaRecuperada = pessoaService.findPessoaById(contatoRecuperado.getIdPessoa());
@@ -106,7 +106,7 @@ public class ContatoService {
 
 
     //ENCONTRA CONTATO PELO ID - ver usage
-    private Contato findContatoById(Integer id) throws Exception {
+    private Contato findContatoById(Integer id) throws RegraDeNegocioException {
         Contato contatoRecuperado = contatoRepository.list().stream()
                 .filter(x -> x.getIdContato().equals(id))
                 .findFirst()
