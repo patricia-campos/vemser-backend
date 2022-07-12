@@ -37,12 +37,13 @@ public class ContatoService {
 
         log.info("Adicionando contato de " + pessoaRecuperada.getNome() + "...");
 
-        // Aqui acontece a conversão do conteúdo do Json através do ObjectMapper
+        // Aqui acontece a conversão do conteúdo do Json através do ObjectMapper - deixa de ser DTO
         Contato contatoEntity = objectMapper.convertValue(contato, Contato.class);
 
         // Chamando o create (insert passando objeto convertido na linha anterior)
         Contato contatoCriado = contatoRepository.create(contatoEntity);
 
+        // Convertendo em DTO para devolver ao controller
         ContatoDTO contatoDTO = new ContatoDTO();
         contatoDTO = objectMapper.convertValue(contatoCriado, ContatoDTO.class);
 
@@ -51,7 +52,7 @@ public class ContatoService {
     }
 
 
-    //----READ
+    //----READ //todo dto aqui também?????
     public List<Contato> list(){
         return contatoRepository.list();
     }

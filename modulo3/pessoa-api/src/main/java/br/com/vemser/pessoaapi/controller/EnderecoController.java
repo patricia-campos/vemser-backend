@@ -44,14 +44,14 @@ public class EnderecoController {
     }
 
 
-    @PostMapping("/{idPessoa}") // Criar novo endereço por idPessoa - localhost:8080/idPessoa
+    @PostMapping("/{idPessoa}") // Criar novo endereço por idPessoa - localhost:8080/endereco/idPessoa
     public ResponseEntity<EnderecoDTO> create(@PathVariable("idPessoa") Integer id, @Valid @RequestBody EnderecoCreateDTO endereco)
             throws Exception {
         return ResponseEntity.ok(enderecoService.create(id, endereco));
     }
 
 
-    @PutMapping("/{idEndereco}") // Editar endereco existente (deve receber todos os dados) - localhost:8080/contato/idEndereco
+    @PutMapping("/{idEndereco}") // Editar endereco existente (deve receber todos os dados) - localhost:8080/endereco/idEndereco
     public ResponseEntity<EnderecoDTO> update(@PathVariable("idEndereco") Integer id,
                            @Valid @RequestBody EnderecoCreateDTO enderecoAtualizar) throws Exception {
         return ResponseEntity.ok(enderecoService.update(id, enderecoAtualizar));

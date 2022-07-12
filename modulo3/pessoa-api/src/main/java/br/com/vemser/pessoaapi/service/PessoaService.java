@@ -22,6 +22,9 @@ public class PessoaService {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private EmailService emailService;
+
 
     //----CREATE
     public PessoaDTO create(PessoaCreateDTO pessoa) {
@@ -39,6 +42,11 @@ public class PessoaService {
         pessoaDTO = objectMapper.convertValue(pessoaCriada, PessoaDTO.class);
 
         log.warn("Pessoa " + pessoaDTO.getNome() + " criada!");
+
+        emailService.sendEmailPessoaCriada(pessoaDTO);
+        log.warn("Enviando E-mail.. " + pessoaDTO.getEmail()+ "!");
+
+
         return pessoaDTO;
     }
 
@@ -50,6 +58,10 @@ public class PessoaService {
 
     public List<Pessoa> listByName(String nome) {
         return pessoaRepository.listByName(nome);
+    }
+
+    public List<Pessoa> listByIdPessoa(Integer id) {
+        return pessoaRepository.listByIdPessoa(id);
     }
 
 
@@ -75,6 +87,9 @@ public class PessoaService {
 
         log.warn("Pessoa " + pessoaRecuperada.getNome() + " atualizada!");
 
+        emailService.sendEmailPessoaAlterada(pessoaDTO);
+        log.warn("Enviando E-mail.. " + pessoaDTO.getEmail()+ "!");
+
         return pessoaDTO;
     }
 
@@ -88,6 +103,9 @@ public class PessoaService {
         pessoaRepository.list().remove(pessoaRecuperada);
 
         log.warn("Pessoa" + pessoaRecuperada.getNome() + " excluída!");
+
+        emailService.sendEmailPessoaDeletada(pessoaRecuperada);
+        log.warn("Enviando E-mail.. " + pessoaRecuperada.getEmail()+ "!");
     }
 
 

@@ -18,6 +18,18 @@
 	</properties>
 	<dependencies>
 
+		<!-- Inserido em aula - 11/07/2022 -  Spring WEB - Aula 5 - Java Mail -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.31</version>
+		</dependency>
+
 		<!-- Inserido em aula - 08/07/2022 -  Spring WEB - Aula 4 - Lombok, DTO-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>

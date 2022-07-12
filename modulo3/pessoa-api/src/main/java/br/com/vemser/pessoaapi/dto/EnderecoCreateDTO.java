@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 
 public class EnderecoCreateDTO {
 
-    private Integer idEndereco;
+    private Integer idEndereco; //todo verificar id
 
     private Integer idPessoa;
 

@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 public class PessoaCreateDTO {
 
-        private Integer idPessoa;
+        private Integer idPessoa; //todo verificar id
 
         @NotEmpty(message = "Nome não pode estar vazio")
         @NotBlank(message = "Nome não pode estar em branco")
@@ -24,6 +24,9 @@ public class PessoaCreateDTO {
         @NotEmpty(message = "CPF não pode ser vazio")
         @Size(min = 11,max = 11, message = "CPF deve conter 11 caracteres")
         private String cpf;
+
+        @Email
+        private String email;
 
 }
 

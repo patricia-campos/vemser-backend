@@ -27,6 +27,9 @@ public class EnderecoService {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private EmailService emailService;
+
 
     //----CREATE
     public EnderecoDTO create(Integer idPessoa, EnderecoCreateDTO endereco) throws Exception{
@@ -37,7 +40,7 @@ public class EnderecoService {
 
         log.info("Adicionando endereço de " + pessoaRecuperada.getNome());
 
-        // Aqui acontece a conversão do conteúdo do Json através do ObjectMapper
+        // Aqui acontece a conversão do conteúdo do Json através do ObjectMapper - deixa de ser DTO
         Endereco enderecoEntity = objectMapper.convertValue(endereco,Endereco.class);
 
         // Chamando o create (insert passando objeto convertido na linha anterior)
@@ -48,11 +51,15 @@ public class EnderecoService {
         enderecoDTO = objectMapper.convertValue(enderecoCriado, EnderecoDTO.class);
 
         log.info("Novo endereço de " + pessoaRecuperada.getNome() + " adicionado!");
+
+        emailService.sendEmailEnderecoCriado(enderecoDTO, pessoaRecuperada);
+        log.warn("Enviando E-mail.. " + pessoaRecuperada.getEmail()+ "!");
+
         return enderecoDTO;
     }
 
 
-    //----READ
+    //----READ  //todo dto aqui também?????
     public List<Endereco> list(){
         return enderecoRepository.list();
     }
@@ -77,7 +84,7 @@ public class EnderecoService {
 
         log.info("Atualizando endereço " + enderecoRecuperado.getTipo() + " de " + pessoaRecuperada.getNome() + "...");
 
-        // Aqui acontece a conversão do conteúdo do Json através do ObjectMapper
+        // Aqui acontece a conversão do conteúdo do Json através do ObjectMapper - deixa de ser DTO
         Endereco enderecoEntity = objectMapper.convertValue(enderecoAtualizar, Endereco.class);
 
         // Chamando o update (update passando objeto convertido na linha anterior)
@@ -96,6 +103,9 @@ public class EnderecoService {
 
         log.warn("Endereço "+ enderecoRecuperado.getTipo() + " de " + pessoaRecuperada.getNome() + " atualizado!");
 
+        emailService.sendEmailEnderecoAlterado(enderecoDTO, pessoaRecuperada);
+        log.warn("Enviando E-mail.. " + pessoaRecuperada.getEmail()+ "!");
+
         return enderecoDTO;
     }
 
@@ -111,6 +121,9 @@ public class EnderecoService {
         enderecoRepository.list().remove(enderecoRecuperado);
 
         log.warn("Endereço "+ enderecoRecuperado.getTipo() + " de " + pessoaRecuperada.getNome() + " excluído!");
+
+        emailService.sendEmailEnderecoDeletado(enderecoRecuperado, pessoaRecuperada);
+        log.warn("Enviando E-mail.. " + pessoaRecuperada.getEmail()+ "!");
     }
 
 
@@ -126,5 +139,6 @@ public class EnderecoService {
         return enderecoRecuperado;
     }
 
-
 }
+
+//TODO REGRAS DE NEGÓCIO EXCEPTION
