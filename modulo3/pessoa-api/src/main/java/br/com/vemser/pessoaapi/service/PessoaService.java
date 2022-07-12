@@ -95,7 +95,7 @@ public class PessoaService {
 
 
     //----DELETE
-    public void delete(Integer id) throws Exception {
+    public void delete(Integer id) throws RegraDeNegocioException {
 
         Pessoa pessoaRecuperada = findPessoaById(id);
 
