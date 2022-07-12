@@ -161,11 +161,11 @@ public class EmailService {
             throws IOException, TemplateException {
 
         Map<String, Object> dados = new HashMap<>();
-        dados.put("nome", pessoa.getNome());
+        dados.put("nome", "Olá, " + pessoa.getNome());
         dados.put("mensagem", "Um novo endereço " + enderecoDTO.getTipo() + " foi cadastrado em seu nome com sucesso!");
         dados.put("email", "Qualquer dúvida, nos contate através do e-mail " + from);
 
-        Template template = fmConfiguration.getTemplate("email-template-endereco.html");
+        Template template = fmConfiguration.getTemplate("email-template.html");
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
         return html;
     }
@@ -193,11 +193,11 @@ public class EmailService {
     // MÉTODO QUE BUSCA NO DTO OS DADOS QUE SERÃO INSERIDOS NO TEMPLATE DO EMAIL
     public String buscarConteudoEnderecoAlterado(EnderecoCreateDTO enderecoDTO, Pessoa pessoa) throws IOException, TemplateException {
         Map<String, Object> dados = new HashMap<>();
-        dados.put("nome", pessoa.getNome());
+        dados.put("nome", "Olá, " + pessoa.getNome());
         dados.put("mensagem", "Seu endereço " + enderecoDTO.getTipo() + " foi alterado com sucesso!");
         dados.put("email", "Qualquer dúvida, nos contate através do e-mail " + from);
 
-        Template template = fmConfiguration.getTemplate("email-template-endereco.html");
+        Template template = fmConfiguration.getTemplate("email-template.html");
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
         return html;
     }
@@ -225,11 +225,11 @@ public class EmailService {
     // MÉTODO QUE BUSCA NO DTO OS DADOS QUE SERÃO INSERIDOS NO TEMPLATE DO EMAIL
     public String buscarConteudoEnderecoDeletado(Endereco endereco, Pessoa pessoa) throws IOException, TemplateException {
         Map<String, Object> dados = new HashMap<>();
-        dados.put("nome", pessoa.getNome());
+        dados.put("nome", "Olá, " + pessoa.getNome());
         dados.put("mensagem", "Seu endereço " + endereco.getTipo() + " foi excluído com sucesso!");
         dados.put("email", "Qualquer dúvida, nos contate através do e-mail " + from);
 
-        Template template = fmConfiguration.getTemplate("email-template-endereco.html");
+        Template template = fmConfiguration.getTemplate("email-template.html");
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
         return html;
     }

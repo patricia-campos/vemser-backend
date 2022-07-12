@@ -52,6 +52,7 @@ public class EnderecoService {
 
         log.info("Novo endereço de " + pessoaRecuperada.getNome() + " adicionado!");
 
+        //Chama método de envio de e-mail
         emailService.sendEmailEnderecoCriado(enderecoDTO, pessoaRecuperada);
         log.warn("Enviando E-mail.. " + pessoaRecuperada.getEmail()+ "!");
 
@@ -103,6 +104,7 @@ public class EnderecoService {
 
         log.warn("Endereço "+ enderecoRecuperado.getTipo() + " de " + pessoaRecuperada.getNome() + " atualizado!");
 
+        //Chama método de envio de e-mail
         emailService.sendEmailEnderecoAlterado(enderecoDTO, pessoaRecuperada);
         log.warn("Enviando E-mail.. " + pessoaRecuperada.getEmail()+ "!");
 
@@ -122,6 +124,7 @@ public class EnderecoService {
 
         log.warn("Endereço "+ enderecoRecuperado.getTipo() + " de " + pessoaRecuperada.getNome() + " excluído!");
 
+        //Chama método de envio de e-mail
         emailService.sendEmailEnderecoDeletado(enderecoRecuperado, pessoaRecuperada);
         log.warn("Enviando E-mail.. " + pessoaRecuperada.getEmail()+ "!");
     }

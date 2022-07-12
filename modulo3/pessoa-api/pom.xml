@@ -18,6 +18,13 @@
 	</properties>
 	<dependencies>
 
+		<!-- Inserido em aula - 12/07/2022 - Java Web - Aula 7 - Swagger  -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.8</version>
+		</dependency>
+
 		<!-- Inserido em aula - 11/07/2022 -  Spring WEB - Aula 5 - Java Mail -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

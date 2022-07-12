@@ -43,6 +43,7 @@ public class PessoaService {
 
         log.warn("Pessoa " + pessoaDTO.getNome() + " criada!");
 
+        //Chama método de envio de e-mail
         emailService.sendEmailPessoaCriada(pessoaDTO, pessoaCriada);
         log.warn("Enviando E-mail.. " + pessoaDTO.getEmail()+ "!");
 
@@ -87,6 +88,7 @@ public class PessoaService {
 
         log.warn("Pessoa " + pessoaRecuperada.getNome() + " atualizada!");
 
+        //Chama método de envio de e-mail
         emailService.sendEmailPessoaAlterada(pessoaDTO);
         log.warn("Enviando E-mail.. " + pessoaDTO.getEmail()+ "!");
 
@@ -104,6 +106,7 @@ public class PessoaService {
 
         log.warn("Pessoa" + pessoaRecuperada.getNome() + " excluída!");
 
+        //Chama método de envio de e-mail
         emailService.sendEmailPessoaDeletada(pessoaRecuperada);
         log.warn("Enviando E-mail.. " + pessoaRecuperada.getEmail()+ "!");
     }
