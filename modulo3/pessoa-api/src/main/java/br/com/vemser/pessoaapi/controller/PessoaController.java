@@ -2,18 +2,15 @@ package br.com.vemser.pessoaapi.controller;
 
 import br.com.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.vemser.pessoaapi.dto.PessoaDTO;
-import br.com.vemser.pessoaapi.entity.Contato;
 import br.com.vemser.pessoaapi.entity.Pessoa;
 import br.com.vemser.pessoaapi.exception.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.service.EmailService;
 import br.com.vemser.pessoaapi.service.PessoaService;
-import br.com.vemser.pessoaapi.repository.PessoaRepository;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import lombok.Getter;
-import lombok.SneakyThrows;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,7 +40,7 @@ public class PessoaController {
     private String app;
 
 
-    //========================EM AULA 12/07=======================================
+    //=================================================================================================================
     @Operation(summary = "Listar clientes cadastrados", description = "Lista todos os clientes cadastrados no banco")
 
     @ApiResponses(
@@ -141,6 +138,10 @@ public class PessoaController {
         pessoaService.delete(id);
     }
 }
+
+
+
+
 
 
     /*-----------------------------------------------------

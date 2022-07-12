@@ -1,6 +1,7 @@
 package br.com.vemser.pessoaapi.dto;
 
 import br.com.vemser.pessoaapi.entity.TipoEndereco;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -16,15 +17,18 @@ public class ContatoCreateDTO {
 
     private Integer idPessoa; //todo verificar id
 
+    @Schema(description = "Tipo de contato")     //========================EM AULA 12/07
     @NotNull(message = "Tipo do contato não pode ser nulo")
     private TipoEndereco tipo;
 
+    @Schema(description = "Número de contato")     //========================EM AULA 12/07
     @NotNull(message = "Número não pode ser nulo")
     @NotEmpty(message = "Número não pode ser vazio")
     @NotBlank(message = "Número não pode ser em branco")
     @Size(max = 13, message = "Número deve conter no máximo 13 caracteres")
     private String numero;
 
+    @Schema(description = "Descrição do contato")     //========================EM AULA 12/07
     @NotEmpty(message = "Descrição não pode ser vazia")
     @NotNull(message = "Descrição não pode ser nula")
     private String descricao;
