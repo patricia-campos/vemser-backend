@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 public class PessoaCreateDTO {
 
-        private Integer idPessoa; //todo verificar id
+        //private Integer idPessoa; //todo verificar id
 
         @NotEmpty(message = "Nome não pode estar vazio")
         @NotBlank(message = "Nome não pode estar em branco")

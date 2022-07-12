@@ -43,7 +43,7 @@ public class PessoaService {
 
         log.warn("Pessoa " + pessoaDTO.getNome() + " criada!");
 
-        emailService.sendEmailPessoaCriada(pessoaDTO);
+        emailService.sendEmailPessoaCriada(pessoaDTO, pessoaCriada);
         log.warn("Enviando E-mail.. " + pessoaDTO.getEmail()+ "!");
 
 
@@ -67,7 +67,7 @@ public class PessoaService {
 
     //----UPDATE
     public PessoaDTO update(Integer id,
-                            PessoaCreateDTO pessoaAtualizar) throws Exception {
+                            PessoaCreateDTO pessoaAtualizar) throws RegraDeNegocioException {
 
         Pessoa pessoaRecuperada = findPessoaById(id);
 
@@ -110,7 +110,7 @@ public class PessoaService {
 
 
     //ENCONTRA PESSOA PELO ID - ver usage
-    public Pessoa findPessoaById(Integer id) throws Exception {
+    public Pessoa findPessoaById(Integer id) throws RegraDeNegocioException {
 
         Pessoa pessoaRecuperada = pessoaRepository.list().stream()
                 .filter(pessoa -> pessoa.getIdPessoa().equals(id))

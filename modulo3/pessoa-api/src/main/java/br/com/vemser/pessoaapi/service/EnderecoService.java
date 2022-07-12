@@ -32,7 +32,7 @@ public class EnderecoService {
 
 
     //----CREATE
-    public EnderecoDTO create(Integer idPessoa, EnderecoCreateDTO endereco) throws Exception{
+    public EnderecoDTO create(Integer idPessoa, EnderecoCreateDTO endereco) throws RegraDeNegocioException{
 
         //Puxei o método de encontrar pessoa by Id do PessoaService
         Pessoa pessoaRecuperada = pessoaService.findPessoaById(idPessoa);
@@ -75,7 +75,7 @@ public class EnderecoService {
 
     //----UPDATE
     public EnderecoDTO update(Integer id,
-                           EnderecoCreateDTO enderecoAtualizar) throws Exception {
+                           EnderecoCreateDTO enderecoAtualizar) throws RegraDeNegocioException {
 
         Endereco enderecoRecuperado = findEnderecoById(id);
 
@@ -111,7 +111,7 @@ public class EnderecoService {
 
 
     //----DELETE
-    public void delete(Integer id) throws Exception {
+    public void delete(Integer id) throws RegraDeNegocioException {
 
         Endereco enderecoRecuperado = findEnderecoById(id);
         Pessoa pessoaRecuperada = pessoaService.findPessoaById(enderecoRecuperado.getIdPessoa());
@@ -129,7 +129,7 @@ public class EnderecoService {
 
 
     //ENCONTRA ENDEREÇO PELO ID - ver usage
-    public Endereco findEnderecoById(Integer id) throws Exception {
+    public Endereco findEnderecoById(Integer id) throws RegraDeNegocioException {
 
         Endereco enderecoRecuperado = enderecoRepository.list().stream()
                 .filter(endereco -> endereco.getIdEndereco().equals(id))

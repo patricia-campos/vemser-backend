@@ -14,7 +14,7 @@ public class EnderecoCreateDTO {
 
     private Integer idEndereco; //todo verificar id
 
-    private Integer idPessoa;
+    private Integer idPessoa; //todo verificar id
 
     @NotNull(message = "Tipo de endereço não pode ser nulo")
     private TipoEndereco tipo;

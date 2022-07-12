@@ -14,7 +14,7 @@ public class ContatoCreateDTO {
 
     private Integer idContato; // todo verificar id
 
-    private Integer idPessoa;
+    private Integer idPessoa; //todo verificar id
 
     @NotNull(message = "Tipo do contato não pode ser nulo")
     private TipoEndereco tipo;
