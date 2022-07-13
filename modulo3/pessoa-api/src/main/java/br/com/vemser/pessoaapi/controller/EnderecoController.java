@@ -5,6 +5,9 @@ import br.com.vemser.pessoaapi.dto.EnderecoDTO;
 import br.com.vemser.pessoaapi.entity.Endereco;
 import br.com.vemser.pessoaapi.service.EnderecoService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,43 +28,120 @@ public class EnderecoController {
     @Autowired
     private EnderecoService enderecoService;
 
+    //=================================================================================================================
 
-    @GetMapping // Listar endereços - localhost:8080/endereco
+    @Operation(summary = "Listar endereços cadastrados",
+               description = "Lista todos os endereços cadastrados no banco")
+
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Retorna a lista de endereços cadastrados"),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
+
+    @GetMapping // localhost:8080/endereco
     public List<Endereco> list() {
         return enderecoService.list();
     }
 
+    //=================================================================================================================
 
-    @GetMapping("/{idEndereco}") // Listar endereço por id - localhost:8080/endereco/idEndereco
+    @Operation(summary = "Mostrar endereço específico cadastrado",
+               description = "Lista endereço cadastrado no banco utilizando o id do endereço como " +
+                             "parâmetro da busca")
+
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Retorna endereço cadastrado por id"),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
+    @GetMapping("/{idEndereco}") // localhost:8080/endereco/idEndereco
     public List<Endereco> listByIdEndereco(@PathVariable("idEndereco") Integer idEndereco) {
         return enderecoService.listByIdEndereco(idEndereco);
     }
 
+    //=================================================================================================================
 
-    @GetMapping("/{idPessoa}/pessoa") // Listar endereco por pessoa - localhost:8080/endereco/idPessoa/pessoa
+    @Operation(summary = "Listar endereços cadastrado de cliente",
+               description = "Lista endereços cadastrados de cliente, utilizando o id do cliente como " +
+                             "parâmetro da busca")
+
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Retorna endereço cadastrado do cliente por id"),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
+
+    @GetMapping("/{idPessoa}/pessoa") // localhost:8080/endereco/idPessoa/pessoa
     public List<Endereco> listByIdPessoa(@PathVariable("idPessoa") Integer idPessoa) {
         return enderecoService.listByIdPessoa(idPessoa);
     }
 
+    //=================================================================================================================
 
-    @PostMapping("/{idPessoa}") // Criar novo endereço por idPessoa - localhost:8080/endereco/idPessoa
+    @Operation(summary = "Inserir novo endereço no cadastro do cliente",
+               description = "Insere um novo endereço no cadastro do cliente, utilizando o id do cliente como " +
+                             "parâmetro para este cadastro")
+
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Insere um novo endereço no cadastro do cliente"),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
+
+    @PostMapping("/{idPessoa}") // localhost:8080/endereco/idPessoa
     public ResponseEntity<EnderecoDTO> create(@PathVariable("idPessoa") Integer id, @Valid @RequestBody EnderecoCreateDTO endereco)
             throws Exception {
         return ResponseEntity.ok(enderecoService.create(id, endereco));
     }
 
+    //=================================================================================================================
 
-    @PutMapping("/{idEndereco}") // Editar endereco existente (deve receber todos os dados) - localhost:8080/endereco/idEndereco
+    @Operation(summary = "Alterar endereço no cadastro do cliente",
+            description = "Altera endereço no cadastro do cliente, utilizando o id do endereço a ser editado como " +
+                          "parâmetro para efetuar a alteração")
+
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Edita endereço no cadastro do cliente"),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
+
+    @PutMapping("/{idEndereco}") // localhost:8080/endereco/idEndereco
     public ResponseEntity<EnderecoDTO> update(@PathVariable("idEndereco") Integer id,
                            @Valid @RequestBody EnderecoCreateDTO enderecoAtualizar) throws Exception {
         return ResponseEntity.ok(enderecoService.update(id, enderecoAtualizar));
     }
 
+    //=================================================================================================================
 
-    @DeleteMapping("/{idEndereco}") // Excluir endereco- localhost:8080/endereco/idEndereco
+    @Operation(summary = "Excluir endereço cadastrado",
+            description = "Exclui endereço de cliente cadastrado no sistema, utilizando o id do endereço como " +
+                          "parâmetro para efetuar a exclusão")
+
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Exclui endereço cadastrado"),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
+
+    @DeleteMapping("/{idEndereco}") // localhost:8080/endereco/idEndereco
     public void delete(@PathVariable("idEndereco") Integer id) throws Exception {
         enderecoService.delete(id);
     }
+    //=================================================================================================================
 }
 
 /*

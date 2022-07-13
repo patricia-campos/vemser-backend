@@ -41,6 +41,7 @@ public class PessoaController {
 
 
     //=================================================================================================================
+
     @Operation(summary = "Listar clientes cadastrados", description = "Lista todos os clientes cadastrados no banco")
 
     @ApiResponses(
@@ -51,13 +52,14 @@ public class PessoaController {
                     }
                 )
 
-    @GetMapping // Listar pessoas - localhost:8080/pessoa
+    @GetMapping // localhost:8080/pessoa
     public List<Pessoa> list() {
         return pessoaService.list();
     }
 
 
     //=================================================================================================================
+
     @Operation(summary = "Listar clientes cadastrados por nome",
                description = "Lista todos os clientes cadastrados no banco utilizando o nome como parâmetro de busca")
 
@@ -69,12 +71,13 @@ public class PessoaController {
             }
     )
 
-    @GetMapping("/byname") // Listar por nome - localhost:8080/pessoa/byname?nome=Rafa
+    @GetMapping("/byname") // localhost:8080/pessoa/byname?nome=Rafa
     public List<Pessoa> listByName(@RequestParam("nome") String nome) {
         return pessoaService.listByName(nome);
     }
 
     //=================================================================================================================
+
     @Operation(summary = "Listar clientes cadastrados por id",
                description = "Lista todos os clientes cadastrados no banco utilizando o id como parâmetro de busca")
 
@@ -89,8 +92,10 @@ public class PessoaController {
     public List<Pessoa> listByIdPessoa(@PathVariable("idPessoa") Integer idPessoa) {
         return pessoaService.listByIdPessoa(idPessoa);
     }
+
     //=================================================================================================================
-    @Operation(summary = "Insere novo cliente no sistema",
+
+    @Operation(summary = "Inserir novo cliente no sistema",
                description = "Insere um novo cliente no cadastro do sistema")
 
     @ApiResponses(
@@ -100,13 +105,17 @@ public class PessoaController {
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
-    @PostMapping // Criar nova pessoa - localhost:8080/pessoa
-    public ResponseEntity<PessoaDTO> create(@RequestBody @Valid PessoaCreateDTO pessoa) {
+
+    @PostMapping // localhost:8080/pessoa
+    public ResponseEntity<PessoaDTO> create(@RequestBody @Valid PessoaCreateDTO pessoa) throws RegraDeNegocioException {
         return ResponseEntity.ok(pessoaService.create(pessoa));
     }
+
     //=================================================================================================================
-    @Operation(summary = "Altera dados de cliente cadastrado",
-                description = "Altera os dados de um cliente cadastrado no sistema, utilizando o id do cliente como parâmetro para a alteração")
+
+    @Operation(summary = "Alterar dados de cliente cadastrado",
+                description = "Altera os dados de um cliente cadastrado no sistema, utilizando o id do cliente " +
+                              "como parâmetro para efetuar a alteração")
 
     @ApiResponses(
             value = {
@@ -115,7 +124,7 @@ public class PessoaController {
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
-    @PutMapping("/{idPessoa}") // Editar pessoa existente - localhost:8080/pessoa/idPessoa
+    @PutMapping("/{idPessoa}") // localhost:8080/pessoa/idPessoa
     public ResponseEntity<PessoaDTO> update(@PathVariable("idPessoa") Integer id,
                          @Valid @RequestBody PessoaCreateDTO pessoaAtualizar) throws RegraDeNegocioException {
 
@@ -123,8 +132,10 @@ public class PessoaController {
     }
 
     //=================================================================================================================
-    @Operation(summary = "Exclui cliente cadastrado",
-            description = "Exclui um cliente cadastrado no sistema, utilizando o id do cliente como parâmetro para a alteração")
+
+    @Operation(summary = "Excluir cliente cadastrado",
+            description = "Exclui um cliente cadastrado no sistema, utilizando o id do cliente como " +
+                          "parâmetro para efetuar a exclusão")
 
     @ApiResponses(
             value = {
@@ -133,18 +144,18 @@ public class PessoaController {
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
-    @DeleteMapping("/{idPessoa}") // Excluir pessoa - localhost:8080/pessoa/idPessoa
+
+    @DeleteMapping("/{idPessoa}") // localhost:8080/pessoa/idPessoa
     public void delete(@PathVariable("idPessoa") Integer id) throws RegraDeNegocioException {
         pessoaService.delete(id);
     }
+    //=================================================================================================================
 }
 
 
-
-
-
-
     /*-----------------------------------------------------
+      NOTAS DE ESTUDO:
+
     @SneakyThrows
     @GetMapping("/email")
     public String email() {

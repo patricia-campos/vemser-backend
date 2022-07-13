@@ -5,6 +5,9 @@ import br.com.vemser.pessoaapi.dto.ContatoDTO;
 import br.com.vemser.pessoaapi.entity.Contato;
 import br.com.vemser.pessoaapi.service.ContatoService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,36 +29,98 @@ public class ContatoController {
     private ContatoService contatoService;
 
 
+    //=================================================================================================================
+
+    @Operation(summary = "Listar contatos de clientes",
+               description = "Lista todos os contatos dos clientes cadastrados no banco")
+
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Retorna a lista de contatos dos clientes cadastrados"),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
+
     @GetMapping // Listar contatos - localhost:8080/contato
     public List<Contato> list() {
         return contatoService.list();
     }
 
+    //=================================================================================================================
 
-    @GetMapping("/{idPessoa}") // Listar por pessoa - localhost:8080/contato/idPessoa
+    @Operation(summary = "Listar contatos cadastrados por cliente",
+               description = "Lista todos os contatos cadastrados no banco, " +
+                             "utilizando como parâmetro para essa busca o id do cliente")
+
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Retorna a lista de contatos dos clientes cadastrados por id"),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
+    @GetMapping("/{idPessoa}") // localhost:8080/contato/idPessoa
     public List<Contato> listByIdCliente(@PathVariable("idPessoa") Integer idPessoa) {
         return contatoService.listByIdPessoa(idPessoa);
     }
 
+    //=================================================================================================================
 
-    @PostMapping("/{idPessoa}") // Criar novo contato em pessoa existente - localhost:8080/contato/idPessoa
+    @Operation(summary = "Inserir novo contato em cliente cadastrado",
+               description = "Insere novo contato no cadastro do cliente, utilizando id do cliente como parâmetro " +
+                             "para este cadastro")
+
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Insere novo contato em cliente cadastrado"),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
+    @PostMapping("/{idPessoa}") // localhost:8080/contato/idPessoa
     public ResponseEntity<ContatoDTO> create(@PathVariable("idPessoa") Integer id, @Valid @RequestBody ContatoCreateDTO contato)
             throws Exception {
         return ResponseEntity.ok(contatoService.create(id, contato));
     }
+    //=================================================================================================================
 
+    @Operation(summary = "Alterar dados de contato de cliente cadastrado",
+               description = "Altera os dados de contato de cliente cadastrado no sistema, " +
+                             "utilizando o id do contato como parâmetro para a alteração")
 
-    @PutMapping("/{idContato}") // Editar contato existente (deve receber todos os dados) - localhost:8080/contato/idContato
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Altera dados de contato de cliente"),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
+
+    @PutMapping("/{idContato}") // (deve receber todos os dados) - localhost:8080/contato/idContato
     public ResponseEntity<ContatoDTO> update(@PathVariable("idContato") Integer id,
                           @Valid @RequestBody ContatoCreateDTO contatoAtualizar) throws Exception {
         return ResponseEntity.ok(contatoService.update(id, contatoAtualizar));
     }
 
+    //=================================================================================================================
 
+    @Operation(summary = "Excluir contato de cliente cadastrado",
+               description = "Exclui contato de cliente cadastrado no sistema, utilizando o id do contato como " +
+                             "parâmetro para a exclusão")
+
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Exclui contato cadastrado"),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
     @DeleteMapping("/{idContato}") // Excluir contato - localhost:8080/contato/idContato
     public void delete(@PathVariable("idContato") Integer id) throws Exception {
         contatoService.delete(id);
     }
+    //=================================================================================================================
 }
 
 /*

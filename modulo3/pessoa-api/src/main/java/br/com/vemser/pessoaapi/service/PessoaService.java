@@ -27,7 +27,7 @@ public class PessoaService {
 
 
     //----CREATE
-    public PessoaDTO create(PessoaCreateDTO pessoa) {
+    public PessoaDTO create(PessoaCreateDTO pessoa) throws RegraDeNegocioException {
 
         log.info("Criando a pessoa...");
 
@@ -52,7 +52,7 @@ public class PessoaService {
     }
 
 
-    //----READ
+    //----READ todo dto aqui também?????
     public List<Pessoa> list() {
         return pessoaRepository.list();
     }

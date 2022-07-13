@@ -13,9 +13,7 @@ import javax.validation.constraints.Size;
 
 public class ContatoCreateDTO {
 
-    private Integer idContato; // todo verificar id
-
-    private Integer idPessoa; //todo verificar id
+    private Integer idPessoa;
 
     @Schema(description = "Tipo de contato")     //========================EM AULA 12/07
     @NotNull(message = "Tipo do contato não pode ser nulo")
