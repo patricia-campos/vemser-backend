@@ -25,8 +25,6 @@ public class OpenApiConfig {
         response.sendRedirect("/swagger-ui/index.html");
     }
 
-    //========================EM AULA 12/07=======================================
-
     @Bean
     public OpenAPI springShopOpenAPI() {
         String securitySchemeName = "bearerAuth";
@@ -47,5 +45,4 @@ public class OpenApiConfig {
                                 )
                 );
     }
-
 }

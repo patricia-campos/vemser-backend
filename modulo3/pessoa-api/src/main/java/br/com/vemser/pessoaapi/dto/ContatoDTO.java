@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class ContatoDTO extends ContatoCreateDTO {
 
-    @Schema(description = "Id do contato")
+    @Schema(description = "Id do contato do cliente")
     private Integer idContato;
 }
 

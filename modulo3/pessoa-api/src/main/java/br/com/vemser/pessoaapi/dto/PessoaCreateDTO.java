@@ -1,5 +1,6 @@
 package br.com.vemser.pessoaapi.dto;
 
+import br.com.vemser.pessoaapi.entity.TipoEndereco;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -15,6 +16,10 @@ public class PessoaCreateDTO {
         @NotBlank(message = "Nome não pode estar em branco")
         @NotNull(message = "Nome não pode ser nulo")
         private String nome;
+
+        @Schema(description = "Sexo do cliente")
+        @NotNull(message = "Não pode ser nulo")
+        private Sexo sexo;
 
         @Schema(description = "Data de nascimento do cliente")
         @NotNull(message = "Informe sua data de nascimento")
@@ -32,6 +37,8 @@ public class PessoaCreateDTO {
         @NotNull(message = "E-mail não pode ser nulo")
         @NotEmpty(message = "E-mail não pode ser vazio")
         private String email;
+
+
 
 }
 

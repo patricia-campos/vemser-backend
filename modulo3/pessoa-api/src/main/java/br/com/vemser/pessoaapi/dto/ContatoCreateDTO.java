@@ -16,18 +16,18 @@ public class ContatoCreateDTO {
     @Schema(description = "Id do cliente")
     private Integer idPessoa;
 
-    @Schema(description = "Tipo de contato")
+    @Schema(description = "Tipo de contato do cliente")
     @NotNull(message = "Tipo do contato não pode ser nulo")
     private TipoEndereco tipo;
 
-    @Schema(description = "Número de contato")
+    @Schema(description = "Número de contato do cliente")
     @NotNull(message = "Número não pode ser nulo")
     @NotEmpty(message = "Número não pode ser vazio")
     @NotBlank(message = "Número não pode ser em branco")
     @Size(max = 13, message = "Número deve conter no máximo 13 caracteres")
     private String numero;
 
-    @Schema(description = "Descrição do contato")
+    @Schema(description = "Descrição do contato do cliente")
     @NotEmpty(message = "Descrição não pode ser vazia")
     @NotNull(message = "Descrição não pode ser nula")
     private String descricao;

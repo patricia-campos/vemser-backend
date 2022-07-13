@@ -18,6 +18,37 @@
 	</properties>
 	<dependencies>
 
+		<!-- Inserido em aula - 13/07/2022 - Java Web - Aula 8 - FeignClient  -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-okhttp</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-jackson</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-slf4j</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-gson</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-httpclient</artifactId>
+		</dependency>
+
 		<!-- Inserido em aula - 12/07/2022 - Java Web - Aula 7 - Swagger  -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
@@ -69,6 +100,19 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<!-- Inserido em aula - 13/07/2022 - Java Web - Aula 8 - FeignClient  -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>2021.0.3</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>
