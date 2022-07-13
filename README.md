@@ -28,7 +28,8 @@ Este é o meu repositório de exercícios como estagiária de backend na 9ª edi
 - [x] Homework 3 - Spring Web - Deadline: 06/07 - 11hs  
 - [x] Homework 4 - Spring Web - Validadores - Deadline: 07/07 - 11hs  
 - [x] Homework 5 - Spring Web - DTO, ObjectMapper - Deadline: 11/07 - 11hs  
-- [x] Homework 6 - Spring Web - Spring Mail - Deadline: 12/07 - 11hs  - Faltam melhorias no HTML
+- [x] Homework 6 - Spring Web - Spring Mail - Deadline: 12/07 - 11hs  - To Do: melhorias no HTML e refatorar EmailService
+- [x] Homework 7 - Spring Web - Swagger - Deadline: 13/07 - 11hs 
 <br>
 
 ## 👨‍🏫 Instrutores
