@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class EnderecoDTO extends EnderecoCreateDTO {
 
-    @Schema(description = "Id do endereço")     //========================EM AULA 12/07
+    @Schema(description = "Id do endereço")
     private Integer idEndereco;
 }
 

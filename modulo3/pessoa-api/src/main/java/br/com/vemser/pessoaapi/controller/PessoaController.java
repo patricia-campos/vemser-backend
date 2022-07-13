@@ -29,7 +29,7 @@ import java.util.List;
 
 public class PessoaController {
 
-    @Autowired //sempre acima do atributo
+    @Autowired
     private PessoaService pessoaService;
     @Autowired
     private EmailService emailService;
@@ -61,7 +61,7 @@ public class PessoaController {
     //=================================================================================================================
 
     @Operation(summary = "Listar clientes cadastrados por nome",
-               description = "Lista todos os clientes cadastrados no banco utilizando o nome como parâmetro de busca")
+               description = "Lista todos os clientes cadastrados no banco utilizando o nome como parâmetro dessa busca")
 
     @ApiResponses(
             value = {
@@ -78,17 +78,17 @@ public class PessoaController {
 
     //=================================================================================================================
 
-    @Operation(summary = "Listar clientes cadastrados por id",
-               description = "Lista todos os clientes cadastrados no banco utilizando o id como parâmetro de busca")
+    @Operation(summary = "Retornar cliente cadastrado por id",
+               description = "Retorna cliente cadastrado no banco utilizando o id como parâmetro dessa busca")
 
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Retorna clientes com o id solicitado"),
+                    @ApiResponse(responseCode = "200", description = "Retorna cliente com o id solicitado"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
-    @GetMapping("/{idPessoa}") // Listar por pessoa - localhost:8080/pessoa/idPessoa
+    @GetMapping("/{idPessoa}") // localhost:8080/pessoa/idPessoa
     public List<Pessoa> listByIdPessoa(@PathVariable("idPessoa") Integer idPessoa) {
         return pessoaService.listByIdPessoa(idPessoa);
     }
@@ -119,7 +119,7 @@ public class PessoaController {
 
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Altera dados do cliente"),
+                    @ApiResponse(responseCode = "200", description = "Altera dados cadastrais do cliente"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }

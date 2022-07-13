@@ -31,18 +31,18 @@ public class ContatoController {
 
     //=================================================================================================================
 
-    @Operation(summary = "Listar contatos de clientes",
+    @Operation(summary = "Listar todos os contatos de clientes",
                description = "Lista todos os contatos dos clientes cadastrados no banco")
 
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Retorna a lista de contatos dos clientes cadastrados"),
+                    @ApiResponse(responseCode = "200", description = "Retorna a lista de contatos cadastrados"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
 
-    @GetMapping // Listar contatos - localhost:8080/contato
+    @GetMapping // localhost:8080/contato
     public List<Contato> list() {
         return contatoService.list();
     }
@@ -50,12 +50,12 @@ public class ContatoController {
     //=================================================================================================================
 
     @Operation(summary = "Listar contatos cadastrados por cliente",
-               description = "Lista todos os contatos cadastrados no banco, " +
+               description = "Lista todos os contatos cadastrados por cliente, " +
                              "utilizando como parâmetro para essa busca o id do cliente")
 
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Retorna a lista de contatos dos clientes cadastrados por id"),
+                    @ApiResponse(responseCode = "200", description = "Retorna a lista de contatos dos clientes por id do cliente"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }

@@ -10,24 +10,24 @@ import java.time.LocalDate;
 
 public class PessoaCreateDTO {
 
-        @Schema(description = "Nome do cliente")     //========================EM AULA 12/07
+        @Schema(description = "Nome do cliente")
         @NotEmpty(message = "Nome não pode estar vazio")
         @NotBlank(message = "Nome não pode estar em branco")
         @NotNull(message = "Nome não pode ser nulo")
         private String nome;
 
-        @Schema(description = "Data de nascimento do cliente")  //========================EM AULA 12/07
+        @Schema(description = "Data de nascimento do cliente")
         @NotNull(message = "Informe sua data de nascimento")
         @Past(message = "Você não pode nascer no futuro!")
         private LocalDate dataNascimento;
 
-        @Schema(description = "CPF do cliente")    //========================EM AULA 12/07
+        @Schema(description = "CPF do cliente")
         @NotNull(message = "CPF não pode ser nulo")
         @NotEmpty(message = "CPF não pode ser vazio")
         @Size(min = 11,max = 11, message = "CPF deve conter 11 caracteres")
         private String cpf;
 
-        @Schema(description = "E-mail do cliente")     //========================EM AULA 12/07
+        @Schema(description = "E-mail do cliente")
         @Email
         @NotNull(message = "E-mail não pode ser nulo")
         @NotEmpty(message = "E-mail não pode ser vazio")
