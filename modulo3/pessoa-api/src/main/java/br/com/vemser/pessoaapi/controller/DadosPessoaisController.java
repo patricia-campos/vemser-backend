@@ -1,11 +1,6 @@
 package br.com.vemser.pessoaapi.controller;
 import br.com.vemser.pessoaapi.client.DadosPessoaisClient;
 import br.com.vemser.pessoaapi.dto.DadosPessoaisDTO;
-
-import br.com.vemser.pessoaapi.dto.PessoaCreateDTO;
-import br.com.vemser.pessoaapi.dto.PessoaDTO;
-import br.com.vemser.pessoaapi.entity.Pessoa;
-import br.com.vemser.pessoaapi.exception.RegraDeNegocioException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,17 +22,21 @@ public class DadosPessoaisController {
         return dadosPessoaisClient.getAll();
     }
 
-    /*
-    @PostMapping // localhost:8080/pessoa
+    @PostMapping
     public ResponseEntity<DadosPessoaisDTO> create(@RequestBody DadosPessoaisDTO dadosPessoaisDTO) {
         return ResponseEntity.ok(dadosPessoaisClient.post(dadosPessoaisDTO));
     }
 
-    @PutMapping("/{cpf}") // localhost:8080/pessoa/idPessoa
+    @PutMapping("/{cpf}")
     public ResponseEntity<DadosPessoaisDTO> update(@PathVariable("cpf") String cpf,
                                             @RequestBody DadosPessoaisDTO dadosPessoaisDTO) {
 
         return ResponseEntity.ok(dadosPessoaisClient.put(cpf, dadosPessoaisDTO));
     }
-*/
+
+    @DeleteMapping("/{cpf}") // localhost:8080/pessoa/idPessoa
+    public void delete(@PathVariable("cpf") String cpf) {
+        dadosPessoaisClient.delete(cpf);
+    }
+
 }
