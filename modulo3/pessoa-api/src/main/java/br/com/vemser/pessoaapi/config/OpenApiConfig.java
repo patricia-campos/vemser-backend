@@ -20,7 +20,7 @@ import java.io.IOException;
 @RestController
 public class OpenApiConfig {
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "/") //Faz com que entre no localhost e vá direto p o swagger
     public void index(HttpServletResponse response) throws IOException {
         response.sendRedirect("/swagger-ui/index.html");
     }
