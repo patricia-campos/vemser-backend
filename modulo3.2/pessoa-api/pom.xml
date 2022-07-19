@@ -18,6 +18,19 @@
 	</properties>
 	<dependencies>
 
+		<!-- Inserido em aula - 18/07/2022 -  Spring Data - -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.oracle.database.jdbc</groupId>
+			<artifactId>ojdbc8</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+
 		<!-- Inserido em aula - 13/07/2022 - Java Web - Aula 8 - FeignClient  -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -67,10 +80,6 @@
 			<artifactId>freemarker</artifactId>
 			<version>2.3.31</version>
 		</dependency>
-
-		<!-- Inserido em aula - 18/07/2022 -  Spring Data - -->
-
-
 
 		<!-- Inserido em aula - 08/07/2022 -  Spring WEB - Aula 4 - Lombok, DTO-->
 		<dependency>
