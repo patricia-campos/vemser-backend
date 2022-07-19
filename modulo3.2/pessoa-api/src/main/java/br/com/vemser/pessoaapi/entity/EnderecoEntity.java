@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity(name="ENDERECO_PESSOA")
 public class EnderecoEntity {
 
