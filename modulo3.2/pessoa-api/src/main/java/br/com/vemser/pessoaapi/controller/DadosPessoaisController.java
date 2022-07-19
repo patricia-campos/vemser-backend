@@ -33,7 +33,7 @@ public class DadosPessoaisController {
 
     //update
     @PutMapping("/{cpf}")
-    public ResponseEntity<DadosPessoaisDTO> update(@PathVariable("cpf") String cpf,
+    public ResponseEntity<DadosPessoaisDTO> update(@PathVariable("cpfCliente") String cpf,
                                             @RequestBody DadosPessoaisDTO dadosPessoaisDTO) {
 
         return ResponseEntity.ok(dadosPessoaisService.put(cpf, dadosPessoaisDTO));
@@ -42,7 +42,7 @@ public class DadosPessoaisController {
 
     //delete
     @DeleteMapping("/{cpf}") // localhost:8080/pessoa/idPessoa
-    public void delete(@PathVariable("cpf") String cpf) {
+    public void delete(@PathVariable("cpfCliente") String cpf) {
         dadosPessoaisService.delete(cpf);
     }
 
