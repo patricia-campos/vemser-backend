@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
-
 public class EnderecoCreateDTO {
 
     @Schema(description = "Id do cliente")

@@ -46,7 +46,7 @@ public class PetService {
     //------------------------------------------------------------------------------------------------------------------
     //READ
     //lista todos
-    public List<PetDTO> list(){
+    public List<PetDTO> list() {
         return petRepository.findAll().stream()
                 .map(this::retornarDTO)
                 .collect(Collectors.toList());
@@ -64,14 +64,14 @@ public class PetService {
     //------------------------------------------------------------------------------------------------------------------
     //UPDATE
     public PetDTO update(Integer id,
-                             PetCreateDTO pet) throws RegraDeNegocioException {
+                         PetCreateDTO pet) throws RegraDeNegocioException {
 
         PetEntity petEntityResgatado = findBichinhoById(id);
 
         //checando se o bichinho existe e alterando seus dados na lista de bichinhos, pelo id do parâmetro
         PessoaEntity pessoaRecuperada = pessoaService.findPessoaById(petEntityResgatado.getIdPessoa());
 
-        log.info("Atualizando pet..." );
+        log.info("Atualizando pet...");
 
         // Chamando o update (update passando objeto convertido na linha anterior)
         petEntityResgatado.setTipo(pet.getTipo());

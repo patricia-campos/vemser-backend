@@ -15,14 +15,6 @@ public interface PessoaRepository extends JpaRepository<PessoaEntity, Integer> {
 
     public List<PessoaEntity> findByNomeContainsIgnoreCase(String nome);
 
-
-
     public List<PessoaEntity> findByidPet(Integer idPessoa);
-    //inserir query methods do segundo exercicio aqui
-
-
-    //inserir query methods do segundo exercicio aqui
-
-
 
 }

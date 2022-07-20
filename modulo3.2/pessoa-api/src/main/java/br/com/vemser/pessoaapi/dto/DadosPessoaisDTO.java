@@ -1,12 +1,14 @@
 package br.com.vemser.pessoaapi.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class DadosPessoaisDTO {
 
 
@@ -19,5 +21,11 @@ public class DadosPessoaisDTO {
     private Sexo sexo;
     private String tituloEleitor;
 
-    }
+}
 
+/*
+NOTAS DE ESTUDO:
+-Extende Dados Pessoais DTO.
+-Cuida da "volta". Usamos essa classe para retornar para o Controller protegendo o tráfego dos dados.
+
+ */

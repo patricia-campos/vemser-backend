@@ -1,6 +1,5 @@
 package br.com.vemser.pessoaapi.dto;
 
-import br.com.vemser.pessoaapi.entity.TipoEndereco;
 import br.com.vemser.pessoaapi.entity.TipoPet;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -25,7 +24,6 @@ public class PetCreateDTO {
     @Schema(description = "Tipo do pet")
     @NotNull(message = "Tipo do pet não pode ser nulo")
     private TipoPet tipo;
-
 }
 
 /*

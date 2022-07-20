@@ -6,7 +6,6 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-
 public class PessoaDTO extends PessoaCreateDTO {
 
     @Schema(description = "Id do cliente")
@@ -21,8 +20,6 @@ public class PessoaDTO extends PessoaCreateDTO {
     @Schema(description = "Lista de enderecos")
     private List<PetDTO> petsDTO;
 }
-
-
 
 /*
 NOTAS DE ESTUDO:

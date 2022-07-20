@@ -16,7 +16,7 @@ public enum TipoContato {
         return tipo;
     }
 
-    public static TipoContato ofTipo(Integer tipo){
+    public static TipoContato ofTipo(Integer tipo) {
         return Arrays.stream(TipoContato.values())
                 .filter(tp -> tp.getTipo().equals(tipo))
                 .findFirst()

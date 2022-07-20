@@ -1,7 +1,6 @@
 package br.com.vemser.pessoaapi.dto;
 
 import br.com.vemser.pessoaapi.entity.TipoContato;
-import br.com.vemser.pessoaapi.entity.TipoEndereco;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -11,7 +10,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
-
 public class ContatoCreateDTO {
 
     @Schema(description = "Id do cliente")
