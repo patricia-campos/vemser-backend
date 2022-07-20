@@ -17,15 +17,11 @@ public enum TipoEndereco {
         return tipo;
     }
 
-    public static TipoEndereco ofTipo(Integer tipo){
+    public static TipoEndereco ofTipo(Integer tipo) {
         return Arrays.stream(TipoEndereco.values())
                 .filter(tp -> tp.getTipo().equals(tipo))
                 .findFirst()
                 .get();
     }
 
-    public enum TipoPet {
-
-        CACHORRO, GATO, PONEI
-    }
 }

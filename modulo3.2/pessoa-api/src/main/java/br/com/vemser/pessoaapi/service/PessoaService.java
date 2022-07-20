@@ -1,9 +1,10 @@
 package br.com.vemser.pessoaapi.service;
 
-import br.com.vemser.pessoaapi.dto.ContatoDTO;
-import br.com.vemser.pessoaapi.dto.PessoaCreateDTO;
-import br.com.vemser.pessoaapi.dto.PessoaDTO;
+import br.com.vemser.pessoaapi.dto.*;
+import br.com.vemser.pessoaapi.entity.ContatoEntity;
+import br.com.vemser.pessoaapi.entity.EnderecoEntity;
 import br.com.vemser.pessoaapi.entity.PessoaEntity;
+import br.com.vemser.pessoaapi.entity.PetEntity;
 import br.com.vemser.pessoaapi.exception.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.repository.PessoaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,6 +24,37 @@ public class PessoaService {
     private PessoaRepository pessoaRepository;
     @Autowired
     private ObjectMapper objectMapper;
+
+
+    //HOMEWORK
+
+    public List<PessoaDTO> listarPessoaEContato() {
+        return pessoaRepository.findAll().stream()
+                .map(pessoaEntity -> {
+                    PessoaDTO pessoaDTO = retornarDTO(pessoaEntity);
+                    pessoaDTO.setContatosDTO(pessoaEntity.getContatos().stream()
+                            .map(this::contatoretornarDTO).collect(Collectors.toList()));
+                    return pessoaDTO;
+                }).toList();
+    }
+    public List<PessoaDTO> listarPessoaEEndereco() {
+        return pessoaRepository.findAll().stream()
+                .map(pessoaEntity -> {
+                    PessoaDTO pessoaDTO = retornarDTO(pessoaEntity);
+                    pessoaDTO.setEnderecosDTO(pessoaEntity.getEnderecos().stream()
+                            .map(this::enderecoretornarDTO).collect(Collectors.toList()));
+                    return pessoaDTO;
+                }).toList();
+    }
+    public List<PessoaDTO> listarPessoaEPets() {
+        return pessoaRepository.findAll().stream()
+                .map(pessoaEntity -> {
+                    PessoaDTO pessoaDTO = retornarDTO(pessoaEntity);
+                    pessoaDTO.setPetsDTO(pessoaEntity.getPet().stream()
+                            .map(this::petretornarDTO).collect(Collectors.toList()));
+                    return pessoaDTO;
+                }).toList();
+    }
 
 
     //------------------------------------------------------------------------------------------------------------------
@@ -53,6 +85,9 @@ public class PessoaService {
                 .collect(Collectors.toList());
     }
 
+
+
+
     //lista por id pessoa
     public List<PessoaDTO> listByIdPessoa(Integer idPessoa) {
 
@@ -61,6 +96,17 @@ public class PessoaService {
                 .map(this::retornarDTO)
                 .collect(Collectors.toList());
     }
+
+
+    public List<PessoaEntity> findByCpf(String cpf){
+         return pessoaRepository.findByCpf(cpf);
+    };
+
+
+    public List<PessoaEntity> findByidPet(Integer idPessoa){
+        return pessoaRepository.findByidPet(idPessoa);
+    };
+
 
     //------------------------------------------------------------------------------------------------------------------
     //UPDATE
@@ -107,6 +153,18 @@ public class PessoaService {
     //MÉTODO ENTITY PARA DTO
     public PessoaDTO retornarDTO(PessoaEntity pessoaEntity) {
         return objectMapper.convertValue(pessoaEntity, PessoaDTO.class);
+    }
+
+    public ContatoDTO contatoretornarDTO(ContatoEntity contatoEntity) {
+        return objectMapper.convertValue(contatoEntity, ContatoDTO.class);
+    }
+
+    public EnderecoDTO enderecoretornarDTO(EnderecoEntity enderecoEntity) {
+        return objectMapper.convertValue(enderecoEntity, EnderecoDTO.class);
+    }
+
+    public PetDTO petretornarDTO(PetEntity petEntity) {
+        return objectMapper.convertValue(petEntity, PetDTO.class);
     }
 }
 

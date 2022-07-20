@@ -1,7 +1,10 @@
 package br.com.vemser.pessoaapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -10,7 +13,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name="ENDERECO_PESSOA")
+@Entity(name = "ENDERECO_PESSOA")
 public class EnderecoEntity {
 
     @Id
@@ -49,15 +52,27 @@ public class EnderecoEntity {
     private String pais;
 
     //------------------------------------------------------------------------------------------------------------------
+
     //RELACIONAMENTO muitos para muitos - Endereço - Pessoa
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "PESSOA_ X_PESSOA_ENDERECO",
             joinColumns = @JoinColumn(name = "ID_ENDERECO"),
-            inverseJoinColumns = @JoinColumn(name = "ID_PESSOA" )
+            inverseJoinColumns = @JoinColumn(name = "ID_PESSOA")
     )
     private Set<PessoaEntity> pessoas;
 
 }
+
+    //------------------------------------------------------------------------------------------------------------------
+    /*
+    ANOTAÇÕES:
+
+    O atributo mappedBy é utilizado quando temos um relacionamento bidirecional mapeado entre duas classes. Ele é um
+    atributo para ser utilizado nas annotations @OneToMany, @OneToOne e @ManyToMany. Para utilizamos, devemos declarar
+    ele dentro da annotation e informar o nome do atributo da classe utilizada no mapeamento na outra ponta do
+    relacionamento.
+
+    */
 

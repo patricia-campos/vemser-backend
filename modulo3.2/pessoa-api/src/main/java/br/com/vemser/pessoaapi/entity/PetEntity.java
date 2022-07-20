@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="PET") //Nome da tabela
+@Entity(name = "PET") //Nome da tabela
 public class PetEntity {
 
     @Id
@@ -29,14 +29,25 @@ public class PetEntity {
     private String nome;
 
     @Column(name = "TIPO")
-    private TipoEndereco.TipoPet tipo;
+    private TipoPet tipo;
 
     //------------------------------------------------------------------------------------------------------------------
+
     //RELACIONAMENTO um para um - Pet - Pessoa
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="ID_PESSOA", referencedColumnName = "ID_PESSOA")
+    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID_PESSOA")
     private PessoaEntity pessoa;
 
 }
+    //------------------------------------------------------------------------------------------------------------------
+    /*
+    ANOTAÇÕES:
+
+    O atributo mappedBy é utilizado quando temos um relacionamento bidirecional mapeado entre duas classes. Ele é um
+    atributo para ser utilizado nas annotations @OneToMany, @OneToOne e @ManyToMany. Para utilizamos, devemos declarar
+    ele dentro da annotation e informar o nome do atributo da classe utilizada no mapeamento na outra ponta do
+    relacionamento.
+
+    */

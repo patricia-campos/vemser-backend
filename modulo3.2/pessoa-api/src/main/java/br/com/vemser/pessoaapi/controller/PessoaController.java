@@ -2,15 +2,20 @@ package br.com.vemser.pessoaapi.controller;
 
 import br.com.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.vemser.pessoaapi.dto.PessoaDTO;
+import br.com.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.vemser.pessoaapi.exception.RegraDeNegocioException;
+import br.com.vemser.pessoaapi.repository.PessoaRepository;
 import br.com.vemser.pessoaapi.service.EmailService;
 import br.com.vemser.pessoaapi.service.PessoaService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -31,11 +36,19 @@ public class PessoaController {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private PessoaRepository pessoaRepository;
+
 
     @Value("${user}")
     private String usuario;
     @Value("${spring.application.name}")
     private String app;
+
+
+
+
+
 
 
     //=================================================================================================================
@@ -94,6 +107,81 @@ public class PessoaController {
     public List<PessoaDTO> listByIdPessoa(@PathVariable("idPessoa") Integer idPessoa) {
         return pessoaService.listByIdPessoa(idPessoa);
     }
+
+
+    @Operation(summary = "Retornar cliente cadastrado por id",
+            description = "Retorna cliente cadastrado no banco utilizando o id como parâmetro dessa busca")
+
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Retorna cliente com o id solicitado"),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
+    @GetMapping("/by-cpf") // localhost:8080/pessoa/idPessoa
+
+    public ResponseEntity<List<PessoaEntity>> list(@RequestParam("cpf") String cpf) {
+        return  ResponseEntity.ok(pessoaService.findByCpf(cpf));
+    }
+
+    @Operation(summary = "Retornar cliente cadastrado por id",
+            description = "Retorna cliente cadastrado no banco utilizando o id como parâmetro dessa busca")
+
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Retorna cliente com o id solicitado"),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
+    @GetMapping("/listar-com-contato") // localhost:8080/pessoa/idPessoa
+
+    public ResponseEntity<List<PessoaDTO>> listPessoaComContato(@RequestParam(required = false) Integer idPessoa) {
+        return new ResponseEntity<>(pessoaService.listarPessoaEContato(), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Retornar cliente cadastrado por id",
+            description = "Retorna cliente cadastrado no banco utilizando o id como parâmetro dessa busca")
+
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Retorna cliente com o id solicitado"),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
+    @GetMapping("/listar-com-enderecos") // localhost:8080/pessoa/idPessoa
+
+    public ResponseEntity<List<PessoaDTO>> listPessoaComEnderecos(@RequestParam(required = false) Integer idPessoa) {
+        return new ResponseEntity<>(pessoaService.listarPessoaEEndereco(), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Retornar cliente cadastrado por id",
+            description = "Retorna cliente cadastrado no banco utilizando o id como parâmetro dessa busca")
+
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Retorna cliente com o id solicitado"),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
+    @GetMapping("/listar-com-pets") // localhost:8080/pessoa/idPessoa
+    public ResponseEntity<List<PessoaDTO>> listPessoaComPets(@RequestParam(required = false) Integer idPessoa) {
+        return new ResponseEntity<>(pessoaService.listarPessoaEPets(), HttpStatus.OK);
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
     //=================================================================================================================
