@@ -23,4 +23,9 @@ public enum TipoEndereco {
                 .findFirst()
                 .get();
     }
+
+    public enum TipoPet {
+
+        CACHORRO, GATO, PONEI
+    }
 }

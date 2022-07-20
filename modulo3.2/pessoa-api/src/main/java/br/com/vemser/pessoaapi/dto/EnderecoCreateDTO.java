@@ -63,7 +63,8 @@ public class EnderecoCreateDTO {
 NOTAS DE ESTUDO:
 @Data - equivalent to the combination of @Getter, @Setter, @RequiredArgsConstructor, @ToString, @EqualsAndHashCode
 
-EnderecoCreateDTO - É o espelho de Endereco, que usamos para fazer a manipulação usando DTO, para fim de proteger
-as informações nas transações.
+Conceito da classe CreateDTO:
+É o espelho da Entity, tem os mesmos atributos da Entity com exceção do id.
+Usamos para fazer a manipulação usando DTO, para fim de proteger as informações nas transações.
 */
 

@@ -20,7 +20,6 @@ import java.util.List;
 @RequestMapping("/contato")
 @Validated
 @Slf4j //para usar log
-
 public class ContatoController {
 
     @Autowired

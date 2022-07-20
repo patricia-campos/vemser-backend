@@ -7,7 +7,7 @@ import lombok.Data;
 
 public class PessoaDTO extends PessoaCreateDTO {
 
-    @Schema(description = "Id do cliente")     //========================EM AULA 12/07
+    @Schema(description = "Id do cliente")
     private Integer idPessoa;
 }
 

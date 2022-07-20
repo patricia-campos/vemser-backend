@@ -31,6 +31,7 @@ public class PessoaController {
     @Autowired
     private EmailService emailService;
 
+
     @Value("${user}")
     private String usuario;
     @Value("${spring.application.name}")

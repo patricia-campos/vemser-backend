@@ -1,8 +1,10 @@
 package br.com.vemser.pessoaapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -45,5 +47,17 @@ public class EnderecoEntity {
 
     @Column(name = "PAIS")
     private String pais;
+
+    //------------------------------------------------------------------------------------------------------------------
+    //RELACIONAMENTO muitos para muitos - Endereço - Pessoa
+
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "PESSOA_ X_PESSOA_ENDERECO",
+            joinColumns = @JoinColumn(name = "ID_ENDERECO"),
+            inverseJoinColumns = @JoinColumn(name = "ID_PESSOA" )
+    )
+    private Set<PessoaEntity> pessoas;
+
 }
 

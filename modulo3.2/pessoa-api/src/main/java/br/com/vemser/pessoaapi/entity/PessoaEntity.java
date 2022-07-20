@@ -1,9 +1,11 @@
 package br.com.vemser.pessoaapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -29,4 +31,52 @@ public class PessoaEntity {
 
     @Column(name = "EMAIL")
     private String email;
+
+    //------------------------------------------------------------------------------------------------------------------
+    //RELACIONAMENTO um para um - Pessoa - Pet
+
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="ID_PET", referencedColumnName = "ID_PET")
+    private PetEntity pet;
+
+    //------------------------------------------------------------------------------------------------------------------
+    //RELACIONAMENTO um para muitos - Pessoa - Contatos
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY,
+            mappedBy = "pessoa",         //Indica o lado inverso do relacionamento
+            cascade = CascadeType.ALL,   //Faz a cascata para deletar
+            orphanRemoval = true)        //Deleta os órfãos
+    private Set<ContatoEntity> contatos;
+
+    //------------------------------------------------------------------------------------------------------------------
+    //RELACIONAMENTO muitos para muitos - Pessoa - Endereço
+
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "PESSOA_ X_PESSOA_ENDERECO",
+            joinColumns = @JoinColumn(name = "ID_PESSOA"),
+            inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO")
+    )
+    private Set<EnderecoEntity> enderecos;
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+O atributo mappedBy é utilizado quando temos um relacionamento bidirecional mapeado entre duas classes. Ele é um
+atributo para ser utilizado nas annotations @OneToMany, @OneToOne e @ManyToMany. Para utilizamos, devemos declarar ele
+dentro da annotation e informar o nome do atributo da classe utilizada no mapeamento na outra ponta do relacionamento.
+
+*/

@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PessoaRepository extends JpaRepository<PessoaEntity, Integer> {
+
+    //inserir query methods do segundo exercicio aqui
+
+
     }

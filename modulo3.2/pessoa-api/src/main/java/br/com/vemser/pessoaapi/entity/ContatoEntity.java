@@ -1,5 +1,6 @@
 package br.com.vemser.pessoaapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,7 +19,8 @@ public class ContatoEntity {
     @Column(name = "ID_CONTATO")
     private Integer idContato;
 
-    @Column(name = "ID_PESSOA")
+    //id pessoa é usada na Pet Entity apenas para fins de referência
+    @Column(name = "ID_PESSOA", insertable = false, updatable = false)
     private Integer idPessoa;
 
     @Column(name = "TIPO")
@@ -29,4 +31,12 @@ public class ContatoEntity {
 
     @Column(name = "DESCRICAO")
     private String descricao;
+
+    //------------------------------------------------------------------------------------------------------------------
+    //RELACIONAMENTO muitos para um - Contatos - Pessoa
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID_PESSOA")
+    private PessoaEntity pessoa;
 }
