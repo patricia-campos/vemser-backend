@@ -1,5 +1,5 @@
 package br.com.vemser.pessoaapi.controller;
-import br.com.vemser.pessoaapi.client.DadosPessoaisClient;
+
 import br.com.vemser.pessoaapi.dto.DadosPessoaisDTO;
 import br.com.vemser.pessoaapi.service.DadosPessoaisService;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +34,7 @@ public class DadosPessoaisController {
     //update
     @PutMapping("/{cpf}")
     public ResponseEntity<DadosPessoaisDTO> update(@PathVariable("cpfCliente") String cpf,
-                                            @RequestBody DadosPessoaisDTO dadosPessoaisDTO) {
+                                                   @RequestBody DadosPessoaisDTO dadosPessoaisDTO) {
 
         return ResponseEntity.ok(dadosPessoaisService.put(cpf, dadosPessoaisDTO));
     }

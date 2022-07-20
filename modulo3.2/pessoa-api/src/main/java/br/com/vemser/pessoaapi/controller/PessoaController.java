@@ -8,13 +8,11 @@ import br.com.vemser.pessoaapi.repository.PessoaRepository;
 import br.com.vemser.pessoaapi.service.EmailService;
 import br.com.vemser.pessoaapi.service.PessoaService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -46,11 +44,6 @@ public class PessoaController {
     private String app;
 
 
-
-
-
-
-
     //=================================================================================================================
 
 
@@ -61,8 +54,8 @@ public class PessoaController {
                     @ApiResponse(responseCode = "200", description = "Retorna a lista de clientes"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
-                    }
-                )
+            }
+    )
 
     @GetMapping // localhost:8080/pessoa
     public List<PessoaDTO> list() {
@@ -74,7 +67,7 @@ public class PessoaController {
 
 
     @Operation(summary = "Listar clientes cadastrados por nome",
-               description = "Lista todos os clientes cadastrados no banco utilizando o nome como parâmetro dessa busca")
+            description = "Lista todos os clientes cadastrados no banco utilizando o nome como parâmetro dessa busca")
 
     @ApiResponses(
             value = {
@@ -94,7 +87,7 @@ public class PessoaController {
 
 
     @Operation(summary = "Retornar cliente cadastrado por id",
-               description = "Retorna cliente cadastrado no banco utilizando o id como parâmetro dessa busca")
+            description = "Retorna cliente cadastrado no banco utilizando o id como parâmetro dessa busca")
 
     @ApiResponses(
             value = {
@@ -108,87 +101,81 @@ public class PessoaController {
         return pessoaService.listByIdPessoa(idPessoa);
     }
 
+    //=================================================================================================================
 
-    @Operation(summary = "Retornar cliente cadastrado por id",
-            description = "Retorna cliente cadastrado no banco utilizando o id como parâmetro dessa busca")
+    @Operation(summary = "Retornar cliente cadastrado por cpf",
+            description = "Retorna cliente cadastrado no banco utilizando o cpf como parâmetro dessa busca")
 
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Retorna cliente com o id solicitado"),
+                    @ApiResponse(responseCode = "200", description = "Retorna cliente com o cpf solicitado"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
-    @GetMapping("/by-cpf") // localhost:8080/pessoa/idPessoa
+    @GetMapping("/by-cpf")
 
     public ResponseEntity<List<PessoaEntity>> list(@RequestParam("cpf") String cpf) {
-        return  ResponseEntity.ok(pessoaService.findByCpf(cpf));
+        return ResponseEntity.ok(pessoaService.findByCpf(cpf));
     }
 
-    @Operation(summary = "Retornar cliente cadastrado por id",
-            description = "Retorna cliente cadastrado no banco utilizando o id como parâmetro dessa busca")
+    //=================================================================================================================
+
+    @Operation(summary = "Retornar cliente cadastrado com contato",
+            description = "Retorna cliente cadastrado no banco ucom seus contatos")
 
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Retorna cliente com o id solicitado"),
+                    @ApiResponse(responseCode = "200", description = "Retorna cliente com seus contatos"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
-    @GetMapping("/listar-com-contato") // localhost:8080/pessoa/idPessoa
+    @GetMapping("/listar-com-contato")
 
     public ResponseEntity<List<PessoaDTO>> listPessoaComContato(@RequestParam(required = false) Integer idPessoa) {
         return new ResponseEntity<>(pessoaService.listarPessoaEContato(), HttpStatus.OK);
     }
 
-    @Operation(summary = "Retornar cliente cadastrado por id",
-            description = "Retorna cliente cadastrado no banco utilizando o id como parâmetro dessa busca")
+    //=================================================================================================================
+
+    @Operation(summary = "Retornar cliente cadastrado com endereço",
+            description = "Retorna cliente cadastrado no banco com seus endereços")
 
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Retorna cliente com o id solicitado"),
+                    @ApiResponse(responseCode = "200", description = "Retorna cliente com endereços"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
-    @GetMapping("/listar-com-enderecos") // localhost:8080/pessoa/idPessoa
+    @GetMapping("/listar-com-enderecos")
 
     public ResponseEntity<List<PessoaDTO>> listPessoaComEnderecos(@RequestParam(required = false) Integer idPessoa) {
         return new ResponseEntity<>(pessoaService.listarPessoaEEndereco(), HttpStatus.OK);
     }
 
-    @Operation(summary = "Retornar cliente cadastrado por id",
-            description = "Retorna cliente cadastrado no banco utilizando o id como parâmetro dessa busca")
+    //=================================================================================================================
+
+    @Operation(summary = "Retornar cliente cadastrado com pet",
+            description = "Retorna cliente cadastrado com seus pets")
 
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Retorna cliente com o id solicitado"),
+                    @ApiResponse(responseCode = "200", description = "Retorna cliente com o pet"),
                     @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
                     @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
             }
     )
-    @GetMapping("/listar-com-pets") // localhost:8080/pessoa/idPessoa
+    @GetMapping("/listar-com-pets")
     public ResponseEntity<List<PessoaDTO>> listPessoaComPets(@RequestParam(required = false) Integer idPessoa) {
         return new ResponseEntity<>(pessoaService.listarPessoaEPets(), HttpStatus.OK);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
     //=================================================================================================================
 
-
     @Operation(summary = "Inserir novo cliente no sistema",
-               description = "Insere um novo cliente no cadastro do sistema")
+            description = "Insere um novo cliente no cadastro do sistema")
 
     @ApiResponses(
             value = {
@@ -203,13 +190,11 @@ public class PessoaController {
         return ResponseEntity.ok(pessoaService.create(pessoa));
     }
 
-
     //=================================================================================================================
 
-
     @Operation(summary = "Alterar dados de cliente cadastrado",
-                description = "Altera os dados de um cliente cadastrado no sistema, utilizando o id do cliente " +
-                              "como parâmetro para efetuar a alteração")
+            description = "Altera os dados de um cliente cadastrado no sistema, utilizando o id do cliente " +
+                    "como parâmetro para efetuar a alteração")
 
     @ApiResponses(
             value = {
@@ -220,18 +205,16 @@ public class PessoaController {
     )
     @PutMapping("/{idPessoa}") // localhost:8080/pessoa/idPessoa
     public ResponseEntity<PessoaDTO> update(@PathVariable("idPessoa") Integer id,
-                         @Valid @RequestBody PessoaCreateDTO pessoaAtualizar) throws RegraDeNegocioException {
+                                            @Valid @RequestBody PessoaCreateDTO pessoaAtualizar) throws RegraDeNegocioException {
 
         return ResponseEntity.ok(pessoaService.update(id, pessoaAtualizar));
     }
 
-
     //=================================================================================================================
-
 
     @Operation(summary = "Excluir cliente cadastrado",
             description = "Exclui um cliente cadastrado no sistema, utilizando o id do cliente como " +
-                          "parâmetro para efetuar a exclusão")
+                    "parâmetro para efetuar a exclusão")
 
     @ApiResponses(
             value = {
@@ -246,12 +229,10 @@ public class PessoaController {
         pessoaService.delete(id);
     }
 
-
     //=================================================================================================================
 }
 
-
-    /*-----------------------------------------------------
+    /*
       NOTAS DE ESTUDO:
 
     @SneakyThrows

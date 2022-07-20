@@ -80,7 +80,7 @@ public class PetController {
 
     @PutMapping("/{idPet}") // (deve receber todos os dados)
     public ResponseEntity<PetDTO> update(@PathVariable("idPet") Integer id,
-                                             @Valid @RequestBody PetCreateDTO petAtualizar) throws Exception {
+                                         @Valid @RequestBody PetCreateDTO petAtualizar) throws Exception {
         return ResponseEntity.ok(petService.update(id, petAtualizar));
     }
 

@@ -2,9 +2,7 @@ package br.com.vemser.pessoaapi.controller;
 
 import br.com.vemser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.vemser.pessoaapi.dto.EnderecoDTO;
-import br.com.vemser.pessoaapi.entity.EnderecoEntity;
 import br.com.vemser.pessoaapi.service.EnderecoService;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -32,7 +30,7 @@ public class EnderecoController {
 
 
     @Operation(summary = "Listar endereços cadastrados",
-               description = "Lista todos os endereços cadastrados no banco")
+            description = "Lista todos os endereços cadastrados no banco")
 
     @ApiResponses(
             value = {
@@ -52,8 +50,8 @@ public class EnderecoController {
 
 
     @Operation(summary = "Mostrar endereço específico cadastrado",
-               description = "Lista endereço cadastrado no banco utilizando o id do endereço como " +
-                             "parâmetro da busca")
+            description = "Lista endereço cadastrado no banco utilizando o id do endereço como " +
+                    "parâmetro da busca")
 
     @ApiResponses(
             value = {
@@ -93,8 +91,8 @@ public class EnderecoController {
 
 
     @Operation(summary = "Inserir novo endereço no cadastro do cliente",
-               description = "Insere um novo endereço no cadastro do cliente, utilizando o id do cliente como " +
-                             "parâmetro para este cadastro")
+            description = "Insere um novo endereço no cadastro do cliente, utilizando o id do cliente como " +
+                    "parâmetro para este cadastro")
 
     @ApiResponses(
             value = {
@@ -116,7 +114,7 @@ public class EnderecoController {
 
     @Operation(summary = "Alterar endereço no cadastro do cliente",
             description = "Altera endereço no cadastro do cliente, utilizando o id do endereço a ser editado como " +
-                          "parâmetro para efetuar a alteração")
+                    "parâmetro para efetuar a alteração")
 
     @ApiResponses(
             value = {
@@ -128,7 +126,7 @@ public class EnderecoController {
 
     @PutMapping("/{idEndereco}") // localhost:8080/endereco/idEndereco
     public ResponseEntity<EnderecoDTO> update(@PathVariable("idEndereco") Integer id,
-                           @Valid @RequestBody EnderecoCreateDTO enderecoAtualizar) throws Exception {
+                                              @Valid @RequestBody EnderecoCreateDTO enderecoAtualizar) throws Exception {
         return ResponseEntity.ok(enderecoService.update(id, enderecoAtualizar));
     }
 
@@ -138,7 +136,7 @@ public class EnderecoController {
 
     @Operation(summary = "Excluir endereço cadastrado",
             description = "Exclui endereço de cliente cadastrado no sistema, utilizando o id do endereço como " +
-                          "parâmetro para efetuar a exclusão")
+                    "parâmetro para efetuar a exclusão")
 
     @ApiResponses(
             value = {

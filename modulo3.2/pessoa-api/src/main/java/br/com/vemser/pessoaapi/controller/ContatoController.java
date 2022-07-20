@@ -30,7 +30,7 @@ public class ContatoController {
 
 
     @Operation(summary = "Listar todos os contatos de clientes",
-               description = "Lista todos os contatos dos clientes cadastrados no banco")
+            description = "Lista todos os contatos dos clientes cadastrados no banco")
 
     @ApiResponses(
             value = {
@@ -50,8 +50,8 @@ public class ContatoController {
 
 
     @Operation(summary = "Listar contatos cadastrados por cliente",
-               description = "Lista todos os contatos cadastrados por cliente, " +
-                             "utilizando como parâmetro para essa busca o id do cliente")
+            description = "Lista todos os contatos cadastrados por cliente, " +
+                    "utilizando como parâmetro para essa busca o id do cliente")
 
     @ApiResponses(
             value = {
@@ -70,8 +70,8 @@ public class ContatoController {
 
 
     @Operation(summary = "Inserir novo contato em cliente cadastrado",
-               description = "Insere novo contato no cadastro do cliente, utilizando id do cliente como parâmetro " +
-                             "para este cadastro")
+            description = "Insere novo contato no cadastro do cliente, utilizando id do cliente como parâmetro " +
+                    "para este cadastro")
 
     @ApiResponses(
             value = {
@@ -91,8 +91,8 @@ public class ContatoController {
 
 
     @Operation(summary = "Alterar dados de contato de cliente cadastrado",
-               description = "Altera os dados de contato de cliente cadastrado no sistema, " +
-                             "utilizando o id do contato como parâmetro para a alteração")
+            description = "Altera os dados de contato de cliente cadastrado no sistema, " +
+                    "utilizando o id do contato como parâmetro para a alteração")
 
     @ApiResponses(
             value = {
@@ -104,7 +104,7 @@ public class ContatoController {
 
     @PutMapping("/{idContato}") // (deve receber todos os dados) - localhost:8080/contato/idContato
     public ResponseEntity<ContatoDTO> update(@PathVariable("idContato") Integer id,
-                          @Valid @RequestBody ContatoCreateDTO contatoAtualizar) throws Exception {
+                                             @Valid @RequestBody ContatoCreateDTO contatoAtualizar) throws Exception {
         return ResponseEntity.ok(contatoService.update(id, contatoAtualizar));
     }
 
@@ -113,8 +113,8 @@ public class ContatoController {
 
 
     @Operation(summary = "Excluir contato de cliente cadastrado",
-               description = "Exclui contato de cliente cadastrado no sistema, utilizando o id do contato como " +
-                             "parâmetro para a exclusão")
+            description = "Exclui contato de cliente cadastrado no sistema, utilizando o id do contato como " +
+                    "parâmetro para a exclusão")
 
     @ApiResponses(
             value = {
