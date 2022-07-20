@@ -32,14 +32,16 @@ public class PetService {
     public PetDTO create(Integer idPessoa, PetCreateDTO petDTO) throws RegraDeNegocioException {
 
         PessoaEntity pessoaRecuperada = pessoaService.findPessoaById(idPessoa); //recuperando pai/mãe do pet
-        petDTO.setIdPessoa(pessoaRecuperada.getIdPessoa());                     //add o pet
 
+        PetEntity petEntity = objectMapper.convertValue(petDTO, PetEntity.class);
+        petEntity.setPessoa(pessoaRecuperada);
+
+        PetEntity petCriado = petRepository.save(petEntity);
         log.info("Adicionando pet...");
 
-        PetEntity petEntity = converterDTO(petDTO); //abrindo o dto para poder manipular o create
+        PetDTO petRetDto = objectMapper.convertValue(petCriado, PetDTO.class);
+        return petRetDto;
 
-        //Salvando no BD
-        return retornarDTO(petRepository.save(petEntity));
 
     }
 
