@@ -1,6 +1,6 @@
 package br.com.vemser.pessoaapi.entity;
 
 public enum TipoPet {
-    CACHORRO, GATO, PONEI
+    CACHORRO, GATO, GUAXINIM
 }
 
