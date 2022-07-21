@@ -18,20 +18,25 @@ public class DadosPessoaisController {
     @Autowired
     private DadosPessoaisService dadosPessoaisService;
 
-    //read
+
+    //=================================================================================================================
+    //GET
     @GetMapping
     List<DadosPessoaisDTO> getListDadosPessoais() {
         return dadosPessoaisService.listarTodos();
     }
 
-    //create
+
+    //=================================================================================================================
+    //POST
     @PostMapping
     public ResponseEntity<DadosPessoaisDTO> post(@RequestBody DadosPessoaisDTO dadosPessoaisDTO) {
         return ResponseEntity.ok(dadosPessoaisService.post(dadosPessoaisDTO));
     }
 
 
-    //update
+    //=================================================================================================================
+    //PUT
     @PutMapping("/{cpf}")
     public ResponseEntity<DadosPessoaisDTO> update(@PathVariable("cpfCliente") String cpf,
                                                    @RequestBody DadosPessoaisDTO dadosPessoaisDTO) {
@@ -40,13 +45,15 @@ public class DadosPessoaisController {
     }
 
 
-    //delete
+    //=================================================================================================================
+    //DELETE
     @DeleteMapping("/{cpf}") // localhost:8080/pessoa/idPessoa
     public void delete(@PathVariable("cpfCliente") String cpf) {
         dadosPessoaisService.delete(cpf);
     }
 
 }
+    //=================================================================================================================
 
 /*
 NOTAS:

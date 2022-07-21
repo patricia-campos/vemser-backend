@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @Service
@@ -26,38 +27,86 @@ public class PessoaService {
     private ObjectMapper objectMapper;
 
 
-    //HOMEWORK
+    //==================================================================================================================
+    //READ / GET
 
-    public List<PessoaDTO> listarPessoaEContato() {
+    //Lista todos
+    public List<PessoaDTO> list() {
         return pessoaRepository.findAll().stream()
-                .map(pessoaEntity -> {
-                    PessoaDTO pessoaDTO = retornarDTO(pessoaEntity);
-                    pessoaDTO.setContatosDTO(pessoaEntity.getContatos().stream()
-                            .map(this::contatoretornarDTO).collect(Collectors.toList()));
-                    return pessoaDTO;
-                }).toList();
+                .map(this::retornarDTO)
+                .collect(Collectors.toList());
     }
-    public List<PessoaDTO> listarPessoaEEndereco() {
-        return pessoaRepository.findAll().stream()
-                .map(pessoaEntity -> {
-                    PessoaDTO pessoaDTO = retornarDTO(pessoaEntity);
-                    pessoaDTO.setEnderecosDTO(pessoaEntity.getEnderecos().stream()
-                            .map(this::enderecoretornarDTO).collect(Collectors.toList()));
-                    return pessoaDTO;
-                }).toList();
-    }
-    public List<PessoaDTO> listarPessoaEPets() {
-        return pessoaRepository.findAll().stream()
-                .map(pessoaEntity -> {
-                    PessoaDTO pessoaDTO = retornarDTO(pessoaEntity);
-                    pessoaDTO.setPetDTO(this.petretornarDTO(pessoaEntity.getPet()));
-                    return pessoaDTO;
-                }).toList();
-    }
-
 
     //------------------------------------------------------------------------------------------------------------------
-    //CREATE
+
+    //Lista por nome
+    public List<PessoaDTO> listByName(String nome) {
+        return pessoaRepository.findAll().stream()
+                .filter(pessoa -> pessoa.getNome().toUpperCase().contains(nome.toUpperCase()))
+                .map(this::retornarDTO)
+                .collect(Collectors.toList());
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    //Lista por id pessoa
+    public List<PessoaDTO> listByIdPessoa(Integer idPessoa) {
+
+        return pessoaRepository.findAll().stream()
+                .filter(pessoa -> pessoa.getIdPessoa().equals(idPessoa))
+                .map(this::retornarDTO)
+                .collect(Collectors.toList());
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    //Lista por cpf
+
+    public List<PessoaEntity> findByCpf(String cpf) {
+        return pessoaRepository.findByCpf(cpf);
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    //Juntando Relação por relação
+    // Pessoa & Contato
+    public List<PessoaDTO> listarPessoaEContato() {
+        return pessoaRepository.findAll().stream().map(pessoaEntity -> {
+            PessoaDTO pessoaDTO = retornarDTO(pessoaEntity);
+            pessoaDTO.setContatosDTO(pessoaEntity.getContatos().stream()
+                    .map(this::contatoretornarDTO).collect(Collectors.toList()));
+            return pessoaDTO;
+        }).toList();
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    //Juntando Relação por relação
+    // Pessoa & Endereço
+    public List<PessoaDTO> listarPessoaEEndereco() {
+        return pessoaRepository.findAll().stream().map(pessoaEntity -> {
+            PessoaDTO pessoaDTO = retornarDTO(pessoaEntity);
+            pessoaDTO.setEnderecosDTO(pessoaEntity.getEnderecos().stream()
+                    .map(this::enderecoretornarDTO).collect(Collectors.toList()));
+            return pessoaDTO;
+        }).toList();
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    //Juntando Relação por relação
+    //Pessoa & Pets
+    public List<PessoaDTO> listarPessoaEPets() {
+        return pessoaRepository.findAll().stream().map(pessoaEntity -> {
+            PessoaDTO pessoaDTO = retornarDTO(pessoaEntity);
+            pessoaDTO.setPetDTO(this.petretornarDTO(pessoaEntity.getPet()));
+            return pessoaDTO;
+        }).toList();
+    }
+
+    //==================================================================================================================
+    //CREATE / POST
+
     public PessoaDTO create(PessoaCreateDTO pessoaDTO) throws RegraDeNegocioException {
 
         log.info("Criando a pessoa...");
@@ -67,48 +116,10 @@ public class PessoaService {
         return retornarDTO(pessoaRepository.save(pessoaEntity));
     }
 
-    //------------------------------------------------------------------------------------------------------------------
-    //READ
-    //lista todos
-    public List<PessoaDTO> list() {
-        return pessoaRepository.findAll().stream()
-                .map(this::retornarDTO)
-                .collect(Collectors.toList());
-    }
 
-    //lista por nome
-    public List<PessoaDTO> listByName(String nome) {
-        return pessoaRepository.findAll().stream()
-                .filter(pessoa -> pessoa.getNome().toUpperCase().contains(nome.toUpperCase()))
-                .map(this::retornarDTO)
-                .collect(Collectors.toList());
-    }
+    //==================================================================================================================
+    //UPDATE / PUT
 
-
-
-
-    //lista por id pessoa
-    public List<PessoaDTO> listByIdPessoa(Integer idPessoa) {
-
-        return pessoaRepository.findAll().stream()
-                .filter(pessoa -> pessoa.getIdPessoa().equals(idPessoa))
-                .map(this::retornarDTO)
-                .collect(Collectors.toList());
-    }
-
-
-    public List<PessoaEntity> findByCpf(String cpf){
-         return pessoaRepository.findByCpf(cpf);
-    };
-
-
-    public List<PessoaEntity> findByidPet(Integer idPessoa){
-        return pessoaRepository.findByidPet(idPessoa);
-    };
-
-
-    //------------------------------------------------------------------------------------------------------------------
-    //UPDATE
     public PessoaDTO update(Integer id,
                             PessoaCreateDTO pessoaDTO) throws RegraDeNegocioException {
 
@@ -124,19 +135,31 @@ public class PessoaService {
         return retornarDTO(pessoaRepository.save(pessoaRecuperada));
     }
 
-    //------------------------------------------------------------------------------------------------------------------
+    //==================================================================================================================
     //DELETE
+
     public void delete(Integer id) throws RegraDeNegocioException {
 
         PessoaEntity pessoaRecuperada = findPessoaById(id);
 
         log.info("Excluindo pessoa...");
         pessoaRepository.delete(pessoaRecuperada);
-
     }
 
-    //------------------------------------------------------------------------------------------------------------------
-    //MÉTODOS AUXILIARES:
+    //==================================================================================================================
+    // HOMEWORK TODO - EM ANDAMENTO
+
+/*
+    public List<PessoaDTO> listPessoaCompleto(Integer idPessoa) {
+
+        if (idPessoa == null) {
+            //TODO
+        }
+
+*/
+
+    //==================================================================================================================
+    //MÉTODOS AUXILIARES
 
     //ENCONTRA PESSOA PELO ID - ver usage
     public PessoaEntity findPessoaById(Integer id) throws RegraDeNegocioException {
@@ -144,15 +167,24 @@ public class PessoaService {
                 .orElseThrow(() -> new RegraDeNegocioException("Pessoa não encontrada"));
     }
 
-    //MÉTODO DTO PARA ENTITY
+    //MÉTODO QUE CONVERTE DE DTO PARA ENTITY
     public PessoaEntity converterDTO(PessoaCreateDTO dto) {
         return objectMapper.convertValue(dto, PessoaEntity.class);
     }
 
-    //MÉTODO ENTITY PARA DTO
+    //MÉTODO QUE CONVERTE DE ENTITY PARA DTO
     public PessoaDTO retornarDTO(PessoaEntity pessoaEntity) {
         return objectMapper.convertValue(pessoaEntity, PessoaDTO.class);
     }
+
+    //MÉTODO PARA SALVAR
+    public PessoaEntity salvar(PessoaEntity pessoaEntity) {
+        return this.pessoaRepository.save(pessoaEntity);
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    //TODO - MELHORAR A ORGANIZAÇÃO DISSO
 
     public ContatoDTO contatoretornarDTO(ContatoEntity contatoEntity) {
         return objectMapper.convertValue(contatoEntity, ContatoDTO.class);
@@ -166,16 +198,8 @@ public class PessoaService {
         return objectMapper.convertValue(petEntity, PetDTO.class);
     }
 
-    public PessoaEntity salvar(PessoaEntity pessoaEntity) {
-        return this.pessoaRepository.save(pessoaEntity);
-    }
 
-}
-
-
-
-
-
+    //==================================================================================================================
         /*
         ANOTAÇÕES:
 
@@ -199,4 +223,4 @@ public class PessoaService {
         log.warn("Enviando E-mail.. " + pessoaRecuperada.getEmail()+ "!");
         */
 
-
+}

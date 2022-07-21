@@ -39,7 +39,7 @@ public class EnderecoController {
 
 
     //=================================================================================================================
-
+    //GET
 
     @Operation(summary = "Listar endereços cadastrados",
             description = "Lista todos os endereços cadastrados no banco")
@@ -58,7 +58,7 @@ public class EnderecoController {
     }
 
 
-    //=================================================================================================================
+    //------------------------------------------------------------------------------------------------------------------
     /* todo está inoperante
 
     @Operation(summary = "Mostrar endereço específico cadastrado",
@@ -78,8 +78,7 @@ public class EnderecoController {
     }
 
     */
-    //=================================================================================================================
-
+    //------------------------------------------------------------------------------------------------------------------
 /* todo está inoperante
 
     @Operation(summary = "Listar endereços cadastrado de cliente",
@@ -98,9 +97,10 @@ public class EnderecoController {
     public List<EnderecoDTO> listByIdPessoa(@PathVariable("idPessoa") Integer idPessoa) {
         return enderecoService.listByIdPessoa(idPessoa);
     }
-
 */
+
     //=================================================================================================================
+    //POST
 
     @Operation(summary = "Inserir novo endereço no cadastro do cliente",
             description = "Insere um novo endereço no cadastro do cliente, utilizando o id do cliente como " +
@@ -122,7 +122,7 @@ public class EnderecoController {
 
 
     //=================================================================================================================
-
+    //PUT
 
     @Operation(summary = "Alterar endereço no cadastro do cliente",
             description = "Altera endereço no cadastro do cliente, utilizando o id do endereço a ser editado como " +
@@ -144,7 +144,7 @@ public class EnderecoController {
 
 
     //=================================================================================================================
-
+    //DELETE
 
     @Operation(summary = "Excluir endereço cadastrado",
             description = "Exclui endereço de cliente cadastrado no sistema, utilizando o id do endereço como " +

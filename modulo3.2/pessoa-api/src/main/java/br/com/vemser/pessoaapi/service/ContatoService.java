@@ -27,8 +27,32 @@ public class ContatoService {
     private ObjectMapper objectMapper;
 
 
+    //==================================================================================================================
+    //READ / GET
+
+    //lista todos
+    public List<ContatoDTO> list(){
+        return contatoRepository.findAll().stream()
+                .map(this::retornarDTO)
+                .collect(Collectors.toList());
+    }
+
     //------------------------------------------------------------------------------------------------------------------
-    //CREATE
+
+    /* //TODO - IMPLEMENTAR
+    //lista por id pessoa
+    public List<ContatoDTO> listByIdPessoa(Integer idPessoa) {
+
+        return contatoRepository.findAll().stream()
+                .filter(contato -> contato.getIdPessoa().equals(idPessoa))
+                .map(this::retornarDTO)
+                .collect(Collectors.toList());
+    }
+  */
+
+    //==================================================================================================================
+    //CREATE / POST
+
     public ContatoDTO create(Integer idPessoa, ContatoCreateDTO contatoDTO) throws RegraDeNegocioException{
 
         PessoaEntity pessoaRecuperada = pessoaService.findPessoaById(idPessoa);
@@ -40,31 +64,11 @@ public class ContatoService {
 
         //Salvando no BD
         return retornarDTO(contatoRepository.save(contatoEntity));
-
     }
 
-    //------------------------------------------------------------------------------------------------------------------
-    //READ
-    //lista todos
-    public List<ContatoDTO> list(){
-        return contatoRepository.findAll().stream()
-                .map(this::retornarDTO)
-                .collect(Collectors.toList());
-    }
+    //==================================================================================================================
+    //UPDATE / PUT
 
-    /* //todo implementar
-    //lista por id pessoa
-    public List<ContatoDTO> listByIdPessoa(Integer idPessoa) {
-
-        return contatoRepository.findAll().stream()
-                .filter(contato -> contato.getIdPessoa().equals(idPessoa))
-                .map(this::retornarDTO)
-                .collect(Collectors.toList());
-
-    }
-  */
-    //------------------------------------------------------------------------------------------------------------------
-    //UPDATE
     public ContatoDTO update(Integer id,
                           ContatoCreateDTO contato) throws RegraDeNegocioException {
 
@@ -90,8 +94,9 @@ public class ContatoService {
         return retornarDTO(contatoRepository.save(contatoEntityRecuperado));
     }
 
-    //------------------------------------------------------------------------------------------------------------------
+    //==================================================================================================================
     //DELETE
+
     public void delete(Integer id) throws RegraDeNegocioException {
 
         ContatoEntity contatoEntityRecuperado = findContatoById(id);
@@ -100,11 +105,10 @@ public class ContatoService {
         log.info("Excluindo contato ");
 
         contatoRepository.delete(contatoEntityRecuperado);
-
     }
 
-    //------------------------------------------------------------------------------------------------------------------
-    //MÉTODOS AUXILIARES:
+    //==================================================================================================================
+    //MÉTODOS AUXILIARES
 
     //ENCONTRA CONTATO PELO ID - ver usage
     private ContatoEntity findContatoById(Integer id) throws RegraDeNegocioException {

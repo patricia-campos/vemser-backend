@@ -27,8 +27,32 @@ public class PetService {
     private ObjectMapper objectMapper;
 
 
+    //==================================================================================================================
+    //READ / GET
+
+    //lista todos
+    public List<PetDTO> list() {
+        return petRepository.findAll().stream()
+                .map(this::retornarDTO)
+                .collect(Collectors.toList());
+    }
+
     //------------------------------------------------------------------------------------------------------------------
-    //CREATE
+
+    /* //TODO IMPLEMENTAR NOVAMENTE
+    //lista por pai/ mãe do pet
+    public List<PetDTO> listByIdPessoa(Integer idPessoa) {
+
+        return petRepository.findAll().stream()
+                .filter(pet -> pet.getIdPessoa().equals(idPessoa))
+                .map(this::retornarDTO)
+                .collect(Collectors.toList());
+    }
+    */
+
+    //==================================================================================================================
+    //CREATE / POST
+
     public PetDTO create(Integer idPessoa, PetCreateDTO petDTO) throws RegraDeNegocioException {
 
         PessoaEntity pessoaRecuperada = pessoaService.findPessoaById(idPessoa); //recuperando pai/mãe do pet
@@ -42,31 +66,11 @@ public class PetService {
         PetDTO petRetDto = objectMapper.convertValue(petCriado, PetDTO.class); //retorno pro controller após operação
         return petRetDto;
 
-
     }
 
-    //------------------------------------------------------------------------------------------------------------------
-    //READ
-    //lista todos
-    public List<PetDTO> list() {
-        return petRepository.findAll().stream()
-                .map(this::retornarDTO)
-                .collect(Collectors.toList());
-    }
+    //==================================================================================================================
+    //UPDATE / PUT
 
-    /* //todo implementar
-    //lista por pai/ mãe do pet
-    public List<PetDTO> listByIdPessoa(Integer idPessoa) {
-
-        return petRepository.findAll().stream()
-                .filter(pet -> pet.getIdPessoa().equals(idPessoa))
-                .map(this::retornarDTO)
-                .collect(Collectors.toList());
-    }
-    */
-
-    //------------------------------------------------------------------------------------------------------------------
-    //UPDATE
     public PetDTO update(Integer id,
                          PetCreateDTO pet) throws RegraDeNegocioException {
 
@@ -91,13 +95,12 @@ public class PetService {
             pessoaService.salvar(pessoaEntity);
         }
 
-
-
         return retornarDTO(petRepository.save(petEntityResgatado));
     }
 
-    //------------------------------------------------------------------------------------------------------------------
+    //==================================================================================================================
     //DELETE
+
     public void delete(Integer id) throws RegraDeNegocioException {
 
         PetEntity petEntityResgatado = findBichinhoById(id);
@@ -109,8 +112,8 @@ public class PetService {
 
     }
 
-    //------------------------------------------------------------------------------------------------------------------
-    //MÉTODOS AUXILIARES:
+    //==================================================================================================================
+    //MÉTODOS AUXILIARES
 
     //ENCONTRA PET PELO ID - ver usage
     private PetEntity findBichinhoById(Integer id) throws RegraDeNegocioException {

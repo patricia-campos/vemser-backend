@@ -43,11 +43,6 @@ public class PessoaEntity {
 
     //RELACIONAMENTO um para um - Pessoa - Pet
 
-    //@JsonIgnore
-    //@OneToMany(fetch = FetchType.LAZY)
-    //@JoinColumn(name="ID_PET", referencedColumnName = "ID_PET")
-    //private Set<PetEntity> pet;
-
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_PET", referencedColumnName = "ID_PET")
@@ -67,11 +62,10 @@ public class PessoaEntity {
     //------------------------------------------------------------------------------------------------------------------
 
     //RELACIONAMENTO muitos para muitos - Pessoa - Endereço
-    //TODO- AQUI DEU RUIM EM ALGUM PONTO
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "PESSOA_ X_PESSOA_ENDERECO",
+    @JoinTable(name = "PESSOA_X_PESSOA_ENDERECO",
             joinColumns = @JoinColumn(name = "ID_PESSOA"),
             inverseJoinColumns = @JoinColumn(name = "ID_ENDERECO")
     )

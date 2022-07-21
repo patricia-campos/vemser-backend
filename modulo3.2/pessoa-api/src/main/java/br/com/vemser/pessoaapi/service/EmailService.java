@@ -31,6 +31,9 @@ public class EmailService {
 
     private final JavaMailSender emailSender;
 
+
+    //TODO - MELHORAR ESSE CÓDIGO PARA QUE FIQUE MAIS ENXUTO
+
     //=================================== E-MAIL PESSOA CRIADA ===================================
 
     public void sendEmailPessoaCriada(PessoaCreateDTO pessoaDTO, PessoaEntity pessoaCriada) {
@@ -50,6 +53,7 @@ public class EmailService {
         }
     }
 
+    //------------------------------------------------------------------------------------------------------------------
 
     // MÉTODO QUE BUSCA NO DTO OS DADOS QUE SERÃO INSERIDOS NO TEMPLATE DO EMAIL
     public String buscarConteudoPessoaCriada(PessoaCreateDTO pessoaDTO, PessoaEntity pessoaCriada)
@@ -66,8 +70,6 @@ public class EmailService {
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
         return html;
     }
-
-
 
     //=================================== E-MAIL PESSOA ALTERADA ===================================
 
@@ -87,6 +89,7 @@ public class EmailService {
             e.printStackTrace();
         }
     }
+    //------------------------------------------------------------------------------------------------------------------
 
     // MÉTODO QUE BUSCA NO DTO OS DADOS QUE SERÃO INSERIDOS NO TEMPLATE DO EMAIL
     public String buscarConteudoPessoaAlterada(PessoaCreateDTO pessoaDTO) throws IOException, TemplateException {
@@ -120,6 +123,8 @@ public class EmailService {
             e.printStackTrace();
         }
     }
+
+    //------------------------------------------------------------------------------------------------------------------
 
     // MÉTODO QUE BUSCA NO DTO OS DADOS QUE SERÃO INSERIDOS NO TEMPLATE DO EMAIL
     public String buscarConteudoPessoaDeletada(PessoaEntity  pessoa) throws IOException, TemplateException {
@@ -155,6 +160,9 @@ public class EmailService {
         }
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+
+
     // MÉTODO QUE BUSCA NO DTO OS DADOS QUE SERÃO INSERIDOS NO TEMPLATE DO EMAIL
     public String buscarConteudoEnderecoCriado(EnderecoCreateDTO enderecoDTO, PessoaEntity  pessoa)
             throws IOException, TemplateException {
@@ -189,6 +197,8 @@ public class EmailService {
         }
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+
     // MÉTODO QUE BUSCA NO DTO OS DADOS QUE SERÃO INSERIDOS NO TEMPLATE DO EMAIL
     public String buscarConteudoEnderecoAlterado(EnderecoCreateDTO enderecoDTO, PessoaEntity  pessoa) throws IOException, TemplateException {
         Map<String, Object> dados = new HashMap<>();
@@ -221,6 +231,9 @@ public class EmailService {
         }
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+
+
     // MÉTODO QUE BUSCA NO DTO OS DADOS QUE SERÃO INSERIDOS NO TEMPLATE DO EMAIL
     public String buscarConteudoEnderecoDeletado(EnderecoEntity enderecoEntity, PessoaEntity  pessoa) throws IOException, TemplateException {
         Map<String, Object> dados = new HashMap<>();
@@ -233,6 +246,9 @@ public class EmailService {
         return html;
     }
 
+    //==================================================================================================================
+    //ANOTAÇÕES
+    // TODO MELHORAR A ORGANIZAÇAO DAS ANOTAÇÕES FEITAS EM AULA
 
     /*
     //================ ENVIA E-MAIL SIMPLES ================

@@ -27,7 +27,7 @@ public class ContatoController {
 
 
     //=================================================================================================================
-
+    //GET
 
     @Operation(summary = "Listar todos os contatos de clientes",
             description = "Lista todos os contatos dos clientes cadastrados no banco")
@@ -46,10 +46,10 @@ public class ContatoController {
     }
 
 
-    //=================================================================================================================
+    //------------------------------------------------------------------------------------------------------------------
+    //GET POR ID
 
-/* todo fora de operação
-
+    /*
     @Operation(summary = "Listar contatos cadastrados por cliente",
             description = "Lista todos os contatos cadastrados por cliente, " +
                     "utilizando como parâmetro para essa busca o id do cliente")
@@ -65,10 +65,10 @@ public class ContatoController {
     public List<ContatoDTO> listByIdCliente(@PathVariable("idPessoa") Integer idPessoa) {
         return contatoService.listByIdPessoa(idPessoa);
     }
-*/
+    */
 
     //=================================================================================================================
-
+    //POST
 
     @Operation(summary = "Inserir novo contato em cliente cadastrado",
             description = "Insere novo contato no cadastro do cliente, utilizando id do cliente como parâmetro " +
@@ -89,7 +89,7 @@ public class ContatoController {
 
 
     //=================================================================================================================
-
+    //PUT
 
     @Operation(summary = "Alterar dados de contato de cliente cadastrado",
             description = "Altera os dados de contato de cliente cadastrado no sistema, " +
@@ -111,7 +111,7 @@ public class ContatoController {
 
 
     //=================================================================================================================
-
+    //DELETE
 
     @Operation(summary = "Excluir contato de cliente cadastrado",
             description = "Exclui contato de cliente cadastrado no sistema, utilizando o id do contato como " +

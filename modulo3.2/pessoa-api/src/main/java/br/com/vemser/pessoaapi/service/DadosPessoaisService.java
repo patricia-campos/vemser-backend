@@ -13,40 +13,44 @@ import java.util.List;
 @Service
 public class DadosPessoaisService {
 
-        @Autowired
-        private DadosPessoaisClient dadosPessoaisClient;
-        @Autowired
-        private ObjectMapper objectMapper;
+    @Autowired
+    private DadosPessoaisClient dadosPessoaisClient;
+    @Autowired
+    private ObjectMapper objectMapper;
 
 
-        //----CREATE
-        public DadosPessoaisDTO post(DadosPessoaisDTO dadosPessoaisDTO) {
-            return dadosPessoaisClient.post(dadosPessoaisDTO);
-        }
+    //----READ / GET
 
-        //----READ
+    //todos
+    public List<DadosPessoaisDTO> listarTodos() {
+        return dadosPessoaisClient.getAll();
+    }
 
-        //todos
-        public List<DadosPessoaisDTO> listarTodos() {
-            return dadosPessoaisClient.getAll();
-        }
+    //por cpf
+    public DadosPessoaisDTO listarPorCpf(String cpf) {
+        return dadosPessoaisClient.get(cpf);
+    }
 
-        //por cpf
-        public DadosPessoaisDTO listarPorCpf(String cpf) {
-            return dadosPessoaisClient.get(cpf);
-        }
+    //==================================================================================================================
 
+    //----CREATE / POST
+    public DadosPessoaisDTO post(DadosPessoaisDTO dadosPessoaisDTO) {
+        return dadosPessoaisClient.post(dadosPessoaisDTO);
+    }
 
-        //----UPDATE
-        public DadosPessoaisDTO put (String cpf, DadosPessoaisDTO dadosPessoaisDTO) {
-            return dadosPessoaisClient.put(cpf, dadosPessoaisDTO);
-        }
+    //==================================================================================================================
 
+    //----UPDATE / PUT
+    public DadosPessoaisDTO put(String cpf, DadosPessoaisDTO dadosPessoaisDTO) {
+        return dadosPessoaisClient.put(cpf, dadosPessoaisDTO);
+    }
 
-        //----DELETE
-        public void delete (String cpf) {
-            dadosPessoaisClient.delete(cpf);
-        }
+    //==================================================================================================================
+
+    //----DELETE
+    public void delete(String cpf) {
+        dadosPessoaisClient.delete(cpf);
+    }
 
 }
 

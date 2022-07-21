@@ -5,7 +5,6 @@ import br.com.vemser.pessoaapi.dto.EnderecoDTO;
 import br.com.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.vemser.pessoaapi.entity.EnderecoEntity;
 import br.com.vemser.pessoaapi.entity.PessoaEntity;
-import br.com.vemser.pessoaapi.entity.PetEntity;
 import br.com.vemser.pessoaapi.exception.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.repository.EnderecoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,10 +29,44 @@ public class EnderecoService {
     private ObjectMapper objectMapper;
 
 
-    //------------------------------------------------------------------------------------------------------------------
-    //CREATE
-    public EnderecoDTO create(Integer idPessoa, EnderecoCreateDTO enderecoDTO) throws RegraDeNegocioException{
+    //==================================================================================================================
+    //READ / GET
+    //lista todos os endereços
+    public List<EnderecoDTO> list(){
+        return enderecoRepository.findAll().stream()
+                .map(this::retornarDTO)
+                .collect(Collectors.toList());
+    }
 
+    //------------------------------------------------------------------------------------------------------------------
+
+    /* //TODO IMPLEMENTAR
+
+    //lista por id endereco
+    public List<EnderecoDTO> listByIdEndereco(Integer idEndereco) {
+        return enderecoRepository.findAll().stream()
+                .filter(endereco -> endereco.getIdEndereco().equals(idEndereco))
+                .map(this::retornarDTO)
+                .collect(Collectors.toList());
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    //TODO IMPLEMENTAR
+
+    lista por id pessoa
+    public List<EnderecoDTO> listByIdPessoa(Integer idPessoa) {
+        return enderecoRepository.findAll().stream()
+                .filter(endereco -> endereco.getIdPessoa().equals(idPessoa))
+                .map(this::retornarDTO)
+                .collect(Collectors.toList());
+    }
+   */
+
+    //==================================================================================================================
+    //CREATE / POST
+
+    public EnderecoDTO create(Integer idPessoa, EnderecoCreateDTO enderecoDTO) throws RegraDeNegocioException{
 
         //COLOCAR O COMMENT
         EnderecoEntity enderecoEntity = objectMapper.convertValue(enderecoDTO, EnderecoEntity.class);
@@ -50,51 +83,16 @@ public class EnderecoService {
 
         return enderecoDTO1;
 
-        //todo puxar os métodos dto acima - tá funcionando como está
+        //TODO - FAZER PUXANDO OS MÉTODOS DTO
     }
 
-    //------------------------------------------------------------------------------------------------------------------
-    //READ
-    //lista todos os endereços
-    public List<EnderecoDTO> list(){
-        return enderecoRepository.findAll().stream()
-                .map(this::retornarDTO)
-                .collect(Collectors.toList());
-    }
+    //==================================================================================================================
+    //UPDATE / PUT
 
-    /* //todo está inoperante
-
-    //lista por id endereco
-    public List<EnderecoDTO> listByIdEndereco(Integer idEndereco) {
-        return enderecoRepository.findAll().stream()
-                .filter(endereco -> endereco.getIdEndereco().equals(idEndereco))
-                .map(this::retornarDTO)
-                .collect(Collectors.toList());
-    }
-
-    //todo está inoperante
-
-    lista por id pessoa
-    public List<EnderecoDTO> listByIdPessoa(Integer idPessoa) {
-        return enderecoRepository.findAll().stream()
-                .filter(endereco -> endereco.getIdPessoa().equals(idPessoa))
-                .map(this::retornarDTO)
-                .collect(Collectors.toList());
-    }
-   */
-
-
-
-    //------------------------------------------------------------------------------------------------------------------
-    //UPDATE
     public EnderecoDTO update(Integer id,
                            EnderecoCreateDTO enderecoAtualizar) throws RegraDeNegocioException {
 
-    //todo verificar como pegar a pessoa pelo relacionamento get
-
-
         PessoaEntity pessoaEntity = pessoaService.findPessoaById(id);
-
 
         PessoaDTO pessoaValidaDTO = objectMapper.convertValue(pessoaEntity, PessoaDTO.class);
         EnderecoEntity enderecoEntityRecuperado = findEnderecoById(id);
@@ -116,21 +114,12 @@ public class EnderecoService {
 
         return retornarDTO(enderecoRepository.save(enderecoEntityRecuperado));
 
-
-        //EnderecoEntity enderecoEntityRecuperado = findEnderecoById(id);
-
-        //pessoaEntity.setPet(null);
-
-        /*
-        //checando se o endereço existe e alterando uma linha da lista de endereços pelo id do parâmetro
-        PessoaEntity pessoaRecuperada = pessoaService.findPessoaById(enderecoEntityRecuperado.getIdPessoa());
-        */
-
-
+        //TODO - FAZER PUXANDO OS MÉTODOS DTO
     }
 
-    //------------------------------------------------------------------------------------------------------------------
+    //==================================================================================================================
     //DELETE
+
     public void delete(Integer id) throws RegraDeNegocioException {
 
         EnderecoEntity enderecoEntityRecuperado = findEnderecoById(id);
@@ -160,9 +149,3 @@ public class EnderecoService {
     }
 
 }
-
-/*
-    @Autowired
-    private EmailService emailService;
-
-*/

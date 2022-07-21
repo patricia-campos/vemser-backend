@@ -27,5 +27,6 @@ public class DadosPessoaisDTO {
 NOTAS DE ESTUDO:
 -Extende Dados Pessoais DTO.
 -Cuida da "volta". Usamos essa classe para retornar para o Controller protegendo o tráfego dos dados.
+-As validações vem todas da api externa, não precisamos validar aqui
 
  */

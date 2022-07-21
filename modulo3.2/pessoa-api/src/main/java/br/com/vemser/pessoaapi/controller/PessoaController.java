@@ -1,5 +1,6 @@
 package br.com.vemser.pessoaapi.controller;
 
+import br.com.vemser.pessoaapi.dto.RelatorioPersonalizadoDTO;
 import br.com.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.vemser.pessoaapi.entity.PessoaEntity;
@@ -230,6 +231,20 @@ public class PessoaController {
     }
 
     //=================================================================================================================
+
+       //todo inserir documentação
+
+    @GetMapping("/relatorio-personalizado")
+    public List<RelatorioPersonalizadoDTO> getRelatorioPersonalizado(@RequestParam(required = false) Integer idPessoa) {
+        return pessoaRepository.relatorioPersonalizadoDTO(idPessoa);
+    }
+
+    //TODO ITEM 1 DO HOMEWORK - EM ANDAMENTO
+    @GetMapping("/pessoa-completo")
+    public ResponseEntity<List<PessoaDTO>> listPessoaCompleto(@RequestParam(required = false) Integer idPessoa) {
+        return new ResponseEntity<>(pessoaService.listPessoaCompleto(idPessoa), HttpStatus.OK);
+    }
+
 }
 
     /*
