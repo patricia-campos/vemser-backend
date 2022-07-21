@@ -12,8 +12,8 @@ import javax.validation.constraints.Size;
 @Data
 public class EnderecoCreateDTO {
 
-    @Schema(description = "Id do cliente")
-    private Integer idPessoa;
+   // @Schema(description = "Id da pessoa")
+   // private Integer idPessoa;
 
     @Schema(description = "Tipo de endereço do cliente")
     @NotNull(message = "Tipo de endereço não pode ser nulo")

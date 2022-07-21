@@ -23,7 +23,6 @@ public class PetEntity {
 
     //id pessoa é usada na Pet Entity apenas para fins de referência
     @Column(name = "ID_PESSOA", insertable = false, updatable = false)
-    //@Column(name = "ID_PESSOA")
     private Integer idPessoa;
 
     @Column(name = "NOME")

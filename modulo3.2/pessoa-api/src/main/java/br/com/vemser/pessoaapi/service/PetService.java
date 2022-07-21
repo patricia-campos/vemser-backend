@@ -54,7 +54,7 @@ public class PetService {
                 .collect(Collectors.toList());
     }
 
-    /*
+    /* //todo implementar
     //lista por pai/ mãe do pet
     public List<PetDTO> listByIdPessoa(Integer idPessoa) {
 
@@ -86,6 +86,7 @@ public class PetService {
         petEntityResgatado.setPessoa(pessoaRecuperada);
         pessoaRecuperada.setPet(petEntityResgatado);
         pessoaService.salvar(pessoaRecuperada);
+
         if (! pessoaRecuperada.getIdPessoa() .equals(pessoaEntity.getIdPessoa())) {
             pessoaService.salvar(pessoaEntity);
         }

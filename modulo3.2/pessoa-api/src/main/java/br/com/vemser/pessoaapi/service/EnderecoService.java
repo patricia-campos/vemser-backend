@@ -2,8 +2,10 @@ package br.com.vemser.pessoaapi.service;
 
 import br.com.vemser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.vemser.pessoaapi.dto.EnderecoDTO;
+import br.com.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.vemser.pessoaapi.entity.EnderecoEntity;
 import br.com.vemser.pessoaapi.entity.PessoaEntity;
+import br.com.vemser.pessoaapi.entity.PetEntity;
 import br.com.vemser.pessoaapi.exception.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.repository.EnderecoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -31,37 +34,35 @@ public class EnderecoService {
     //CREATE
     public EnderecoDTO create(Integer idPessoa, EnderecoCreateDTO enderecoDTO) throws RegraDeNegocioException{
 
-        /*
-        //PessoaEntity pessoaRecuperada = pessoaService.findPessoaById(idPessoa);
-        enderecoDTO.setIdPessoa(pessoaRecuperada.getIdPessoa());
-        */
+
+        //COLOCAR O COMMENT
+        EnderecoEntity enderecoEntity = objectMapper.convertValue(enderecoDTO, EnderecoEntity.class);
+
+        //Recuperou a pessoa que busquei através da service, com o parâmetro id
+        PessoaEntity pessoaRecuperada = pessoaService.findPessoaById(idPessoa);
+
+        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaRecuperada, PessoaDTO.class);
 
         log.info("Adicionando endereço...");
 
-        EnderecoEntity enderecoEntity = converterDTO(enderecoDTO);
+        EnderecoEntity enderecoEntity1 = enderecoRepository.save(enderecoEntity);
+        EnderecoDTO enderecoDTO1 = objectMapper.convertValue(enderecoEntity1, EnderecoDTO.class);
 
-        //Salvando no BD
-        return retornarDTO(enderecoRepository.save(enderecoEntity));
+        return enderecoDTO1;
+
+        //todo puxar os métodos dto acima - tá funcionando como está
     }
 
     //------------------------------------------------------------------------------------------------------------------
     //READ
-    //lista todos
+    //lista todos os endereços
     public List<EnderecoDTO> list(){
         return enderecoRepository.findAll().stream()
                 .map(this::retornarDTO)
                 .collect(Collectors.toList());
     }
 
-    /*
-    lista por id pessoa
-    public List<EnderecoDTO> listByIdPessoa(Integer idPessoa) {
-        return enderecoRepository.findAll().stream()
-                .filter(endereco -> endereco.getIdPessoa().equals(idPessoa))
-                .map(this::retornarDTO)
-                .collect(Collectors.toList());
-    }
-   */
+    /* //todo está inoperante
 
     //lista por id endereco
     public List<EnderecoDTO> listByIdEndereco(Integer idEndereco) {
@@ -71,17 +72,35 @@ public class EnderecoService {
                 .collect(Collectors.toList());
     }
 
+    //todo está inoperante
+
+    lista por id pessoa
+    public List<EnderecoDTO> listByIdPessoa(Integer idPessoa) {
+        return enderecoRepository.findAll().stream()
+                .filter(endereco -> endereco.getIdPessoa().equals(idPessoa))
+                .map(this::retornarDTO)
+                .collect(Collectors.toList());
+    }
+   */
+
+
+
     //------------------------------------------------------------------------------------------------------------------
     //UPDATE
     public EnderecoDTO update(Integer id,
                            EnderecoCreateDTO enderecoAtualizar) throws RegraDeNegocioException {
 
-        EnderecoEntity enderecoEntityRecuperado = findEnderecoById(id);
+    //todo verificar como pegar a pessoa pelo relacionamento get
 
-        /*
-        //checando se o endereço existe e alterando uma linha da lista de endereços pelo id do parâmetro
-        PessoaEntity pessoaRecuperada = pessoaService.findPessoaById(enderecoEntityRecuperado.getIdPessoa());
-        */
+
+        PessoaEntity pessoaEntity = pessoaService.findPessoaById(id);
+
+
+        PessoaDTO pessoaValidaDTO = objectMapper.convertValue(pessoaEntity, PessoaDTO.class);
+        EnderecoEntity enderecoEntityRecuperado = findEnderecoById(id);
+        EnderecoEntity enderecoEntity = objectMapper.convertValue(enderecoAtualizar, EnderecoEntity.class);
+
+        enderecoEntity.setPessoa(Set.of(pessoaEntity));
 
         log.info("Atualizando endereço...");
 
@@ -96,6 +115,18 @@ public class EnderecoService {
         enderecoEntityRecuperado.setPais(enderecoAtualizar.getPais());
 
         return retornarDTO(enderecoRepository.save(enderecoEntityRecuperado));
+
+
+        //EnderecoEntity enderecoEntityRecuperado = findEnderecoById(id);
+
+        //pessoaEntity.setPet(null);
+
+        /*
+        //checando se o endereço existe e alterando uma linha da lista de endereços pelo id do parâmetro
+        PessoaEntity pessoaRecuperada = pessoaService.findPessoaById(enderecoEntityRecuperado.getIdPessoa());
+        */
+
+
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -103,7 +134,6 @@ public class EnderecoService {
     public void delete(Integer id) throws RegraDeNegocioException {
 
         EnderecoEntity enderecoEntityRecuperado = findEnderecoById(id);
-        //PessoaEntity pessoaRecuperada = pessoaService.findPessoaById(enderecoEntityRecuperado.getIdPessoa());
 
         log.info("Excluindo endereço...");
 

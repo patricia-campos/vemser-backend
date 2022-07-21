@@ -18,14 +18,13 @@ public class EnderecoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ENDERECO_SEQ")
-    @SequenceGenerator(name = "ENDERECO_SEQ", sequenceName = "seq_endereco2", allocationSize = 1)
+    @SequenceGenerator(name = "ENDERECO_SEQ", sequenceName = "seq_endereco_contato", allocationSize = 1)
     @Column(name = "ID_ENDERECO")
     private Integer idEndereco;
 
-    /*
-    @Column(name = "ID_PESSOA")
-    private Integer idPessoa;
-    */
+    //id pessoa é usada na Pet Entity apenas para fins de referência
+    //@Column(name = "ID_PESSOA", insertable = false, updatable = false)
+    //private Integer idPessoa;
 
     @Column(name = "TIPO")
     private TipoEndereco tipo;
@@ -57,11 +56,11 @@ public class EnderecoEntity {
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "PESSOA_ X_PESSOA_ENDERECO",
+    @JoinTable(name = "PESSOA_X_PESSOA_ENDERECO",
             joinColumns = @JoinColumn(name = "ID_ENDERECO"),
             inverseJoinColumns = @JoinColumn(name = "ID_PESSOA")
     )
-    private Set<PessoaEntity> pessoas;
+    private Set<PessoaEntity> pessoa;
 
 }
 

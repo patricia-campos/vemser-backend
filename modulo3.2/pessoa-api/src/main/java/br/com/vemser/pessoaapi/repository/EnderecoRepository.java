@@ -10,10 +10,15 @@ import java.util.List;
 @Repository
 public interface EnderecoRepository extends JpaRepository<EnderecoEntity, Integer> {
 
+    /*
+
     //ISSO DEVE SER NA SERVICE
     @Query("SELECT e " +
             "FROM ENDERECO e "+
             "WHERE e.pais = :pais"
     )
     List<EnderecoEntity> listEnderecoPorPais(String pais);
+
+    */
+
 }

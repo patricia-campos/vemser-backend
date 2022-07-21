@@ -48,6 +48,7 @@ public class ContatoController {
 
     //=================================================================================================================
 
+/* todo fora de operação
 
     @Operation(summary = "Listar contatos cadastrados por cliente",
             description = "Lista todos os contatos cadastrados por cliente, " +
@@ -64,7 +65,7 @@ public class ContatoController {
     public List<ContatoDTO> listByIdCliente(@PathVariable("idPessoa") Integer idPessoa) {
         return contatoService.listByIdPessoa(idPessoa);
     }
-
+*/
 
     //=================================================================================================================
 

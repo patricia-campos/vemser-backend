@@ -32,11 +32,11 @@ public class ContatoService {
     public ContatoDTO create(Integer idPessoa, ContatoCreateDTO contatoDTO) throws RegraDeNegocioException{
 
         PessoaEntity pessoaRecuperada = pessoaService.findPessoaById(idPessoa);
-        contatoDTO.setIdPessoa(pessoaRecuperada.getIdPessoa());
 
         log.info("Adicionando contato...");
 
         ContatoEntity contatoEntity = converterDTO(contatoDTO);
+        contatoEntity.setPessoa(pessoaRecuperada);
 
         //Salvando no BD
         return retornarDTO(contatoRepository.save(contatoEntity));
@@ -52,6 +52,7 @@ public class ContatoService {
                 .collect(Collectors.toList());
     }
 
+    /* //todo implementar
     //lista por id pessoa
     public List<ContatoDTO> listByIdPessoa(Integer idPessoa) {
 
@@ -59,14 +60,17 @@ public class ContatoService {
                 .filter(contato -> contato.getIdPessoa().equals(idPessoa))
                 .map(this::retornarDTO)
                 .collect(Collectors.toList());
-    }
 
+    }
+  */
     //------------------------------------------------------------------------------------------------------------------
     //UPDATE
     public ContatoDTO update(Integer id,
                           ContatoCreateDTO contato) throws RegraDeNegocioException {
 
         ContatoEntity contatoEntityRecuperado = findContatoById(id);
+        PessoaEntity pessoaEntity = contatoEntityRecuperado.getPessoa();
+        pessoaEntity.setPet(null);
 
         //checando se o endereço existe e alterando uma linha da lista de endereços pelo id do parâmetro
         PessoaEntity pessoaRecuperada = pessoaService.findPessoaById(contatoEntityRecuperado.getIdPessoa());
@@ -77,6 +81,11 @@ public class ContatoService {
         contatoEntityRecuperado.setTipo(contato.getTipo());
         contatoEntityRecuperado.setNumero(contato.getNumero());
         contatoEntityRecuperado.setDescricao(contato.getDescricao());
+        pessoaService.salvar(pessoaRecuperada);
+
+        if (! pessoaRecuperada.getIdPessoa() .equals(pessoaEntity.getIdPessoa())) {
+            pessoaService.salvar(pessoaEntity);
+        }
 
         return retornarDTO(contatoRepository.save(contatoEntityRecuperado));
     }

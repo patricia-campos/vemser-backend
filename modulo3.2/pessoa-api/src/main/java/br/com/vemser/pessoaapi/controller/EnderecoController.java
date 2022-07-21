@@ -59,7 +59,7 @@ public class EnderecoController {
 
 
     //=================================================================================================================
-
+    /* todo está inoperante
 
     @Operation(summary = "Mostrar endereço específico cadastrado",
             description = "Lista endereço cadastrado no banco utilizando o id do endereço como " +
@@ -77,10 +77,11 @@ public class EnderecoController {
         return enderecoService.listByIdEndereco(idEndereco);
     }
 
-
+    */
     //=================================================================================================================
 
-/*
+/* todo está inoperante
+
     @Operation(summary = "Listar endereços cadastrado de cliente",
                description = "Lista endereços cadastrados de cliente, utilizando o id do cliente como " +
                              "parâmetro da busca")
@@ -100,7 +101,6 @@ public class EnderecoController {
 
 */
     //=================================================================================================================
-
 
     @Operation(summary = "Inserir novo endereço no cadastro do cliente",
             description = "Insere um novo endereço no cadastro do cliente, utilizando o id do cliente como " +
