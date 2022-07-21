@@ -49,11 +49,9 @@ public class PessoaEntity {
     //private Set<PetEntity> pet;
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY,
-            mappedBy = "pessoa",         //Indica o lado inverso do relacionamento
-            cascade = CascadeType.ALL,   //Faz a cascata para deletar
-            orphanRemoval = true)        //Deleta os órfãos
-    private Set<PetEntity> pet;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_PET", referencedColumnName = "ID_PET")
+    private PetEntity pet;
 
     //------------------------------------------------------------------------------------------------------------------
 

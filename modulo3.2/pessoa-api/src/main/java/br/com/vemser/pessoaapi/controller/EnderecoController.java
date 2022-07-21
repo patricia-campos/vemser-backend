@@ -2,12 +2,14 @@ package br.com.vemser.pessoaapi.controller;
 
 import br.com.vemser.pessoaapi.dto.EnderecoCreateDTO;
 import br.com.vemser.pessoaapi.dto.EnderecoDTO;
+import br.com.vemser.pessoaapi.entity.EnderecoEntity;
 import br.com.vemser.pessoaapi.service.EnderecoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +27,16 @@ public class EnderecoController {
 
     @Autowired
     private EnderecoService enderecoService;
+
+    /*
+    //FEITO EM AULA
+    @GetMapping("/endereco-por-pais")
+    public ResponseEntity<EnderecoEntity> getEnderecoPorPais(@RequestParam Integer idPessoa) {
+        return new ResponseEntity<>(enderecoByIdPessoa(idPessoa), HttpStatus.ok);
+    }
+    */
+
+
 
     //=================================================================================================================
 

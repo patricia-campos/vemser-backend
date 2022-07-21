@@ -18,7 +18,7 @@ public class PessoaDTO extends PessoaCreateDTO {
     private List<EnderecoDTO> enderecosDTO;
 
     @Schema(description = "Lista de enderecos")
-    private List<PetDTO> petsDTO;
+    private PetDTO petDTO;
 }
 
 /*

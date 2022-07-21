@@ -50,8 +50,7 @@ public class PessoaService {
         return pessoaRepository.findAll().stream()
                 .map(pessoaEntity -> {
                     PessoaDTO pessoaDTO = retornarDTO(pessoaEntity);
-                    pessoaDTO.setPetsDTO(pessoaEntity.getPet().stream()
-                            .map(this::petretornarDTO).collect(Collectors.toList()));
+                    pessoaDTO.setPetDTO(this.petretornarDTO(pessoaEntity.getPet()));
                     return pessoaDTO;
                 }).toList();
     }
@@ -166,6 +165,11 @@ public class PessoaService {
     public PetDTO petretornarDTO(PetEntity petEntity) {
         return objectMapper.convertValue(petEntity, PetDTO.class);
     }
+
+    public PessoaEntity salvar(PessoaEntity pessoaEntity) {
+        return this.pessoaRepository.save(pessoaEntity);
+    }
+
 }
 
 

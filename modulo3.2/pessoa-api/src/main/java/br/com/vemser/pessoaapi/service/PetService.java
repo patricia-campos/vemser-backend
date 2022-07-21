@@ -33,13 +33,13 @@ public class PetService {
 
         PessoaEntity pessoaRecuperada = pessoaService.findPessoaById(idPessoa); //recuperando pai/mãe do pet
 
-        PetEntity petEntity = objectMapper.convertValue(petDTO, PetEntity.class);
+        PetEntity petEntity = objectMapper.convertValue(petDTO, PetEntity.class); //set agora é pelo relacionamento
         petEntity.setPessoa(pessoaRecuperada);
 
         PetEntity petCriado = petRepository.save(petEntity);
         log.info("Adicionando pet...");
 
-        PetDTO petRetDto = objectMapper.convertValue(petCriado, PetDTO.class);
+        PetDTO petRetDto = objectMapper.convertValue(petCriado, PetDTO.class); //retorno pro controller após operação
         return petRetDto;
 
 
@@ -54,6 +54,7 @@ public class PetService {
                 .collect(Collectors.toList());
     }
 
+    /*
     //lista por pai/ mãe do pet
     public List<PetDTO> listByIdPessoa(Integer idPessoa) {
 
@@ -62,22 +63,34 @@ public class PetService {
                 .map(this::retornarDTO)
                 .collect(Collectors.toList());
     }
+    */
 
     //------------------------------------------------------------------------------------------------------------------
     //UPDATE
     public PetDTO update(Integer id,
                          PetCreateDTO pet) throws RegraDeNegocioException {
 
-        PetEntity petEntityResgatado = findBichinhoById(id);
+        PetEntity petEntityResgatado = findBichinhoById(id); //Busca dados do pet a ser alterado
+        PessoaEntity pessoaEntity = petEntityResgatado.getPessoa();
+        pessoaEntity.setPet(null);
 
-        //checando se o bichinho existe e alterando seus dados na lista de bichinhos, pelo id do parâmetro
-        PessoaEntity pessoaRecuperada = pessoaService.findPessoaById(petEntityResgatado.getIdPessoa());
+
+        //checando se o bichinho existe e alterando seus dados na lista, pelo id da pessoa
+        PessoaEntity pessoaRecuperada = pessoaService.findPessoaById(pet.getIdPessoa());
 
         log.info("Atualizando pet...");
 
-        // Chamando o update (update passando objeto convertido na linha anterior)
+        // Chamando o update (passando objeto convertido na linha anterior)
         petEntityResgatado.setTipo(pet.getTipo());
         petEntityResgatado.setNome(pet.getNome());
+        petEntityResgatado.setPessoa(pessoaRecuperada);
+        pessoaRecuperada.setPet(petEntityResgatado);
+        pessoaService.salvar(pessoaRecuperada);
+        if (! pessoaRecuperada.getIdPessoa() .equals(pessoaEntity.getIdPessoa())) {
+            pessoaService.salvar(pessoaEntity);
+        }
+
+
 
         return retornarDTO(petRepository.save(petEntityResgatado));
     }
@@ -87,7 +100,7 @@ public class PetService {
     public void delete(Integer id) throws RegraDeNegocioException {
 
         PetEntity petEntityResgatado = findBichinhoById(id);
-        PessoaEntity pessoaRecuperada = pessoaService.findPessoaById(petEntityResgatado.getIdPessoa());
+        PessoaEntity pessoaRecuperada = pessoaService.findPessoaById(petEntityResgatado.getIdPessoa());//Checa se existe
 
         log.info("Excluindo pet");
 
@@ -98,10 +111,10 @@ public class PetService {
     //------------------------------------------------------------------------------------------------------------------
     //MÉTODOS AUXILIARES:
 
-    //ENCONTRA CONTATO PELO ID - ver usage
+    //ENCONTRA PET PELO ID - ver usage
     private PetEntity findBichinhoById(Integer id) throws RegraDeNegocioException {
         return petRepository.findById(id)
-                .orElseThrow(() -> new RegraDeNegocioException("Bichinho não encontrado"));
+                .orElseThrow(() -> new RegraDeNegocioException("Pet não encontrado"));
     }
 
     //MÉTODO DTO PARA ENTITY
