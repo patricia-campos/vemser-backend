@@ -46,7 +46,7 @@ public class PessoaController {
 
 
     //=================================================================================================================
-
+    //GET
 
     @Operation(summary = "Listar clientes cadastrados", description = "Lista todos os clientes cadastrados no banco")
 
@@ -174,6 +174,7 @@ public class PessoaController {
     }
 
     //=================================================================================================================
+    //POST
 
     @Operation(summary = "Inserir novo cliente no sistema",
             description = "Insere um novo cliente no cadastro do sistema")
@@ -192,6 +193,7 @@ public class PessoaController {
     }
 
     //=================================================================================================================
+    //PUT
 
     @Operation(summary = "Alterar dados de cliente cadastrado",
             description = "Altera os dados de um cliente cadastrado no sistema, utilizando o id do cliente " +
@@ -212,6 +214,7 @@ public class PessoaController {
     }
 
     //=================================================================================================================
+    //DELETE
 
     @Operation(summary = "Excluir cliente cadastrado",
             description = "Exclui um cliente cadastrado no sistema, utilizando o id do cliente como " +
@@ -231,21 +234,49 @@ public class PessoaController {
     }
 
     //=================================================================================================================
+    //GET - HOMEWORK
 
-       //todo inserir documentação
+    @Operation(summary = "Relatório personalizado",
+            description = "Exibe relatório personalizado")
+
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Relatório personalizado exibido"),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
+
 
     @GetMapping("/relatorio-personalizado")
     public List<RelatorioPersonalizadoDTO> getRelatorioPersonalizado(@RequestParam(required = false) Integer idPessoa) {
         return pessoaRepository.relatorioPersonalizadoDTO(idPessoa);
     }
 
-    //TODO ITEM 1 DO HOMEWORK - EM ANDAMENTO
+    //------------------------------------------------------------------------------------------------------------------
+
+    @Operation(summary = "Pessoa Completo",
+            description = "Exibe pessoa completo")
+
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Relatório pessoa completo"),
+                    @ApiResponse(responseCode = "403", description = "Você não tem permissão para acessar este recurso"),
+                    @ApiResponse(responseCode = "500", description = "Foi gerada uma exceção")
+            }
+    )
+
     @GetMapping("/pessoa-completo")
     public ResponseEntity<List<PessoaDTO>> listPessoaCompleto(@RequestParam(required = false) Integer idPessoa) {
         return new ResponseEntity<>(pessoaService.listPessoaCompleto(idPessoa), HttpStatus.OK);
     }
 
+    //=================================================================================================================
+
+
 }
+
+
 
     /*
       NOTAS DE ESTUDO:

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 @Service
@@ -147,16 +146,44 @@ public class PessoaService {
     }
 
     //==================================================================================================================
-    // HOMEWORK TODO - EM ANDAMENTO
-
-/*
+    // HOMEWORK
     public List<PessoaDTO> listPessoaCompleto(Integer idPessoa) {
 
         if (idPessoa == null) {
-            //TODO
-        }
 
-*/
+            return pessoaRepository.findAll().stream().map(pessoaEntity -> {
+
+                PessoaDTO pessoaDTO = retornarDTO(pessoaEntity);
+                pessoaDTO.setEnderecosDTO(pessoaEntity.getEnderecos().stream()
+                        .map(this::enderecoretornarDTO)
+                        .toList());
+
+                pessoaDTO.setContatosDTO(pessoaEntity.getContatos().stream()
+                        .map(this::contatoretornarDTO).toList());
+
+                pessoaDTO.setPetDTO(petretornarDTO(pessoaEntity.getPet()));
+                return pessoaDTO;
+
+            }).toList();
+
+        } else {
+
+            return pessoaRepository.findById(idPessoa).map(pessoaEntity -> {
+                PessoaDTO pessoaDTO = retornarDTO(pessoaEntity);
+                pessoaDTO.setEnderecosDTO(pessoaEntity.getEnderecos().stream()
+                        .map(this::enderecoretornarDTO).toList());
+
+                pessoaDTO.setContatosDTO(pessoaEntity.getContatos().stream()
+                        .map(this::contatoretornarDTO).toList());
+
+                pessoaDTO.setPetDTO(petretornarDTO(pessoaEntity.getPet()));
+
+                return pessoaDTO;
+
+            }).stream().toList();
+        }
+    }
+
 
     //==================================================================================================================
     //MÉTODOS AUXILIARES
@@ -184,7 +211,7 @@ public class PessoaService {
 
     //------------------------------------------------------------------------------------------------------------------
 
-    //TODO - MELHORAR A ORGANIZAÇÃO DISSO
+    //TODO - MELHORAR A ORGANIZAÇÃO DISSO - criar mapper como no projeto
 
     public ContatoDTO contatoretornarDTO(ContatoEntity contatoEntity) {
         return objectMapper.convertValue(contatoEntity, ContatoDTO.class);

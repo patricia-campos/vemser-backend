@@ -59,7 +59,7 @@ public class EnderecoController {
 
 
     //------------------------------------------------------------------------------------------------------------------
-    /* todo está inoperante
+    /*
 
     @Operation(summary = "Mostrar endereço específico cadastrado",
             description = "Lista endereço cadastrado no banco utilizando o id do endereço como " +
@@ -79,7 +79,7 @@ public class EnderecoController {
 
     */
     //------------------------------------------------------------------------------------------------------------------
-/* todo está inoperante
+/*
 
     @Operation(summary = "Listar endereços cadastrado de cliente",
                description = "Lista endereços cadastrados de cliente, utilizando o id do cliente como " +
