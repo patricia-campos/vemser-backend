@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class RelatorioPersonalizadoDTO {
 
     //Pessoa
-    private Integer idPessoa;
+    //private Integer idPessoa;
     private String nome;
     private String email;
 

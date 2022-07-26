@@ -15,7 +15,7 @@ public interface PessoaRepository extends JpaRepository<PessoaEntity, Integer> {
     //------------------------------------------------------------------------------------------------------------------
     //LISTAR PESSOA COMPLETA - HOMEWORK
     @Query(value = " select new br.com.vemser.pessoaapi.dto.RelatorioPersonalizadoDTO(" +
-            " p.idPessoa," +
+            //" p.idPessoa," +
             " p.nome," +
             " p.email," +
             " c.numero," +
