@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -91,6 +92,10 @@ public class EnderecoService {
 
         log.info("Adicionando endereço...");
 
+        List<PessoaEntity> pessoas = new ArrayList<>();
+        pessoas.add(pessoaRecuperada);
+
+        enderecoEntity.setPessoa(pessoas);
         EnderecoEntity enderecoEntity1 = enderecoRepository.save(enderecoEntity);
         EnderecoDTO enderecoDTO1 = objectMapper.convertValue(enderecoEntity1, EnderecoDTO.class);
 
@@ -111,7 +116,7 @@ public class EnderecoService {
         EnderecoEntity enderecoEntityRecuperado = findEnderecoById(id);
         EnderecoEntity enderecoEntity = objectMapper.convertValue(enderecoAtualizar, EnderecoEntity.class);
 
-        enderecoEntity.setPessoa(Set.of(pessoaEntity));
+        //enderecoEntity.setPessoa(Set.of(pessoaEntity));
 
         log.info("Atualizando endereço...");
 

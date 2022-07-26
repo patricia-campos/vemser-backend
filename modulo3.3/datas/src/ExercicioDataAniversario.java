@@ -11,18 +11,19 @@ public class ExercicioDataAniversario {
         // fazer o cálculo de quantos dias e meses faltam até a próxima data.
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("Informe quando será seu próximo aniversário: (DD/MM/AAAA)");
+        System.out.println("Informe seu aniversário: (DD/MM/AAAA)");
         String dataInformada = sc.nextLine();
 
         LocalDate hoje = LocalDate.now();
 
+        //Informa modelo de formatação e aplica
         DateTimeFormatter dataAniversarioFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dataAniversario = LocalDate.parse(dataInformada, dataAniversarioFormatada);
 
-        int meses = Period.between(hoje, dataAniversario).getMonths();
-        int dias = Period.between(hoje, dataAniversario).getDays();
 
-        System.out.println("Faltam " + meses + " meses e " + dias + " dias para o seu próximo aniversário!");
+        Period proximaData = Period.between(hoje,dataAniversario.plusYears(1));
+
+        System.out.println("Faltam " + proximaData.getMonths() + " meses e " + proximaData.getDays()+ " dias para o seu próximo aniversário!");
 
     }
 }

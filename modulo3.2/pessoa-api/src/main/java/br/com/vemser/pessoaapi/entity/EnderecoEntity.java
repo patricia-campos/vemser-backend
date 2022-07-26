@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -60,7 +61,8 @@ public class EnderecoEntity {
             joinColumns = @JoinColumn(name = "ID_ENDERECO"),
             inverseJoinColumns = @JoinColumn(name = "ID_PESSOA")
     )
-    private Set<PessoaEntity> pessoa;
+    private List<PessoaEntity> pessoa;
+    //private Set<PessoaEntity> pessoa;
 
 }
 
