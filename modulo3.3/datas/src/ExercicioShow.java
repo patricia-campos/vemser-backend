@@ -14,7 +14,7 @@ public class ExercicioShow {
         //Fuso de Londres
         ZoneId londres = ZoneId.of("Europe/London");
 
-        //Data e hora do show para o fuso de Londres
+        //Transformar data e hora do show para o fuso de Londres
         ZonedDateTime dataHoraShowEmLondres = ZonedDateTime.of(dataHoraShow, londres);
 
         //Data e hora atuais no Brasil para comparar
@@ -56,3 +56,5 @@ public class ExercicioShow {
 
     }
 }
+
+//Usar sempre local date time

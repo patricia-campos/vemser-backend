@@ -18,6 +18,12 @@
 	</properties>
 	<dependencies>
 
+		<!-- Inserido em aula - 26/07/2022 -  Spring Security- -->
+
+
+
+
+
 		<!-- Inserido em aula - 18/07/2022 -  Spring Data - -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

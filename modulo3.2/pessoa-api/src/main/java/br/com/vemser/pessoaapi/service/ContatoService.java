@@ -2,6 +2,7 @@ package br.com.vemser.pessoaapi.service;
 
 import br.com.vemser.pessoaapi.dto.ContatoCreateDTO;
 import br.com.vemser.pessoaapi.dto.ContatoDTO;
+import br.com.vemser.pessoaapi.dto.PageDTO;
 import br.com.vemser.pessoaapi.entity.ContatoEntity;
 import br.com.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.vemser.pessoaapi.exception.RegraDeNegocioException;
@@ -9,6 +10,9 @@ import br.com.vemser.pessoaapi.repository.ContatoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,12 +36,24 @@ public class ContatoService {
     //READ / GET
 
     //lista todos
-    public List<ContatoDTO> list(){
-        return contatoRepository.findAll().stream()
-                .map(this::retornarDTO)
-                .collect(Collectors.toList());
-    }
+    //public List<ContatoDTO> list(){
+        //return contatoRepository.findAll().stream()
+       //         .map(this::retornarDTO)
+     //           .collect(Collectors.toList());
+    //}
 
+
+    public PageDTO<ContatoDTO> list(Integer pagina,
+                                    Integer registroPorPagina) {
+        Pageable pageable = PageRequest.of(pagina, registroPorPagina);
+        Page<ContatoEntity> page = contatoRepository.findAll(pageable);
+
+        List<ContatoDTO> contatoDTOS = page.getContent().stream()
+                .map(this::retornarDTO)
+                .toList();
+
+        return new PageDTO<>(page.getTotalElements(), page.getTotalPages(), pagina, registroPorPagina, contatoDTOS);
+    }
     //------------------------------------------------------------------------------------------------------------------
 
     /* //TODO - IMPLEMENTAR

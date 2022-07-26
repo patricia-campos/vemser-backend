@@ -1,5 +1,6 @@
 package br.com.vemser.pessoaapi.controller;
 
+import br.com.vemser.pessoaapi.dto.PageDTO;
 import br.com.vemser.pessoaapi.dto.RelatorioPersonalizadoDTO;
 import br.com.vemser.pessoaapi.dto.PessoaCreateDTO;
 import br.com.vemser.pessoaapi.dto.PessoaDTO;
@@ -45,8 +46,9 @@ public class PessoaController {
     private String app;
 
 
-    //=================================================================================================================
-    //GET
+    //==================================================================================================================
+    //                                                GET / READ
+    //==================================================================================================================
 
     @Operation(summary = "Listar clientes cadastrados", description = "Lista todos os clientes cadastrados no banco")
 
@@ -116,7 +118,7 @@ public class PessoaController {
     )
     @GetMapping("/by-cpf")
 
-    public ResponseEntity<List<PessoaEntity>> list(@RequestParam("cpf") String cpf) {
+    public ResponseEntity<List<PessoaDTO>> list(@RequestParam("cpf") String cpf) {
         return ResponseEntity.ok(pessoaService.findByCpf(cpf));
     }
 
@@ -173,8 +175,9 @@ public class PessoaController {
         return new ResponseEntity<>(pessoaService.listarPessoaEPets(), HttpStatus.OK);
     }
 
-    //=================================================================================================================
-    //POST
+    //==================================================================================================================
+    //                                               POST / CREATE
+    //==================================================================================================================
 
     @Operation(summary = "Inserir novo cliente no sistema",
             description = "Insere um novo cliente no cadastro do sistema")
@@ -192,8 +195,9 @@ public class PessoaController {
         return ResponseEntity.ok(pessoaService.create(pessoa));
     }
 
-    //=================================================================================================================
-    //PUT
+    //==================================================================================================================
+    //                                                PUT / UPDATE
+    //==================================================================================================================
 
     @Operation(summary = "Alterar dados de cliente cadastrado",
             description = "Altera os dados de um cliente cadastrado no sistema, utilizando o id do cliente " +
@@ -213,8 +217,9 @@ public class PessoaController {
         return ResponseEntity.ok(pessoaService.update(id, pessoaAtualizar));
     }
 
-    //=================================================================================================================
-    //DELETE
+    //==================================================================================================================
+    //                                                 DELETE
+    //==================================================================================================================
 
     @Operation(summary = "Excluir cliente cadastrado",
             description = "Exclui um cliente cadastrado no sistema, utilizando o id do cliente como " +
@@ -233,8 +238,9 @@ public class PessoaController {
         pessoaService.delete(id);
     }
 
-    //=================================================================================================================
-    //GET - HOMEWORK
+    //==================================================================================================================
+    //                                                 GET HOMEWORK
+    //==================================================================================================================
 
     @Operation(summary = "Relatório personalizado",
             description = "Exibe relatório personalizado")
@@ -249,9 +255,16 @@ public class PessoaController {
 
 
     @GetMapping("/relatorio-personalizado")
-    public List<RelatorioPersonalizadoDTO> getRelatorioPersonalizado(@RequestParam(required = false) Integer idPessoa) {
-        return pessoaRepository.relatorioPersonalizadoDTO(idPessoa);
+    public PageDTO<RelatorioPersonalizadoDTO> getRelatorioPersonalizado(@RequestParam(required = false) Integer idPessoa, Integer pagina, Integer quantidadeRegistros) {
+        //return pessoaRepository.relatorioPersonalizadoDTO(idPessoa);
+        return pessoaService.relatorioPersonalizadoDTO(idPessoa, pagina, quantidadeRegistros);
     }
+
+    //@GetMapping("/relatorio-personalizado")
+    //public List<RelatorioPersonalizadoDTO> getRelatorioPersonalizado(@RequestParam(required = false) Integer idPessoa) {
+    //    return pessoaRepository.relatorioPersonalizadoDTO(idPessoa);
+    //}
+
 
     //------------------------------------------------------------------------------------------------------------------
 
@@ -274,12 +287,15 @@ public class PessoaController {
     //=================================================================================================================
 
 
+    //}
+
+
 }
 
 
 
     /*
-      NOTAS DE ESTUDO:
+      NOTAS DE ESTUDO: //TODO REIMPLEMENTAR EMAIL
 
     @SneakyThrows
     @GetMapping("/email")

@@ -2,6 +2,8 @@ package br.com.vemser.pessoaapi.repository;
 
 import br.com.vemser.pessoaapi.dto.RelatorioPersonalizadoDTO;
 import br.com.vemser.pessoaapi.entity.PessoaEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -32,15 +34,10 @@ public interface PessoaRepository extends JpaRepository<PessoaEntity, Integer> {
             "  left join p.pet petz " +
 
             " where (:idPessoa is null OR p.idPessoa = :idPessoa )")
-    List<RelatorioPersonalizadoDTO> relatorioPersonalizadoDTO(@Param("idPessoa") Integer idPessoa);
+    Page<RelatorioPersonalizadoDTO> relatorioPersonalizadoDTO(@Param("idPessoa") Integer idPessoa, Pageable pageable);
 
     //------------------------------------------------------------------------------------------------------------------
 
-    // TODO PRECISA TRASNFERIR PARA SERVICE -Está incompleto - Feitos em aula 21/07
-
-    public List<PessoaEntity> findByCpf(String cpf); //funcionando
-
-    public List<PessoaEntity> findByNomeContainsIgnoreCase(String nome); //incompleto
 
 
 }

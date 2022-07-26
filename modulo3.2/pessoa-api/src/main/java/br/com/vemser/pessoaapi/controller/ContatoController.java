@@ -2,6 +2,7 @@ package br.com.vemser.pessoaapi.controller;
 
 import br.com.vemser.pessoaapi.dto.ContatoCreateDTO;
 import br.com.vemser.pessoaapi.dto.ContatoDTO;
+import br.com.vemser.pessoaapi.dto.PageDTO;
 import br.com.vemser.pessoaapi.service.ContatoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -41,9 +42,17 @@ public class ContatoController {
     )
 
     @GetMapping // localhost:8080/contato
-    public List<ContatoDTO> list() {
-        return contatoService.list();
+    public PageDTO<ContatoDTO> list(Integer pagina, Integer quantidadeRegistros) {
+
+        return contatoService.list(pagina, quantidadeRegistros);
     }
+
+
+    //@GetMapping // localhost:8080/contato
+    //public List<ContatoDTO> list() {
+    //    return contatoService.list();
+    //}
+
 
 
     //------------------------------------------------------------------------------------------------------------------

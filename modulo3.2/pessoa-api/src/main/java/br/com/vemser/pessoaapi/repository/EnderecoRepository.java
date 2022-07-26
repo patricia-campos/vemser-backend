@@ -12,7 +12,8 @@ public interface EnderecoRepository extends JpaRepository<EnderecoEntity, Intege
 
     /*
 
-    //QUERY DEVE SER NA SERVICE - FEITO EM AULA - TODO COLOCAR NA SERVCICE
+    // FEITO EM AULA - TODO CHAMAR ESSE MÉTODO NA SERVICE E CRIAR ENDPOINT NO CONTROLLER
+
     @Query("SELECT e " +
             "FROM ENDERECO e "+
             "WHERE e.pais = :pais"

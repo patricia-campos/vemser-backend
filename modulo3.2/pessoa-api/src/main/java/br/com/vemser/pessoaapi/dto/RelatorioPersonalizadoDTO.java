@@ -14,14 +14,14 @@ public class RelatorioPersonalizadoDTO {
     private String nome;
     private String email;
 
+    //Contato
+    private String numero;
+
     //Endereco
     private String cep;
     private String cidade;
     private String estado;
     private String pais;
-
-    //Contato
-    private String numero;
 
     //Pet
     private String nomePet;

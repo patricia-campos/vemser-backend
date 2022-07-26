@@ -17,6 +17,7 @@ public class ExercicioDataAniversario {
         LocalDate hoje = LocalDate.now();
 
         //Informa modelo de formatação e aplica
+
         DateTimeFormatter dataAniversarioFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dataAniversario = LocalDate.parse(dataInformada, dataAniversarioFormatada);
 
