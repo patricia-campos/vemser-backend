@@ -116,6 +116,10 @@ public class EnderecoService {
         EnderecoEntity enderecoEntityRecuperado = findEnderecoById(id);
         EnderecoEntity enderecoEntity = objectMapper.convertValue(enderecoAtualizar, EnderecoEntity.class);
 
+
+        List<PessoaEntity> pessoas = new ArrayList<>();
+        pessoas.add(pessoaEntity);
+        enderecoEntity.setPessoa(pessoas);
         //enderecoEntity.setPessoa(Set.of(pessoaEntity));
 
         log.info("Atualizando endereço...");
