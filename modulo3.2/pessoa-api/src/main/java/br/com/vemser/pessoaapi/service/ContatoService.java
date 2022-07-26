@@ -26,7 +26,8 @@ public class ContatoService {
     @Autowired
     private ObjectMapper objectMapper;
 
-
+    @Autowired
+    private EmailService emailService;
     //==================================================================================================================
     //READ / GET
 

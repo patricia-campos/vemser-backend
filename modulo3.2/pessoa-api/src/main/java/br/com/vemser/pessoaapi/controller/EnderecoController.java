@@ -1,8 +1,10 @@
 package br.com.vemser.pessoaapi.controller;
 
 import br.com.vemser.pessoaapi.dto.EnderecoCreateDTO;
+import br.com.vemser.pessoaapi.dto.PessoaDTO;
 import br.com.vemser.pessoaapi.dto.EnderecoDTO;
 import br.com.vemser.pessoaapi.entity.EnderecoEntity;
+import br.com.vemser.pessoaapi.exception.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.service.EnderecoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -28,15 +30,6 @@ public class EnderecoController {
     @Autowired
     private EnderecoService enderecoService;
 
-    /*
-    //FEITO EM AULA
-    @GetMapping("/endereco-por-pais")
-    public ResponseEntity<EnderecoEntity> getEnderecoPorPais(@RequestParam Integer idPessoa) {
-        return new ResponseEntity<>(enderecoByIdPessoa(idPessoa), HttpStatus.ok);
-    }
-    */
-
-
 
     //=================================================================================================================
     //GET
@@ -59,7 +52,6 @@ public class EnderecoController {
 
 
     //------------------------------------------------------------------------------------------------------------------
-    /*
 
     @Operation(summary = "Mostrar endereço específico cadastrado",
             description = "Lista endereço cadastrado no banco utilizando o id do endereço como " +
@@ -73,13 +65,12 @@ public class EnderecoController {
             }
     )
     @GetMapping("/{idEndereco}") // localhost:8080/endereco/idEndereco
-    public List<EnderecoDTO> listByIdEndereco(@PathVariable("idEndereco") Integer idEndereco) {
+    public List<EnderecoDTO> listByIdEndereco(@PathVariable("idEndereco") Integer idEndereco) throws RegraDeNegocioException {
         return enderecoService.listByIdEndereco(idEndereco);
     }
 
-    */
     //------------------------------------------------------------------------------------------------------------------
-/*
+
 
     @Operation(summary = "Listar endereços cadastrado de cliente",
                description = "Lista endereços cadastrados de cliente, utilizando o id do cliente como " +
@@ -93,11 +84,16 @@ public class EnderecoController {
             }
     )
 
-    @GetMapping("/{idPessoa}/pessoa") // localhost:8080/endereco/idPessoa/pessoa
-    public List<EnderecoDTO> listByIdPessoa(@PathVariable("idPessoa") Integer idPessoa) {
-        return enderecoService.listByIdPessoa(idPessoa);
+   // @GetMapping("/{idPessoa}/pessoa") // localhost:8080/endereco/idPessoa/pessoa
+    //public List<EnderecoDTO> listByIdPessoa(@PathVariable("idPessoa") Integer idPessoa) throws RegraDeNegocioException {
+     //   return enderecoService.listByIdPessoa(idPessoa);
+    //}
+    @GetMapping("/{idPessoa}/pessoa")
+    public ResponseEntity<List<PessoaDTO>> listarEnderecoUsuario(@PathVariable("idPessoa") Integer id) throws RegraDeNegocioException {
+        log.info("Recuperando um endereço com base no id do usuário");
+        return ResponseEntity.ok(enderecoService.listByIdPessoa(id));
     }
-*/
+
 
     //=================================================================================================================
     //POST
@@ -167,7 +163,16 @@ public class EnderecoController {
     //=================================================================================================================
 }
 
+
 /*
 NOTAS DE ESTUDO:
 Post e Put (entradas de dados) agora usam EnderecoDTO e EnderecoCreateDTO para fazer o tráfego de informações
 */
+
+  /*
+    //FEITO EM AULA
+    @GetMapping("/endereco-por-pais")
+    public ResponseEntity<EnderecoEntity> getEnderecoPorPais(@RequestParam Integer idPessoa) {
+        return new ResponseEntity<>(enderecoByIdPessoa(idPessoa), HttpStatus.ok);
+    }
+    */

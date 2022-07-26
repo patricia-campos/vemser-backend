@@ -7,6 +7,7 @@ import br.com.vemser.pessoaapi.entity.EnderecoEntity;
 import br.com.vemser.pessoaapi.entity.PessoaEntity;
 import br.com.vemser.pessoaapi.exception.RegraDeNegocioException;
 import br.com.vemser.pessoaapi.repository.EnderecoRepository;
+import br.com.vemser.pessoaapi.repository.PessoaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class EnderecoService {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private PessoaRepository pessoaRepository;
 
     //==================================================================================================================
     //READ / GET
@@ -40,11 +43,11 @@ public class EnderecoService {
 
     //------------------------------------------------------------------------------------------------------------------
 
-    /* //TODO IMPLEMENTAR
+     //TODO IMPLEMENTAR
 
     //lista por id endereco
-    public List<EnderecoDTO> listByIdEndereco(Integer idEndereco) {
-        return enderecoRepository.findAll().stream()
+    public List<EnderecoDTO> listByIdEndereco(Integer idEndereco) throws RegraDeNegocioException {
+        return enderecoRepository.findById(idEndereco).stream()
                 .filter(endereco -> endereco.getIdEndereco().equals(idEndereco))
                 .map(this::retornarDTO)
                 .collect(Collectors.toList());
@@ -54,14 +57,24 @@ public class EnderecoService {
 
     //TODO IMPLEMENTAR
 
-    lista por id pessoa
-    public List<EnderecoDTO> listByIdPessoa(Integer idPessoa) {
-        return enderecoRepository.findAll().stream()
-                .filter(endereco -> endereco.getIdPessoa().equals(idPessoa))
-                .map(this::retornarDTO)
-                .collect(Collectors.toList());
+    //lista por id pessoa
+
+
+    public List<PessoaDTO> listByIdPessoa(Integer id) throws RegraDeNegocioException {
+        pessoaService.findPessoaById(id);
+        return pessoaRepository.findById(id).stream()
+                .map(pessoaEntity -> {
+                    PessoaDTO pessoaDTO = pessoaService.retornarDTO(pessoaEntity);
+                    pessoaDTO.setEnderecosDTO(pessoaEntity.getEnderecos().stream()
+                            .map(enderecoEntity -> objectMapper.convertValue(enderecoEntity, EnderecoDTO.class))
+                            .toList());
+                    return pessoaDTO;
+                }).toList();
     }
-   */
+
+
+
+
 
     //==================================================================================================================
     //CREATE / POST
