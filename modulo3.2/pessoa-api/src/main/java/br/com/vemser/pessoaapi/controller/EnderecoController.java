@@ -84,11 +84,8 @@ public class EnderecoController {
             }
     )
 
-   // @GetMapping("/{idPessoa}/pessoa") // localhost:8080/endereco/idPessoa/pessoa
-    //public List<EnderecoDTO> listByIdPessoa(@PathVariable("idPessoa") Integer idPessoa) throws RegraDeNegocioException {
-     //   return enderecoService.listByIdPessoa(idPessoa);
-    //}
-    @GetMapping("/{idPessoa}/pessoa")
+    @GetMapping("pessoa/{idPessoa}")
+
     public ResponseEntity<List<PessoaDTO>> listarEnderecoUsuario(@PathVariable("idPessoa") Integer id) throws RegraDeNegocioException {
         log.info("Recuperando um endereço com base no id do usuário");
         return ResponseEntity.ok(enderecoService.listByIdPessoa(id));
