@@ -30,8 +30,8 @@ public class TokenService {
         if (token == null) {
             return Optional.empty();
         }
-        //byte[] decodeBytes = Base64.getUrlDecoder().decode(token);
-        byte[] decodeBytes = Base64.getMimeDecoder().decode(token);
+        byte[] decodeBytes = Base64.getUrlDecoder().decode(token);
+        //byte[] decodeBytes = Base64.getMimeDecoder().decode(token);
         String decoded = new String(decodeBytes);
         String[] split = decoded.split(";");
         Optional<UsuarioEntity> optionalUsuario = usuarioService.findByLoginAndSenha(split[0], split[1]);
