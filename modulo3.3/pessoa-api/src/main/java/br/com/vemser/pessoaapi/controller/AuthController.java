@@ -1,5 +1,8 @@
 package br.com.vemser.pessoaapi.controller;
 
+
+import br.com.vemser.pessoaapi.dto.UsuarioDTO;
+import br.com.vemser.pessoaapi.dto.UsuarioCreateDTO;
 import br.com.vemser.pessoaapi.dto.LoginDTO;
 import br.com.vemser.pessoaapi.entity.UsuarioEntity;
 import br.com.vemser.pessoaapi.exception.RegraDeNegocioException;
@@ -57,6 +60,12 @@ public class AuthController {
 
         //retorna o token
         return token;
+    }
+
+
+    @PostMapping("/registrar")
+    public UsuarioDTO cadastrar (@RequestBody UsuarioCreateDTO usuarioCreateDTO){
+        return usuarioService.registrar(usuarioCreateDTO);
     }
 }
 
