@@ -17,4 +17,12 @@ public class UsuarioService {
         return usuarioRepository.findByLoginAndSenha(login, senha);
     }
 
+    public Optional<UsuarioEntity> findById(Integer idUsuario) {
+        return usuarioRepository.findById(idUsuario);
+    }
+
+    public Optional<UsuarioEntity> findByLogin(String login) {
+        return usuarioRepository.findByLogin(login);
+    }
+
 }

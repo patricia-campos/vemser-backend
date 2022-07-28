@@ -19,38 +19,29 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
     private final TokenService tokenService;
 
-    private static final String BEARER = "Bearer ";
+    protected static final String BEARER = "Bearer ";
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        // Recuperar token do header
+        //buscando o token da request
         String token = getTokenFromHeader(request);
-        //String token = request.getHeader("Authorization");
-        Optional<UsuarioEntity> optionalUsuarioEntity = tokenService.isValid(token);
 
-        authenticate(optionalUsuarioEntity);
+        //buscando o is valid de token service para validar o token
+        UsernamePasswordAuthenticationToken dtoDoSpringSecurity = tokenService.isValid(token);
 
+        //setando a autenticação
+        SecurityContextHolder.getContext().setAuthentication(dtoDoSpringSecurity);
+
+
+        //UsernamePasswordAuthenticationToken user = tokenService.isValid(token);
+        //SecurityContextHolder.getContext().setAuthentication(user);
         filterChain.doFilter(request, response);
 
     }
 
 
-    //recuperar usuário do token
-
-    public void authenticate(Optional<UsuarioEntity> optionalUsuarioEntity) {
-        boolean valido = !optionalUsuarioEntity.isEmpty();
-
-        if (valido) {
-            UsuarioEntity usuarioEntity = optionalUsuarioEntity.get();
-            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                    new UsernamePasswordAuthenticationToken(usuarioEntity.getLogin(), usuarioEntity.getSenha(), Collections.emptyList());
-            SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-        } else {
-            SecurityContextHolder.getContext().setAuthentication(null);
-        }
-    }
 
     // adicionar o usuário no contexto do spring security
     private String getTokenFromHeader(HttpServletRequest request) {
