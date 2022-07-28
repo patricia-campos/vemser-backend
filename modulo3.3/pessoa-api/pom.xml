@@ -18,6 +18,13 @@
 	</properties>
 	<dependencies>
 
+		<!-- Inserido em aula - 27/07/2022 -  Spring Security- -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+
 		<!-- Inserido em aula - 26/07/2022 -  Spring Security- -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -35,7 +42,6 @@
 			<artifactId>ojdbc8</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-
 
 		<!-- Inserido em aula - 13/07/2022 - Java Web - Aula 8 - FeignClient  -->
 		<dependency>
