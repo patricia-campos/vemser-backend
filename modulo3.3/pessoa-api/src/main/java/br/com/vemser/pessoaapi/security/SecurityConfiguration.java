@@ -33,7 +33,7 @@ public class SecurityConfiguration {
                 .csrf().disable()
 
                 // Adicionar regras de requisição
-                .authorizeHttpRequests((authz) -> authz.antMatchers("/", "/auth")
+                .authorizeHttpRequests((authz) -> authz.antMatchers("/", "/auth", "auth/registrar")
                         .permitAll()
                         .anyRequest()
                         .authenticated());
